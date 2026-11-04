@@ -1,0 +1,173 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{amsmath,array,graphicx,booktabs,multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{setspace}
+\setCJKmainfont{Noto Serif CJK SC}
+\geometry{margin=2.2cm,top=2.0cm,bottom=2.2cm}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{-\thepage{}-}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.2em}
+\setlength{\headheight}{14pt}
+\linespread{1.12}
+\usepackage{setspace}
+\usepackage{eso-pic}
+\usetikzlibrary{calc}
+
+%region exam setup
+
+\examsetup{
+    page = {
+    size = a4paper,           % 设定纸张大小 [4]
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 [3]
+  },
+    choices = {
+    label-pos = top-left,
+    column-sep = 1em,
+    label-pos = auto,
+    label-sep = 0.5em,
+    max-columns = 4
+    },
+  question = {
+    top-sep    = 1em, % 调整题目上方的垂直距离（默认值为 .5em plus .5em minus .2em）
+    bottom-sep = 1em  % 调整题目下方的垂直距离（默认值为 .5em plus .5em minus .2em）
+  },
+    paren = {
+    show-paren = false  % 设置为 false 则不显示括号 [3, 4]
+  },
+    choices = {
+    label = \textbf{\Alph*}
+  }, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {参考答案},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  }
+}
+
+%endregion
+
+
+%region 卷面变量设置
+    % ==========================
+    \input{config.tex}
+    \newcommand{\optrow}[4]{%
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llll}
+    A~#1 & B~#2 & C~#3 & D~#4
+    \end{tabular*}%
+    }
+    \newcommand{\qitem}[5]{\item #1\par\optrow{#2}{#3}{#4}{#5}}
+%endregion
+    \begin{document}
+
+
+%region 封面
+    \AddToShipoutPictureFG*{%
+    \put(31,104){\color{black}\rule{16pt}{66pt}}%
+    \put(37,112){\makebox(0,0)[lb]{\rotatebox{90}{\color{white}\bfseries\footnotesize \sidebartext}}}%
+    \put(24,18){\makebox(0,0)[lb]{\small 版权所有}}%
+    \put(520,18){\makebox(0,0)[lb]{\bfseries\small 【机密】}}%
+    }
+
+    \thispagestyle{fancy}
+
+    \begin{minipage}[t]{0.22\linewidth}
+    \vspace{0pt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.56\linewidth}
+    \centering
+    {\zihao{3}\bfseries \examtitle\par}
+    \vspace{2.3em}
+    {\zihao{3}\bfseries \examlevel\par}
+    \vspace{0.3em}
+    {\zihao{2}\bfseries \examsubject\par}
+    \vspace{0.2em}
+    {\large (\papercode)\par}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.18\linewidth}
+    \vspace{0pt}
+    \end{minipage}
+
+    \vspace{3.0em}
+
+    \begin{center}
+    \begin{tabular}{c}
+        \papername\hspace{2em}\papertype\\[-0.1em]
+        \midrule
+        日期:\examdate\\[-0.1em]
+        时间:\examtime\\[-0.1em]
+        (\examduration)\\
+        \midrule
+    \end{tabular}
+    \end{center}
+
+    \vspace{2.0em}
+
+    {\zihao{4}\bfseries \underline{考生须知}\par}
+    \vspace{0.8em}
+
+    \begin{enumerate}[label=\arabic*、,leftmargin=2em,itemsep=0.65em]
+    \item 本科试卷共分两份：\\
+    试卷一：选择题（\paperonepercentage）；\\
+    试卷二：作答题（\papertwopercentage）。
+
+    \item 考生须于第一阶段规定的60分钟内完成试卷一。第二阶段规定的2小时内作答试卷二。
+
+    \item 试卷一选择题20题全答。选出正确的答案，然后用\textbf{5B铅笔将“O”答案纸}（电脑卡）上相应的字母所在的小方格涂黑。
+
+    \item 可使用电子计算机进行演算。
+
+    \item 试卷一选择题共印\questionpages。
+    \end{enumerate}
+
+    \vspace{2.0em}
+
+    \begin{center}
+    {\setlength{\fboxrule}{1.2pt}\fbox{\rule{0pt}{1.1em}\hspace{1.2em}{\zihao{4}\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.2em}}}
+    \end{center}
+
+    \vfill
+
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
+    考生姓名：\underline{\hspace{4.2cm}} & 考生编号：\underline{\hspace{4.0cm}}
+    \end{tabular*}
+
+%endregion
+
+\newpage
+
+
+
+
+
+\vfill % 与上方内容保持距离
+
+\noindent
+\newlength{\sigwidth}
+\settowidth{\sigwidth}{（\hspace{4em}师）}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l l}
+    出题： & 审题： & 审核： \\[4em]
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} \\
+    （\hspace{0em} \setterteacher ） &
+    （\hspace{0em} \reviewteacher ）  &
+    （\hspace{0em} \auditteacher ） \\
+\end{tabular*}
+
+\clearpage
+\thispagestyle{empty} % 取消这一页的页眉页脚（页码）
+~
+\clearpage
+\end{document}

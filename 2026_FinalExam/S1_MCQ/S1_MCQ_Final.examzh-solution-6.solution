@@ -1,0 +1,1 @@
+\par \noindent 6.【解析】求三边为 $4,5,6$ 的三角形的最小内角。 \\ 最小边所对的角最小，故设边长 $4$ 所对的角为 $\alpha $，用余弦定律求 $\cos \alpha $。 \\ \begin {align*} \cos \alpha &= \frac {5^2+6^2-4^2}{2\times 5\times 6} = \frac {45}{60} = \frac {3}{4} \\ \alpha &= \cos ^{-1}\frac {3}{4} \approx 41.4^{\circ } \end {align*} 故选 A。\par \vspace *{1ex}

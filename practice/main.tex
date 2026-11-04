@@ -1,0 +1,257 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc}
+
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+\geometry{margin=2cm}
+
+\AtBeginDocument{\zihao{4}}
+% ----------- 调整 exam -----------
+
+
+%region exam setup
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        question = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {answer},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em
+}
+\newcommand{\qscore}[1]{%
+    \unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[4em][r]{(#1\%)}}%
+}
+\newcommand{\solutionlayout}{%
+    \setlength{\abovedisplayskip}{0.6em}%
+    \setlength{\belowdisplayskip}{0.6em}%
+    \setlength{\abovedisplayshortskip}{0.35em}%
+    \setlength{\belowdisplayshortskip}{0.35em}%
+    \setlength{\jot}{0.35em}%
+}
+%endregion
+
+
+
+
+\begin{document}
+
+%region 范围：独中统考高三附加数学 - 微分法应用（相关变化率） | 考点：面积对时间的相关变化率 | 难度：基础
+\begin{question}[points = 3]
+    一正方形的边长以 $2\text{ cm/s}$ 的速率增加。求当边长为 $10\text{ cm}$ 时，该正方形面积的变化率。
+    \hfill (3\%)
+\end{question}
+
+\begin{solution}
+    求正方形面积 $A$ 随时间 $t$ 的变化率 $\dfrac{dA}{dt}$。 \\
+    设正方形边长为 $x$，已知 $\dfrac{dx}{dt}=2$，利用链式法则 $\dfrac{dA}{dt}=\dfrac{dA}{dx}\times\dfrac{dx}{dt}$ 求解。
+    \begin{align*}
+        A &= x^2 \\
+        \frac{dA}{dx} &= 2x
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac{dA}{dt} &= 2x\times\frac{dx}{dt} = 2x(2) = 4x
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \text{当 } x=10 \text{ 时} \quad \frac{dA}{dt} &= 4(10) = 40\text{ cm}^2/\text{s}
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：独中统考高三附加数学 - 微分法应用（相关变化率） | 考点：球体体积与半径的相关变化率 | 难度：中等
+\begin{question}[points = 4]
+    一气球在充气过程中，其体积以 $100\pi\text{ cm}^3/\text{s}$ 的速率增加。已知气球为球体，体积 $V=\dfrac{4}{3}\pi r^3$。求当半径为 $5\text{ cm}$ 时，半径的变化率。
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求半径 $r$ 随时间 $t$ 的变化率 $\dfrac{dr}{dt}$。 \\
+    已知 $\dfrac{dV}{dt}=100\pi$，先求 $\dfrac{dV}{dr}$，再利用 $\dfrac{dr}{dt}=\dfrac{dV}{dt}\div\dfrac{dV}{dr}$ 求解。
+    \begin{align*}
+        \frac{dV}{dr} &= 4\pi r^2
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac{dr}{dt} &= \frac{dV}{dt}\div\frac{dV}{dr} = \frac{100\pi}{4\pi r^2}
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        \text{当 } r=5 \text{ 时} \quad \frac{dr}{dt} &= \frac{100\pi}{4\pi(25)} = \frac{100\pi}{100\pi} = 1\text{ cm/s}
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：独中统考高三附加数学 - 微分法应用（相关变化率） | 考点：勾股定理与相关变化率（梯子问题） | 难度：中等偏难
+\begin{question}[points = 5]
+    一把长 $5\text{ m}$ 的梯子斜靠在竖直的墙上。梯子底部沿地面以 $0.5\text{ m/s}$ 的速率向外滑离墙脚。求当梯子底部与墙脚的距离为 $3\text{ m}$ 时，梯子顶端沿墙下滑的速率。
+    \hfill (5\%)
+\end{question}
+
+\begin{solution}
+    求梯子顶端高度 $y$ 随时间 $t$ 的变化率 $\dfrac{dy}{dt}$。 \\
+    设梯脚与墙脚的距离为 $x$，梯顶与地面的距离为 $y$，由勾股定理建立 $x$、$y$ 的关系式，再对 $t$ 求导。
+    \begin{align*}
+        x^2+y^2 &= 5^2 = 25
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        2x\frac{dx}{dt}+2y\frac{dy}{dt} &= 0 \\
+        x\frac{dx}{dt}+y\frac{dy}{dt} &= 0
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \text{当 } x=3 \text{ 时} \quad y &= \sqrt{25-3^2} = 4
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        3(0.5)+4\frac{dy}{dt} &= 0 \\
+        \frac{dy}{dt} &= -\frac{1.5}{4} = -0.375
+    \end{align*}
+    \hfill (1分) \\
+    负号表示 $y$ 随时间减小，故梯子顶端下滑的速率为 $0.375\text{ m/s}$。
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：独中统考高三附加数学 - 微分法应用（相关变化率） | 考点：圆锥体积的相关变化率（相似三角形建模） | 难度：中等偏难
+\begin{question}[points = 6]
+    一个顶点朝下的圆锥形水箱，高为 $12\text{ m}$，顶部半径为 $4\text{ m}$。水以 $2\text{ m}^3/\text{min}$ 的速率注入水箱。
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.5]
+            \draw (-4,6) -- (0,0) -- (4,6);
+            \draw[dashed] (-4,6) -- (4,6);
+            \draw[dashed] (0,0) -- (0,6);
+            \draw[<->] (-4.8,0) -- (-4.8,6) node[midway, left] {$12$};
+            \draw[<->] (-4,6.6) -- (4,6.6) node[midway, above] {$4$};
+            \draw[dashed] (-2,3) -- (2,3);
+            \node[right] at (2,3) {水面};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{questionparts}
+        \item 设水深为 $h\text{ m}$，水面半径为 $r\text{ m}$。利用相似三角形，将水的体积 $V$ 表示为 $h$ 的函数。 \qscore{2}
+
+        \item 求当水深为 $6\text{ m}$ 时，水面上升的速率（答案以 $\pi$ 表示，并准确至小数点后4位）。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 将体积 $V$ 表示为 $h$ 的函数。 \\
+        由相似三角形，水面半径 $r$ 与水深 $h$ 成正比。
+        \begin{align*}
+            \frac{r}{h} &= \frac{4}{12} = \frac{1}{3} \\
+            r &= \frac{h}{3}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            V &= \frac{1}{3}\pi r^2h = \frac{1}{3}\pi\left(\frac{h}{3}\right)^2h \\
+            &= \frac{\pi}{27}h^3
+        \end{align*}
+        \hfill (1分)
+
+        \item 求水面上升的速率 $\dfrac{dh}{dt}$。 \\
+        已知 $\dfrac{dV}{dt}=2$，先求 $\dfrac{dV}{dh}$，再利用 $\dfrac{dh}{dt}=\dfrac{dV}{dt}\div\dfrac{dV}{dh}$ 求解。
+        \begin{align*}
+            \frac{dV}{dh} &= \frac{\pi}{9}h^2
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \frac{dh}{dt} &= \frac{dV}{dt}\div\frac{dV}{dh} = 2\div\frac{\pi}{9}h^2 = \frac{18}{\pi h^2}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \text{当 } h=6 \text{ 时} \quad \frac{dh}{dt} &= \frac{18}{\pi(6)^2} = \frac{18}{36\pi} = \frac{1}{2\pi}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \frac{dh}{dt} &\approx 0.1592\text{ m/min}
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：独中统考高三附加数学 - 微分法应用（相关变化率） | 考点：平面运动中距离的相关变化率 | 难度：较难
+\begin{question}[points = 5]
+    两艘船同时从同一码头出发，甲船以 $15\text{ km/h}$ 的速率向东航行，乙船以 $20\text{ km/h}$ 的速率向北航行。求 $2$ 小时后，两船之间的距离增加的速率。
+    \hfill (5\%)
+\end{question}
+
+\begin{solution}
+    求两船间的距离 $z$ 随时间 $t$ 的变化率 $\dfrac{dz}{dt}$。 \\
+    设甲船向东航行的距离为 $x$，乙船向北航行的距离为 $y$，由勾股定理建立 $x$、$y$、$z$ 的关系式，再对 $t$ 求导。
+    \begin{align*}
+        x=15t, \quad y=20t, \quad z^2 &= x^2+y^2
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        2z\frac{dz}{dt} &= 2x\frac{dx}{dt}+2y\frac{dy}{dt} \\
+        z\frac{dz}{dt} &= x\frac{dx}{dt}+y\frac{dy}{dt}
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \text{当 } t=2 \text{ 时} \quad x&=30,\quad y=40 \\
+        z &= \sqrt{30^2+40^2} = 50
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        50\frac{dz}{dt} &= 30(15)+40(20) = 450+800 = 1250
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac{dz}{dt} &= \frac{1250}{50} = 25\text{ km/h}
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+\end{document}

@@ -1,0 +1,553 @@
+% 需要的宏包/库：\usetikzlibrary{angles,quotes,calc}
+% 以下为作答题 1--12，按试卷题号顺序排列
+
+%region 范围：立体几何 | 考点：二面角（平面 HAC 与底面的夹角）、三垂线定理 | 难度：中等
+\begin{question}[points = 4]
+    如图，在长方体 $ABCD\text{-}EFGH$ 中，$AB=35$，$BC=12$，$DH=5$。求平面 $HAC$ 与平面 $ABCD$ 所成的角。（答案精确至 $0.1^\circ$）
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.9]
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (5,0);
+            \coordinate (C) at (6,1.4);
+            \coordinate (D) at (1,1.4);
+            \coordinate (E) at (0,0.7);
+            \coordinate (F) at (5,0.7);
+            \coordinate (G) at (6,2.1);
+            \coordinate (H) at (1,2.1);
+            \draw (A)--(B)--(F)--(E)--cycle;
+            \draw (E)--(H)--(G)--(F);
+            \draw (B)--(C)--(G);
+            \draw[dashed] (A)--(D)--(C);
+            \draw[dashed] (D)--(H);
+            \draw[dashed] (H)--(A);
+            \draw[dashed] (H)--(C);
+            \draw[dashed] (A)--(C);
+            \fill (A) circle (1.5pt) node[below left]{$A$};
+            \fill (B) circle (1.5pt) node[below right]{$B$};
+            \fill (C) circle (1.5pt) node[right]{$C$};
+            \fill (D) circle (1.5pt) node[below right,inner sep=1pt]{$D$};
+            \fill (E) circle (1.5pt) node[left]{$E$};
+            \fill (F) circle (1.5pt) node[below left]{$F$};
+            \fill (G) circle (1.5pt) node[above right]{$G$};
+            \fill (H) circle (1.5pt) node[above left]{$H$};
+            \node[below] at ($(A)!0.5!(B)$) {$35$};
+            \node[below right] at ($(B)!0.5!(C)$) {$12$};
+            \node[right] at ($(D)!0.5!(H)$) {$5$};
+        \end{tikzpicture}
+    \end{center}
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求平面 $HAC$ 与底面 $ABCD$ 所成的角 $\theta$。\\
+    $HD\perp$ 底面，作 $DP\perp AC$ 于 $P$，由三垂线定理 $HP\perp AC$，故 $\theta=\angle HPD$。\\
+    设 $P$ 为 $D$ 在 $AC$ 上的垂足，$AD=BC=12$，$DC=AB=35$。\\
+    \begin{align*}
+        AC=\sqrt{35^2+12^2}=\sqrt{1369}=37
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac12\cdot AD\cdot DC &=\frac12\cdot AC\cdot DP \\
+        DP &=\frac{12\times35}{37}=\frac{420}{37}
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \tan\theta=\frac{DH}{DP}=\frac{5\times37}{420}=\frac{37}{84}
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \theta=\arctan\frac{37}{84}\approx 23.8^\circ
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：概率与统计 | 考点：标准正态分布的对称性、二项分布 | 难度：中等
+\begin{question}[points = 4]
+    设随机变量 $Z$ 服从标准正态分布，则 $P(Z\le1)=0.8413$。在 $Z$ 的十个随机值中，恰有八个满足 $-1\le Z\le1$ 的概率是多少？
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求十个独立取值中恰有八个落在 $[-1,1]$ 内的概率。\\
+    先由对称性求单个值落在 $[-1,1]$ 内的概率 $p$，再用二项分布 $B(10,p)$。\\
+    设 $p=P(-1\le Z\le1)$。\\
+    \begin{align*}
+        p=2P(Z\le1)-1=2\times0.8413-1=0.6826
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        P &=\binom{10}{8}p^8(1-p)^2 \\
+        &=45\times0.6826^8\times0.3174^2
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        P\approx0.214
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：复数与方程 | 考点：实系数方程的共轭虚根、多项式除法 | 难度：中等
+\begin{question}[points = 4]
+    已知 $\dfrac{i}{2}$ 是方程 $4x^4-4x^3+5x^2-x+1=0$ 的一个根，求此方程的所有根。
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求四次方程 $4x^4-4x^3+5x^2-x+1=0$ 的全部根。\\
+    实系数方程的虚根成对共轭出现，由一对共轭根得二次因式，再做因式分解。\\
+    设 $x_1=\dfrac i2$。\\
+    \begin{align*}
+        x_2=\overline{x_1}=-\frac i2
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \left(x-\frac i2\right)\left(x+\frac i2\right)=x^2+\frac14
+        \ \Rightarrow\ 4x^2+1\ \text{是原多项式的因式}
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        4x^4-4x^3+5x^2-x+1=(4x^2+1)(x^2-x+1)
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        x^2-x+1=0\ \Rightarrow\ x=\frac{1\pm\sqrt3\,i}{2}
+    \end{align*}
+    所有根为 $\pm\dfrac i2,\ \dfrac{1\pm\sqrt3\,i}{2}$。 \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：导数及其应用 | 考点：隐函数/显函数求导、切线斜率 | 难度：中等
+\begin{question}[points = 4]
+    证明曲线 $4xy-3x^2+4=0$ 没有水平切线。
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    证明曲线上任一点处的切线斜率都不为 $0$。\\
+    先把 $y$ 表示成 $x$ 的函数，再求导判断符号。\\
+    \begin{align*}
+        x=0\ \Rightarrow\ 4=0\ (\text{矛盾}),\quad\text{故 }x\neq0,\quad
+        y=\frac{3x^2-4}{4x}=\frac{3x}{4}-\frac1x
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac{\mathrm{d}y}{\mathrm{d}x}=\frac34+\frac1{x^2}
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac{\mathrm{d}y}{\mathrm{d}x}\ge\frac34>0
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \frac{\mathrm{d}y}{\mathrm{d}x}\neq0\ \text{恒成立，故曲线没有水平切线}
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：定积分 | 考点：三角函数积分、换元法 | 难度：基础
+\begin{question}[points = 4]
+    求 $\displaystyle\int_0^{\frac{\pi}{2}}\bigl(\sin^2\theta\cos^3\theta\bigr)\,\mathrm{d}\theta$。
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求 $\displaystyle\int_0^{\frac{\pi}{2}}\sin^2\theta\cos^3\theta\,\mathrm{d}\theta$。\\
+    拆出一个 $\cos\theta$ 与 $\mathrm{d}\theta$ 凑成 $\mathrm{d}(\sin\theta)$，再换元。\\
+    设 $u=\sin\theta$，则 $\mathrm{d}u=\cos\theta\,\mathrm{d}\theta$，$\theta:0\to\dfrac{\pi}{2}$ 对应 $u:0\to1$。\\
+    \begin{align*}
+        \sin^2\theta\cos^3\theta\,\mathrm{d}\theta=\sin^2\theta\,(1-\sin^2\theta)\cos\theta\,\mathrm{d}\theta
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \int_0^{\frac{\pi}{2}}\sin^2\theta\cos^3\theta\,\mathrm{d}\theta=\int_0^1u^2(1-u^2)\,\mathrm{d}u
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \int_0^1(u^2-u^4)\,\mathrm{d}u=\left[\frac{u^3}{3}-\frac{u^5}{5}\right]_0^1
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        =\frac13-\frac15=\frac{2}{15}
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：数学归纳法 | 考点：复合函数的迭代与归纳证明 | 难度：中等
+\begin{question}[points = 6]
+    设 $f^1(x)=f(x)=\dfrac{1}{2-x}$。对于任意正整数 $n$，定义复合函数 $f^{n+1}=f^n\circ f$。用数学归纳法证明：对所有正整数 $n$，
+    \[
+        f^n(x)=\frac{(n-1)x-n}{nx-(n+1)}.
+    \]
+    \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    证明 $f^n(x)=\dfrac{(n-1)x-n}{nx-(n+1)}$ 对所有正整数 $n$ 成立。\\
+    按基础步、归纳假设、归纳步三部分书写，归纳步用 $f^{k+1}=f^k\circ f$ 代入。\\
+    \textbf{基础步：}\ $n=1$ 时
+    \begin{align*}
+        \frac{(1-1)x-1}{1\cdot x-2}=\frac{-1}{x-2}=\frac{1}{2-x}=f^1(x)
+    \end{align*}
+    \hfill (1分) \\
+    \textbf{归纳假设：}\ 设 $n=k\ (k\ge1)$ 时
+    \begin{align*}
+        f^k(x)=\frac{(k-1)x-k}{kx-(k+1)}
+    \end{align*}
+    \hfill (1分) \\
+    \textbf{归纳步：}\ 设 $u=f(x)=\dfrac{1}{2-x}$，则 $u(2-x)=1$。
+    \begin{align*}
+        f^{k+1}(x)=f^k(u)
+        &=\frac{(k-1)u-k}{ku-(k+1)} \\
+        &=\frac{(k-1)u(2-x)-k(2-x)}{ku(2-x)-(k+1)(2-x)} \\
+        &=\frac{(k-1)-k(2-x)}{k-(k+1)(2-x)}
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        (k-1)-k(2-x)=kx-(k+1)
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        k-(k+1)(2-x)=(k+1)x-(k+2)
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        f^{k+1}(x)=\frac{\bigl((k+1)-1\bigr)x-(k+1)}{(k+1)x-\bigl((k+1)+1\bigr)}
+    \end{align*}
+    即 $n=k+1$ 时结论成立，由数学归纳法，对所有正整数 $n$ 结论成立。 \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：三角函数 | 考点：辅助角公式、三角方程的一般解 | 难度：基础
+\begin{question}[points = 6]
+    \begin{questionparts}
+        \item 将 $\sin\theta+\sqrt3\cos\theta$ 写成 $R\sin(\theta+\alpha)$ 的形式，其中 $R>0$ 且 $0^\circ<\alpha<90^\circ$。 \qscore{3}
+
+        \item 求方程 $\sin\theta+\sqrt3\cos\theta-1=0$ 的一般解。 \qscore{3}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 把 $\sin\theta+\sqrt3\cos\theta$ 化为 $R\sin(\theta+\alpha)$。\\
+        展开 $R\sin(\theta+\alpha)$ 后与原式比较 $\sin\theta,\cos\theta$ 的系数。\\
+        \begin{align*}
+            R\sin(\theta+\alpha)=R\cos\alpha\sin\theta+R\sin\alpha\cos\theta
+            \ \Rightarrow\ R\cos\alpha=1,\ R\sin\alpha=\sqrt3
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            R=\sqrt{1^2+(\sqrt3)^2}=2
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \tan\alpha=\sqrt3,\ 0^\circ<\alpha<90^\circ\ \Rightarrow\ \alpha=60^\circ,\quad
+            \sin\theta+\sqrt3\cos\theta=2\sin(\theta+60^\circ)
+        \end{align*}
+        \hfill (1分)
+
+        \item 求 $\sin\theta+\sqrt3\cos\theta=1$ 的一般解。\\
+        用 (a) 的结果化为 $\sin(\theta+60^\circ)=\dfrac12$。\\
+        \begin{align*}
+            2\sin(\theta+60^\circ)=1\ \Rightarrow\ \sin(\theta+60^\circ)=\frac12
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \theta+60^\circ=30^\circ+360^\circ k\quad\text{或}\quad\theta+60^\circ=150^\circ+360^\circ k,\quad k\in\mathbb{Z}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \theta=-30^\circ+360^\circ k\quad\text{或}\quad\theta=90^\circ+360^\circ k,\quad k\in\mathbb{Z}
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：排列组合与统计 | 考点：圆排列、方差非负性 | 难度：中等
+\begin{question}[points = 6]
+    \begin{questionparts}
+        \item 四个男生与四个女生围圆桌而坐，男女间隔的坐法有几种？ \qscore{2}
+
+        \item 已知一组数据 $x_1,x_2,x_3,\cdots,x_{50}$ 的和为 $1500$。利用方差为非负的性质，求 $\displaystyle\sum_i x_i^2$ 的最小可能值。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求四男四女围圆桌、男女间隔的坐法数（旋转后相同的视为同一种）。\\
+        先固定一名男生消除旋转，再排其余男生与女生。\\
+        \begin{align*}
+            N &=3!\times4!
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            N &=6\times24=144
+        \end{align*}
+        \hfill (1分)
+
+        \item 已知 $\displaystyle\sum_{i=1}^{50}x_i=1500$，求 $\displaystyle\sum_i x_i^2$ 的最小值。\\
+        用方差 $\sigma^2=\dfrac1{50}\displaystyle\sum_i x_i^2-\bar{x}^2\ge0$ 得到下界。\\
+        \begin{align*}
+            \bar{x}=\frac{1500}{50}=30
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \sigma^2=\frac1{50}\sum_i x_i^2-\bar{x}^2\ge0
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \sum_i x_i^2\ge50\times30^2=45000
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \sigma^2=0\ \Leftrightarrow\ x_1=x_2=\cdots=x_{50}=30,\quad
+            \left(\sum_i x_i^2\right)_{\min}=45000
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：微分方程 | 考点：可分离变量方程、分部积分 | 难度：中等
+\begin{question}[points = 6]
+    求满足 $\dfrac{1}{x}\dfrac{\mathrm{d}y}{\mathrm{d}x}=(1+2y)\sin x$ 且通过点 $\left(\dfrac{\pi}{2},0\right)$ 的曲线方程式。
+    \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    求微分方程 $\dfrac1x\dfrac{\mathrm{d}y}{\mathrm{d}x}=(1+2y)\sin x$ 过点 $\left(\dfrac{\pi}{2},0\right)$ 的特解。\\
+    分离变量后两边积分，右边用分部积分，再代入点求常数。\\
+    \begin{align*}
+        \frac{\mathrm{d}y}{1+2y}=x\sin x\,\mathrm{d}x
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \int\frac{\mathrm{d}y}{1+2y}=\frac12\ln|1+2y|
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        \int x\sin x\,\mathrm{d}x &=-x\cos x+\int\cos x\,\mathrm{d}x \\
+        &=-x\cos x+\sin x+C
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        \frac12\ln|1+2y|=\sin x-x\cos x+C
+    \end{align*}
+    代入 $\left(\dfrac{\pi}{2},0\right)$：
+    \begin{align*}
+        0=1-0+C\ \Rightarrow\ C=-1
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        1+2y &=e^{\,2(\sin x-x\cos x-1)}\quad(\text{过该点时 }1+2y=1>0) \\
+        y &=\frac12\left(e^{\,2\sin x-2x\cos x-2}-1\right)
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：空间向量与平面方程 | 考点：叉积求法向量、直线与平面的交点 | 难度：中等
+\begin{question}[points = 6]
+    已知一平面 $P$ 经过点 $(-1,1,2)$，$(-2,0,5)$ 及原点。求
+    \begin{questionparts}
+        \item $P$ 的方程式； \qscore{3}
+
+        \item $P$ 与直线 $L:\ \begin{cases} x=2+2t \\ y=1-t \\ z=-1+t \end{cases}$ 的交点。 \qscore{3}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求过原点及点 $(-1,1,2)$、$(-2,0,5)$ 的平面方程。\\
+        平面法向量取两个方向向量的叉积。\\
+        设 $\vec{u}=(-1,1,2)$，$\vec{v}=(-2,0,5)$，法向量 $\vec{n}=\vec{u}\times\vec{v}$。\\
+        \begin{align*}
+            \vec{n}=\begin{vmatrix}\vec{i}&\vec{j}&\vec{k}\\-1&1&2\\-2&0&5\end{vmatrix}
+            =(5,\,1,\,2)
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            5x+y+2z=0
+        \end{align*}
+        \hfill (1分)
+
+        \item 求平面 $P$ 与直线 $L$ 的交点。\\
+        把 $L$ 的参数式代入 $P$ 的方程求参数 $t$。\\
+        \begin{align*}
+            5(2+2t)+(1-t)+2(-1+t)=0
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            9+11t=0\ \Rightarrow\ t=-\frac{9}{11}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            (x,y,z)=\left(\frac{4}{11},\ \frac{20}{11},\ -\frac{20}{11}\right)
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：解三角形与导数应用 | 考点：仰角、余弦定理、变化率 | 难度：困难
+\begin{question}[points = 10]
+    在一水平地面上有三点 $O,A,B$，且 $\angle AOB=120^\circ$。在点 $O$ 处有一垂直于地面的柱子。小敏在点 $A$ 处测得从地面到柱顶的仰角为 $30^\circ$，她沿着直线匀速走了 $13$ 公尺后到达点 $B$，此处她测得从地面到柱顶的仰角为 $60^\circ$。
+
+    \begin{center}
+        \begin{tikzpicture}
+            \coordinate (O) at (0,0);
+            \coordinate (A) at (3.25,0);
+            \coordinate (B) at (120:1.08);
+            \draw (O)--(A)--(B)--cycle;
+            \pic[draw,"$120^\circ$",angle radius=6mm,angle eccentricity=1.6]{angle=A--O--B};
+            \fill (O) circle (1.5pt) node[below left]{$O$};
+            \fill (A) circle (1.5pt) node[right]{$A$};
+            \fill (B) circle (1.5pt) node[above left]{$B$};
+            \node[above right] at ($(A)!0.5!(B)$) {$13$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{questionparts}
+        \item 证明柱子的高度为 $\sqrt{39}$ 公尺。 \qscore{4}
+
+        \item 证明 $\cos\angle OAB=\dfrac{7\sqrt{13}}{26}$。 \qscore{2}
+
+        \item 从 $A$ 走到 $B$ 的路程中，仰角不断地变化。在离 $A$ 多远时，仰角的瞬间变率为 $0$？ \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 证明柱高为 $\sqrt{39}$ 公尺。\\
+        用仰角的正切表示 $OA,OB$，再在 $\triangle OAB$ 中用余弦定理。\\
+        设柱高为 $h$。\\
+        \begin{align*}
+            OA=\frac{h}{\tan30^\circ}=\sqrt3\,h,\qquad OB=\frac{h}{\tan60^\circ}=\frac{\sqrt3}{3}h
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            AB^2=OA^2+OB^2-2\cdot OA\cdot OB\cos120^\circ
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            169=3h^2+\frac{h^2}{3}+h^2=\frac{13}{3}h^2
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            h^2=39\ \Rightarrow\ h=\sqrt{39}
+        \end{align*}
+        \hfill (1分)
+
+        \item 证明 $\cos\angle OAB=\dfrac{7\sqrt{13}}{26}$。\\
+        由 (a) 得三边长，在 $\triangle OAB$ 中用余弦定理。\\
+        \begin{align*}
+            OA=\sqrt3\cdot\sqrt{39}=3\sqrt{13},\quad OB=\frac{\sqrt{39}}{\sqrt3}=\sqrt{13},\quad
+            \cos\angle OAB=\frac{OA^2+AB^2-OB^2}{2\cdot OA\cdot AB}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \cos\angle OAB=\frac{117+169-13}{2\cdot3\sqrt{13}\cdot13}
+            =\frac{273}{78\sqrt{13}}=\frac{7}{2\sqrt{13}}=\frac{7\sqrt{13}}{26}
+        \end{align*}
+        \hfill (1分)
+
+        \item 求仰角瞬间变率为 $0$ 时离 $A$ 的距离。\\
+        设仰角 $\varphi$ 满足 $\tan\varphi=\dfrac{h}{OP}$，对路程 $s$ 求导，令其为 $0$。\\
+        设 $P$ 为 $AB$ 上一点，$AP=s\ (0\le s\le13)$，$r=OP$。\\
+        \begin{align*}
+            r^2 &=OA^2+s^2-2\cdot OA\cdot s\cos\angle OAB \\
+            &=117+s^2-21s
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \varphi=\arctan\frac{h}{r}\ \Rightarrow\
+            \frac{\mathrm{d}\varphi}{\mathrm{d}s}=-\frac{h\,r'}{r^2+h^2},\qquad
+            r'=\frac{2s-21}{2r}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \frac{\mathrm{d}\varphi}{\mathrm{d}s}=0\ \Rightarrow\ 2s-21=0
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            s=\frac{21}{2}=10.5\in[0,13]
+        \end{align*}
+        即离 $A$ 点 $10.5$ 公尺时仰角的瞬间变率为 $0$。 \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：圆锥曲线与参数方程 | 考点：抛物线焦点准线、最短距离、圆与抛物线交点个数 | 难度：困难
+\begin{question}[points = 10]
+    已知一抛物线 $y=2(x-1)^2+1$。
+    \begin{questionparts}
+        \item 求此抛物线的焦点及准线。 \qscore{3}
+
+        \item 已知此抛物线的参数方程式为 $\begin{cases} x=1+\dfrac14t \\[2mm] y=1+\dfrac18t^2 \end{cases}$，证明从点 $(1,5)$ 到抛物线的最短距离为 $\dfrac{\sqrt{31}}{4}$。 \qscore{4}
+
+        \item 以 $(1,5)$ 为圆心，要作一圆与抛物线相交于四个点，求半径的取值范围。 \qscore{3}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求抛物线 $y=2(x-1)^2+1$ 的焦点与准线。\\
+        化为标准形式 $(x-h)^2=4p(y-k)$，顶点为 $(h,k)$。\\
+        \begin{align*}
+            (x-1)^2=\frac12(y-1)=4p(y-1)
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            4p=\frac12\ \Rightarrow\ p=\frac18,\quad\text{顶点 }(1,1),\ \text{开口向上}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \text{焦点 }\left(1,\frac98\right),\qquad\text{准线 }y=\frac78
+        \end{align*}
+        \hfill (1分)
+
+        \item 证明点 $(1,5)$ 到抛物线的最短距离为 $\dfrac{\sqrt{31}}{4}$。\\
+        用参数方程写出距离的平方，换元 $u=t^2$ 后配方求最小值。\\
+        设 $D$ 为 $(1,5)$ 到抛物线上点 $(x,y)$ 的距离，$u=t^2\ge0$。\\
+        \begin{align*}
+            D^2=(x-1)^2+(y-5)^2=\left(\frac t4\right)^2+\left(\frac{t^2}{8}-4\right)^2
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            D^2=\frac{t^4}{64}-\frac{15t^2}{16}+16=\frac{u^2-60u+1024}{64}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            D^2=\frac{(u-30)^2+124}{64}
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            u=30\ge0\ \text{时}\ D^2_{\min}=\frac{124}{64}=\frac{31}{16},\qquad D_{\min}=\frac{\sqrt{31}}{4}
+        \end{align*}
+        \hfill (1分)
+
+        \item 求使以 $(1,5)$ 为圆心的圆与抛物线交于四点的半径 $r$ 的范围。\\
+        交点满足 $D^2=r^2$，化为关于 $u=t^2$ 的方程，每个正根 $u$ 对应 $t=\pm\sqrt u$ 两个交点。\\
+        设 $r>0$，交点满足 $D^2=r^2$。\\
+        \begin{align*}
+            \frac{u^2-60u+1024}{64}=r^2\ \Rightarrow\ u^2-60u+1024-64r^2=0
+        \end{align*}
+        \hfill (1分) \\
+        四个交点等价于上述方程有两个不相等的正根：
+        \begin{align*}
+            \Delta=3600-4(1024-64r^2)=256r^2-496>0,\qquad
+            u_1u_2=1024-64r^2>0,\qquad u_1+u_2=60>0
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            \frac{31}{16}<r^2<16\ \Rightarrow\ \frac{\sqrt{31}}{4}<r<4
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion

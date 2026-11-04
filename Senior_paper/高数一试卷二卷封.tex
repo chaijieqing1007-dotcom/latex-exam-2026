@@ -1,0 +1,116 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage{xeCJK}
+\IfFontExistsTF{Noto Serif CJK SC}{%
+  \setCJKmainfont{Noto Serif CJK SC}
+}{%
+  \IfFontExistsTF{NSimSun}{%
+    \setCJKmainfont{NSimSun}
+  }{%
+    \setCJKmainfont{FandolSong}
+  }%
+}
+\usepackage[margin=2cm,top=1.5cm,bottom=1.6cm]{geometry}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usetikzlibrary{calc}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.08}
+
+\newcommand{\ulinefill}[1]{\underline{\hspace{#1}}}
+
+\begin{document}
+
+\AddToShipoutPictureFG*{%
+  \put(31,104){\color{black}\rule{16pt}{66pt}}%
+  \put(37,112){\makebox(0,0)[lb]{\rotatebox{90}{\color{white}\bfseries\footnotesize 高级数学 / 二}}}%
+  \put(24,18){\makebox(0,0)[lb]{\small 董总版权所有}}%
+  \put(520,18){\makebox(0,0)[lb]{\bfseries\small 【机密】}}%
+}
+
+\begin{center}
+  {\zihao{3}\bfseries 2018 年度马来西亚华文独中统一考试\par}
+  \vspace{1.0em}
+  {\zihao{4}\bfseries 高中组\par}
+  \vspace{1.0em}
+  {\zihao{2}\bfseries 高 级 数 学\par}
+  \vspace{0.2em}
+  {\small (SC05)\par}
+\end{center}
+
+\vspace{1.3em}
+
+\begin{center}
+  \begin{tabular}{c}
+    试卷二\hspace{2em}作答题\\[-0.1em]
+    \noalign{\hrule height 0.4pt}
+    日期：2018 年 10 月 25 日\\[-0.05em]
+    时间：9.45 a.m.－11.45 a.m.\\[-0.05em]
+    （2 小时）\\
+    \noalign{\hrule height 0.4pt}
+  \end{tabular}
+\end{center}
+
+\vspace{1.0em}
+
+{\zihao{4}\bfseries 考 生 须 知\par}
+\vspace{0.55em}
+
+\begin{enumerate}[label=（\arabic*）,leftmargin=2.8em,itemsep=0.38em]
+  \item 本科试卷共分两份：\\
+  \hspace*{1.3em}试卷一：选择题（40\%），\\
+  \hspace*{1.3em}试卷二：作答题（60\%）。
+
+  \item 试卷二共分两组：\\
+  \hspace*{1.3em}甲组（必答题）：5 题\textbf{全答}（20\%）；\\
+  \hspace*{1.3em}乙组（选答题）：7 题\textbf{选答 4 题，但不能超过 4 题}（40\%）。\\
+  \hspace*{1.3em}两组全部共答 9 题完卷。
+
+  \item \textbf{每题必须用新的一张纸作答。}
+
+  \item 只可用蓝色或黑色的原子笔书写，惟可用铅笔画图。
+
+  \item 不必抄题，惟试题号码必须书写清楚。
+
+  \item 所有演算必须清楚地写出。必要的几何图形必须画出。
+
+  \item 可使用所规定的电子计算机进行演算，除非题目限制。
+
+  \item 作答前，须在\textbf{积分表}（电脑卡）上正确填写考生编号及用 \textbf{5B} 铅笔\\
+  将对应的小方格涂黑。作答后，须根据所答题数在试题号码栏上\\
+  将有关小方格涂黑，并指出作答总数。
+
+  \item 答卷必须依试题号码次序排列，并且将\textbf{积分表}（电脑卡）置于上\\
+  面，合订成一本。
+
+  \item 数学公式表在 2--4 面。
+
+  \item 试卷二作答题共印七面，最后一面空白。
+\end{enumerate}
+
+\vspace{1.0em}
+
+\begin{center}
+  \fbox{\rule{0pt}{1.15em}\hspace{1.2em}{\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.2em}}
+\end{center}
+
+\vspace{1.2em}
+
+\noindent
+（考生姓名：\ulinefill{4.4cm}\hfill 考生编号：\ulinefill{4.3cm}）
+
+\vfill
+
+\begin{center}
+-57-
+\end{center}
+
+\end{document}

@@ -1,0 +1,242 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc}
+
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+\geometry{margin=2cm}
+
+\AtBeginDocument{\zihao{4}}
+% ----------- 调整 exam -----------
+
+
+%region exam setup
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        question = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {answer},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em
+}
+\newcommand{\qscore}[1]{%
+    \unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[4em][r]{(#1\%)}}%
+}
+\newcommand{\solutionlayout}{%
+    \setlength{\abovedisplayskip}{0.6em}%
+    \setlength{\belowdisplayskip}{0.6em}%
+    \setlength{\abovedisplayshortskip}{0.35em}%
+    \setlength{\belowdisplayshortskip}{0.35em}%
+    \setlength{\jot}{0.35em}%
+}
+%endregion
+
+
+
+
+\begin{document}
+
+%region 范围：高三统计学-集中趋势 | 考点：算术平均数（未分组数据） | 难度：基础
+\begin{question}[points = 4]
+    某教师记录 5 位学生某次测验的分数如下：
+    \[
+        76,\ 84,\ 90,\ 68,\ 82
+    \]
+    求这组数据的平均数。
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求 5 个数据的平均数。 \\
+    直接利用平均数公式 $\bar{x}=\dfrac{\sum x_i}{n}$。
+    \begin{align*}
+        \bar{x} &= \frac{76+84+90+68+82}{5} \\
+        &= \frac{400}{5} \\
+        &= 80
+    \end{align*}
+    \hfill (4分)
+\end{solution}
+%endregion
+
+%region 范围：高三统计学-集中趋势 | 考点：加权平均数（频数分布） | 难度：中等
+\begin{question}[points = 6]
+    某班 30 位学生进行一次共 5 题的随堂测验，每人答对题数 $x$（单位：题）的频数分布如下表：
+
+    \begin{center}
+    \begin{tabular}{c|ccccc}
+        答对题数 $x$ & 1 & 2 & 3 & 4 & 5 \\
+        \hline
+        人数 $f$ & 2 & 5 & 10 & 8 & 5
+    \end{tabular}
+    \end{center}
+
+    求该班学生平均答对题数。
+    \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    求频数分布表所示数据的加权平均数。 \\
+    利用加权平均数公式 $\bar{x}=\dfrac{\sum f_ix_i}{\sum f_i}$。
+    \begin{align*}
+        \sum f_i &= 2+5+10+8+5 = 30
+    \end{align*}
+    \hfill (2分)
+    \begin{align*}
+        \sum f_ix_i &= 1(2)+2(5)+3(10)+4(8)+5(5) \\
+        &= 2+10+30+32+25 \\
+        &= 99
+    \end{align*}
+    \hfill (2分)
+    \[
+        \bar{x} = \frac{99}{30} = 3.3
+    \]
+    \hfill (2分)
+\end{solution}
+%endregion
+
+%region 范围：高三统计学-集中趋势 | 考点：中位数（未分组数据，无需公式） | 难度：基础
+\begin{question}[points = 4]
+    某教师记录 10 位学生完成一份作业所需的时间（单位：分钟）如下：
+    \[
+        23,\ 19,\ 31,\ 27,\ 15,\ 35,\ 29,\ 41,\ 18,\ 25
+    \]
+    求这组数据的中位数。
+    \hfill (4\%)
+\end{question}
+
+\begin{solution}
+    求 10 个数据的中位数。 \\
+    将数据由小到大排列，取中间两项的平均数。
+    \[
+        15,\ 18,\ 19,\ 23,\ 25,\ 27,\ 29,\ 31,\ 35,\ 41
+    \]
+    \hfill (2分)
+    \begin{align*}
+        M &= \frac{25+27}{2} \\
+        &= 26
+    \end{align*}
+    \hfill (2分)
+\end{solution}
+%endregion
+
+%region 范围：高三统计学-集中趋势 | 考点：中位数（分组数据，插值公式） | 难度：中等
+\begin{question}[points = 8]
+    某次数学测验中，50 名学生的成绩分布如下表：
+
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        成绩 & 50-60 & 60-70 & 70-80 & 80-90 & 90-100 \\
+        \hline
+        人数 $f$ & 5 & 12 & 20 & 9 & 4 \\
+        \hline
+    \end{tabular}
+    \end{center}
+
+    求这组数据的中位数。
+    \hfill (8\%)
+\end{question}
+
+\begin{solution}
+    求分组数据的中位数。 \\
+    先确定中位数所在组，再代入中位数插值公式 $M=L+\left(\dfrac{\frac{n}{2}-F}{f_m}\right)c$。
+    \begin{align*}
+        n &= 5+12+20+9+4 = 50, \quad \frac{n}{2}=25
+    \end{align*}
+    \hfill (2分)
+    \begin{align*}
+        F(\text{累积至}\ 70\text{-}80\ \text{之前}) &= 5+12 = 17
+    \end{align*}
+    \hfill (2分)
+    中位数组为 $70\text{-}80$，即 $L=70,\ F=17,\ f_m=20,\ c=10$。
+    \begin{align*}
+        M &= 70 + \left(\frac{25-17}{20}\right)(10) \\
+        &= 70 + \frac{80}{20} \\
+        &= 70+4 \\
+        &= 74
+    \end{align*}
+    \hfill (4分)
+\end{solution}
+%endregion
+
+%region 范围：高三统计学-集中趋势 | 考点：众数（分组数据，插值公式） | 难度：中等
+\begin{question}[points = 8]
+    某校体育测试记录 70 名学生一分钟跳绳个数，分布如下表：
+
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        跳绳个数 & 50-60 & 60-70 & 70-80 & 80-90 & 90-100 \\
+        \hline
+        人数 $f$ & 8 & 12 & 24 & 16 & 10 \\
+        \hline
+    \end{tabular}
+    \end{center}
+
+    求这组数据的众数。
+    \hfill (8\%)
+\end{question}
+
+\begin{solution}
+    求分组数据的众数。 \\
+    确定众数组，代入众数公式 $Mo=L+\left(\dfrac{d_1}{d_1+d_2}\right)c$，其中 $d_1=f_m-f_1,\ d_2=f_m-f_2$。
+    众数组为频数最高的 $70\text{-}80$，即 $L=70,\ f_m=24,\ f_1=12,\ f_2=16,\ c=10$。
+    \begin{align*}
+        d_1 &= 24-12 = 12 \\
+        d_2 &= 24-16 = 8
+    \end{align*}
+    \hfill (3分)
+    \begin{align*}
+        Mo &= 70 + \left(\frac{12}{12+8}\right)(10) \\
+        &= 70 + \left(\frac{12}{20}\right)(10) \\
+        &= 70+6 \\
+        &= 76
+    \end{align*}
+    \hfill (5分)
+\end{solution}
+%endregion
+
+\end{document}

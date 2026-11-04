@@ -1,0 +1,410 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage{amsmath,amssymb,array,graphicx,booktabs,multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tasks}
+
+\setCJKmainfont{Noto Serif CJK SC}
+\geometry{margin=2.2cm,top=2.0cm,bottom=2.2cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{-\thepage{}-}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\headheight}{14pt}
+\linespread{1.12}
+
+% Question counter
+\newcounter{qnum}
+\setcounter{qnum}{0}
+
+\newenvironment{question}
+  {%
+    \stepcounter{qnum}%
+    \vspace{0.8em}%
+    \noindent\textbf{\theqnum.}\enspace
+  }
+  {\par\vspace{0.4em}}
+
+\newenvironment{choices}
+  {%
+    \begin{enumerate}[label=\textbf{\Alph*},leftmargin=2.2em,itemsep=0.15em,topsep=0.2em]
+  }
+  {\end{enumerate}\vspace{0.5em}}
+
+\newenvironment{solution}
+  {%
+    \par\noindent
+  }
+  {\par}
+
+\begin{document}
+
+% ---- Logo + Header ----
+\begin{center}
+  {\zihao{2}\bfseries 吉兰丹中华独立中学\par}
+  \vspace{0.3em}
+  {\zihao{2}\bfseries 2025 年高中统考预考\par}
+\end{center}
+
+\vspace{1.5em}
+
+\begin{center}
+  \begin{tabular}{c}
+    {\large\bfseries 高中组}\\[0.4em]
+    {\zihao{2}\bfseries 高 中 数 学}\\[0.1em]
+    {\large (SC 04)}\\[0.6em]
+    \midrule\\[-0.8em]
+    试卷一\hspace{2em}选择题\\[0.1em]
+    \midrule\\[-0.5em]
+    日期：2025 年 9 月 23 日\\[0.1em]
+    时间：9：00 a.m. 至 10：00 a.m.\\[0.1em]
+    (1 小时)\\[0.2em]
+    \midrule
+  \end{tabular}
+\end{center}
+
+\vspace{1.5em}
+
+{\large\bfseries \underline{考生须知}\par}
+\vspace{0.5em}
+
+\begin{enumerate}[label=\chinese{enumi}、,leftmargin=2em,itemsep=0.5em]
+  \item 本科试卷共分两份：\\
+        试卷一：选择题（40\%）；\\
+        试卷二：作答题（60\%）。
+
+  \item 考生须于第一阶段规定的 60 分钟内完成试卷一。暂停 15 分钟后，才在第二阶段规定的 2 小时内作答试卷二。
+
+  \item 试卷一选择题 20 题\textbf{全答}。选出\textbf{正确}的答案，然后用 \textbf{5B 铅笔}将\textbf{"O"答案纸}（电脑卡）上相应的字母所在的小方格涂黑。
+
+  \item 可使用电子计算机进行演算。
+
+  \item 试卷一选择题共印三面。
+\end{enumerate}
+
+\vspace{1.5em}
+
+\begin{center}
+  {\setlength{\fboxrule}{1.2pt}\fbox{\rule{0pt}{1.1em}\hspace{1.5em}{\large\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.5em}}}
+\end{center}
+
+\vfill
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
+（考生姓名：\underline{\hspace{4.2cm}} & 考生编号：\underline{\hspace{4.0cm}}）
+\end{tabular*}
+
+\newpage
+
+% ============================================================
+%  试卷一：选择题
+% ============================================================
+
+\begin{question}
+    以下何者为 $f(x)=x^3-6x^2-x+18$ 的因式。
+    \begin{choices}
+        \item $x-1$
+        \item $x+1$
+        \item $x-2$
+        \item $x+2$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    以下哪个关于一元二次方程式 $x^2+kx-2=0$（$k\in\mathbb{R}$）的根的叙述是正确的？
+    \begin{choices}
+        \item 方程式无实根
+        \item 方程式由两个正根
+        \item 方程式有两个相等实根
+        \item 方程式有两个相异的实根
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求函数 $f(x)=\sqrt{3-x}$ 的定义域。
+    \begin{choices}
+        \item $(-\infty,0)$
+        \item $(-\infty,3)$
+        \item $(0,\infty)$
+        \item $(3,\infty)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    化简 $\displaystyle\sqrt[3]{x^2 y}\times\left(\sqrt[6]{\dfrac{y}{x}}\right)^2$。
+    \begin{choices}
+        \item $x^{\frac{1}{3}}y^{\frac{2}{3}}$
+        \item $x^{\frac{4}{3}}y$
+        \item $x\,y^{\frac{4}{3}}$
+        \item $x^{\frac{5}{3}}y^{\frac{2}{5}}$ \phantom{$x^{\frac{2}{5}}$}
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知一等差数列的第 3 项是 5，第 8 项是 20。求此数列的第 25 项。
+    \begin{choices}
+        \item $71$
+        \item $78$
+        \item $85$
+        \item $89$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    下列哪个矩阵没有逆矩阵？
+    \begin{choices}
+        \item $\begin{pmatrix}0&1\\1&0\end{pmatrix}$
+        \item $\begin{pmatrix}1&-1\\0&1\end{pmatrix}$
+        \item $\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$
+        \item $\begin{pmatrix}1&-1\\0&-1\end{pmatrix}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求满足不等式 $|2x-1|<5$ 的整数 $x$ 的个数。
+    \begin{choices}
+        \item $4$
+        \item $5$
+        \item $6$
+        \item $7$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\dfrac{2x-4}{x^2-3x}=\dfrac{a}{x}+\dfrac{b}{x-3}$，其中 $a,b$ 为常数。求 $2a+b$ 的值。
+    \begin{choices}
+        \item $2$
+        \item $\dfrac{2}{3}$
+        \item $\dfrac{10}{3}$
+        \item $0$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    展开 $\begin{vmatrix}1 & x & -2 \\ -5 & x-1 & 3 \\ 0 & 0 & x+1\end{vmatrix}$。
+    \begin{choices}
+        \item $-6x^2-5x+1$
+        \item $-4x^2-5x-1$
+        \item $4x^2+5x+1$
+        \item $6x^2+5x-1$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知一扇形的半径为 2 cm，且其周长为半径的 4 倍。求此扇形的面积（cm$^2$）。
+    \begin{choices}
+        \item $\dfrac{1}{2}$
+        \item $\dfrac{\pi}{4}$
+        \item $\dfrac{\pi}{2}$
+        \item $4$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知某地沿经线到南极的距离比到北极的距离多了 2140 海里，试求此地的纬度。
+    \begin{choices}
+        \item $72.17^\circ\text{S}$
+        \item $72.26^\circ\text{N}$
+        \item $17.74^\circ\text{S}$
+        \item $17.83^\circ\text{N}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\sin\alpha=-\dfrac{7}{25}$ 且 $\alpha$ 为第三象限角，试求 $\sin\!\left(\dfrac{\pi}{2}+\alpha\right)$ 的值。
+    \begin{choices}
+        \item $\dfrac{24}{25}$
+        \item $-\dfrac{24}{25}$
+        \item $\dfrac{7}{25}$
+        \item $-\dfrac{7}{25}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\triangle ABC$ 中，$\angle B$ 是钝角，$AB=8$，$BC=6$，$\triangle ABC$ 的面积为 $12\sqrt{3}$，求 $\angle B$。
+    \begin{choices}
+        \item $102^\circ$
+        \item $112^\circ$
+        \item $120^\circ$
+        \item $124^\circ$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知点 $P$ 内分以点 $A(-8,14)$ 及点 $B(4,2)$ 为端点的线段成 $\dfrac{AP}{PB}=\dfrac{1}{2}$。求点 $P$ 的坐标。
+    \begin{choices}
+        \item $(0,6)$
+        \item $(-4,10)$
+        \item $(2,2)$
+        \item $(2,8)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知直线 $L$ 的 $y$ 截距为 $-5$ 且垂直于直线 $5x-11y=35$，求直线 $L$ 的 $x$ 截距。
+    \begin{choices}
+        \item $-11$
+        \item $-7$
+        \item $-5$
+        \item $-3$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    试用公式求这 55 名高中生的身高中位数。
+    \vspace{0.4em}
+    \begin{center}
+    \begin{tabular}{lcccc}
+    \toprule
+    身高 & 150--159 & 160--169 & 170--179 & 180--189 \\
+    \midrule
+    人数 & 15 & 20 & 17 & 3 \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \vspace{0.4em}
+    \begin{choices}
+        \item $165.95$
+        \item $165.75$
+        \item $165.25$
+        \item $164.75$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求曲线 $y=3x^2-5x-1$ 上 $x=2$ 时的切线斜率。
+    \begin{choices}
+        \item $4$
+        \item $5$
+        \item $6$
+        \item $7$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求曲线 $y=x^3-6x^2+9x-12$ 的上凸区间。
+    \begin{choices}
+        \item $(-\infty,1)$
+        \item $(-\infty,2)$
+        \item $(-\infty,3)$
+        \item $(1,\infty)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求 $\displaystyle\int\!\left(3x^2-\frac{1}{x}\right)dx$。
+    \begin{choices}
+        \item $x^3+\dfrac{1}{x^2}+C$
+        \item $x^3-\dfrac{1}{x^2}+C$
+        \item $6x+\dfrac{2}{x^2}+C$
+        \item $x^3-\ln x+C$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\displaystyle\int_1^5 f(x)\,dx=10$ 及 $\displaystyle\int_3^5 f(x)\,dx=7$。求 $\displaystyle\int_1^3\bigl[f(x)+2\bigr]dx$ 的值。
+    \begin{choices}
+        \item $4$
+        \item $5$
+        \item $6$
+        \item $7$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\vspace{2em}
+\noindent 汇整/出题者：吴永华
+
+\end{document}

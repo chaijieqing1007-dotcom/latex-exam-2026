@@ -1,0 +1,120 @@
+% ==========================
+% 卷面变量设置（只需改这里）
+% ==========================
+\newcommand{\paperlevel}{初中一}
+\newcommand{\papersubject}{数学 试卷一}
+\newcommand{\schoolname}{金宝培元独立中学}
+\newcommand{\examname}{年终考}
+\newcommand{\classinfo}{J1(H / I/ F)}
+\newcommand{\examdate}{30-10-2026}
+\newcommand{\examtime}{13:00-14:15}
+\newcommand{\questiontotal}{6}
+\newcommand{\paperpercentage}{60\%}
+\newcommand{\setterteacher}{蔡杰庆师}
+\newcommand{\reviewteacher}{禤佩娟师}
+\newcommand{\secondreviewteacher}{张惠雯师}
+\newcommand{\auditteacher}{雷泳健师}
+
+
+
+\usepackage{xeCJK}
+\setCJKmainfont{NSimSun}
+\newCJKfontfamily\heiti{NSimSun}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{calc}
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+
+% \renewcommand{\choiceshook}{%
+%     \setlength{\leftmargin}{18pt}%
+% }
+\geometry{margin=2cm}
+\AtBeginDocument{\zihao{4}}
+
+
+%region ----------- 调整 exam -----------
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        problem = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整各 question 之间的垂直间距
+    question = {
+        top-sep = 1em,
+        bottom-sep = 1em,
+    },
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {参考答案},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+%endregion
+
+\newcommand{\qscoreoffset}{4em}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em,
+    before={\renewcommand{\qscoreoffset}{8em}},
+}
+\newcommand{\qscore}[2][\%]{%
+    \leavevmode\unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[\qscoreoffset][r]{(#2#1)}}%
+}
+
+\newcommand{\makeexamheader}{%
+%region 三栏标题区
+% ==========================
+\noindent
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} p{0.3\textwidth} p{0.35\textwidth} p{0.3\textwidth}}
+
+\raggedright
+\textbf{\paperlevel}\\[0.2em]
+\textbf{}{\papersubject}\\[0.4em]
+姓名：\underline{\hspace{3cm}} &
+
+\centering
+\textbf{\schoolname}\\[0.2em]
+\textbf{\examname}\\[0.4em]
+班级：\classinfo &
+
+\raggedright
+日期：\examdate\\[0.2em]
+时间：\examtime\\[0.4em]
+得分：\underline{\hspace{2.5cm}} \\
+
+\end{tabular*}
+
+\begin{flushleft}
+作答题：\questiontotal 题全做（\paperpercentage） 
+\end{flushleft}
+%endregion
+}

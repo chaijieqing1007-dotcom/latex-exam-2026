@@ -1,0 +1,984 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage{amsmath,amssymb,array,graphicx,booktabs,multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tasks}
+
+\setCJKmainfont{Noto Serif CJK SC}
+\geometry{margin=2.2cm,top=2.0cm,bottom=2.2cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{-\thepage{}-}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\headheight}{14pt}
+\linespread{1.12}
+
+% Question counter
+\newcounter{qnum}
+\setcounter{qnum}{0}
+
+\newenvironment{question}
+  {%
+    \stepcounter{qnum}%
+    \vspace{0.8em}%
+    \noindent\textbf{\theqnum.}\enspace
+  }
+  {\par\vspace{0.4em}}
+
+\ExplSyntaxOn
+
+\box_new:N \l__prism_choice_box
+\dim_new:N \l__prism_choice_max_dim
+\int_new:N \l__prism_choice_cols_int
+\seq_new:N \l__prism_choice_seq
+
+\cs_new_protected:Npn \prism_choices_auto:n #1
+  {
+    \seq_set_split:Nnn \l__prism_choice_seq { \item } {#1}
+    \seq_pop_left:NN \l__prism_choice_seq \l_tmpa_tl
+    \dim_zero:N \l__prism_choice_max_dim
+
+    \seq_map_inline:Nn \l__prism_choice_seq
+      {
+        \tl_set:Nn \l_tmpa_tl {##1}
+        \tl_trim_spaces:N \l_tmpa_tl
+        \hbox_set:Nn \l__prism_choice_box
+          {
+            \textbf{A}\enspace \strut \tl_use:N \l_tmpa_tl
+          }
+        \dim_set:Nn \l__prism_choice_max_dim
+          {
+            \dim_max:nn { \l__prism_choice_max_dim } { \box_wd:N \l__prism_choice_box }
+          }
+      }
+
+    \int_set:Nn \l__prism_choice_cols_int
+      {
+        \dim_compare:nNnTF { \l__prism_choice_max_dim } < { 0.22\linewidth }
+          { 4 }
+          {
+            \dim_compare:nNnTF { \l__prism_choice_max_dim } < { 0.46\linewidth }
+              { 2 }
+              { 1 }
+          }
+      }
+
+    \int_compare:nNnTF { \l__prism_choice_cols_int } = { 1 }
+      {
+        \begin{enumerate}[label=\textbf{\Alph*},leftmargin=2.2em,itemsep=0.15em,topsep=0.2em]
+          #1
+        \end{enumerate}
+      }
+      {
+        \begin{multicols}{\int_use:N \l__prism_choice_cols_int}
+        \begin{enumerate}[label=\textbf{\Alph*},leftmargin=2.2em,itemsep=0.15em,topsep=0.2em]
+          #1
+        \end{enumerate}
+        \end{multicols}
+      }
+    \vspace{0.5em}
+  }
+
+\NewDocumentEnvironment{choices}{+b}
+  {
+    \prism_choices_auto:n {#1}
+  }
+  {}
+
+\ExplSyntaxOff
+
+\newenvironment{solution}
+  {%
+    \par\noindent
+  }
+  {\par}
+
+\begin{document}
+
+% ---- Logo + Header ----
+\begin{center}
+  {\zihao{2}\bfseries 吉兰丹中华独立中学\par}
+  \vspace{0.3em}
+  {\zihao{2}\bfseries 2025 年高中统考预考\par}
+\end{center}
+
+\vspace{1.5em}
+
+\begin{center}
+  \begin{tabular}{c}
+    {\large\bfseries 高中组}\\[0.4em]
+    {\zihao{2}\bfseries 高 中 数 学}\\[0.1em]
+    {\large (SC 04)}\\[0.6em]
+    \midrule\\[-0.8em]
+    试卷一\hspace{2em}选择题\\[0.1em]
+    \midrule\\[-0.5em]
+    日期：2025 年 9 月 23 日\\[0.1em]
+    时间：9：00 a.m. 至 10：00 a.m.\\[0.1em]
+    (1 小时)\\[0.2em]
+    \midrule
+  \end{tabular}
+\end{center}
+
+\vspace{1.5em}
+
+{\large\bfseries \underline{考生须知}\par}
+\vspace{0.5em}
+
+\begin{enumerate}[label=\chinese{enumi}、,leftmargin=2em,itemsep=0.5em]
+  \item 本科试卷共分两份：\\
+        试卷一：选择题（40\%）；\\
+        试卷二：作答题（60\%）。
+
+  \item 考生须于第一阶段规定的 60 分钟内完成试卷一。暂停 15 分钟后，才在第二阶段规定的 2 小时内作答试卷二。
+
+  \item 试卷一选择题 20 题\textbf{全答}。选出\textbf{正确}的答案，然后用 \textbf{5B 铅笔}将\textbf{"O"答案纸}（电脑卡）上相应的字母所在的小方格涂黑。
+
+  \item 可使用电子计算机进行演算。
+
+  \item 试卷一选择题共印三面。
+\end{enumerate}
+
+\vspace{1.5em}
+
+\begin{center}
+  {\setlength{\fboxrule}{1.2pt}\fbox{\rule{0pt}{1.1em}\hspace{1.5em}{\large\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.5em}}}
+\end{center}
+
+\vfill
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
+（考生姓名：\underline{\hspace{4.2cm}} & 考生编号：\underline{\hspace{4.0cm}}）
+\end{tabular*}
+
+\newpage
+
+% ============================================================
+%  试卷一：选择题
+% ============================================================
+
+\begin{question}
+    以下何者为 $f(x)=x^3-6x^2-x+18$ 的因式。
+    \begin{choices}
+        \item $x-1$
+        \item $x+1$
+        \item $x-2$
+        \item $x+2$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    以下哪个关于一元二次方程式 $x^2+kx-2=0$（$k\in\mathbb{R}$）的根的叙述是正确的？
+    \begin{choices}
+        \item 方程式无实根
+        \item 方程式由两个正根
+        \item 方程式有两个相等实根
+        \item 方程式有两个相异的实根
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求函数 $f(x)=\sqrt{3-x}$ 的定义域。
+    \begin{choices}
+        \item $(-\infty,0)$
+        \item $(-\infty,3)$
+        \item $(0,\infty)$
+        \item $(3,\infty)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    化简 $\displaystyle\sqrt[3]{x^2 y}\times\left(\sqrt[6]{\dfrac{y}{x}}\right)^2$。
+    \begin{choices}
+        \item $x^{\frac{1}{3}}y^{\frac{2}{3}}$
+        \item $x^{\frac{4}{3}}y$
+        \item $x\,y^{\frac{4}{3}}$
+        \item $x^{\frac{5}{3}}y^{\frac{2}{5}}$ \phantom{$x^{\frac{2}{5}}$}
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知一等差数列的第 3 项是 5，第 8 项是 20。求此数列的第 25 项。
+    \begin{choices}
+        \item $71$
+        \item $78$
+        \item $85$
+        \item $89$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    下列哪个矩阵没有逆矩阵？
+    \begin{choices}
+        \item $\begin{pmatrix}0&1\\1&0\end{pmatrix}$
+        \item $\begin{pmatrix}1&-1\\0&1\end{pmatrix}$
+        \item $\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$
+        \item $\begin{pmatrix}1&-1\\0&-1\end{pmatrix}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求满足不等式 $|2x-1|<5$ 的整数 $x$ 的个数。
+    \begin{choices}
+        \item $4$
+        \item $5$
+        \item $6$
+        \item $7$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\dfrac{2x-4}{x^2-3x}=\dfrac{a}{x}+\dfrac{b}{x-3}$，其中 $a,b$ 为常数。求 $2a+b$ 的值。
+    \begin{choices}
+        \item $2$
+        \item $\dfrac{2}{3}$
+        \item $\dfrac{10}{3}$
+        \item $0$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    展开 $\begin{vmatrix}1 & x & -2 \\ -5 & x-1 & 3 \\ 0 & 0 & x+1\end{vmatrix}$。
+    \begin{choices}
+        \item $-6x^2-5x+1$
+        \item $-4x^2-5x-1$
+        \item $4x^2+5x+1$
+        \item $6x^2+5x-1$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知一扇形的半径为 2 cm，且其周长为半径的 4 倍。求此扇形的面积（cm$^2$）。
+    \begin{choices}
+        \item $\dfrac{1}{2}$
+        \item $\dfrac{\pi}{4}$
+        \item $\dfrac{\pi}{2}$
+        \item $4$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知某地沿经线到南极的距离比到北极的距离多了 2140 海里，试求此地的纬度。
+    \begin{choices}
+        \item $72.17^\circ\text{S}$
+        \item $72.26^\circ\text{N}$
+        \item $17.74^\circ\text{S}$
+        \item $17.83^\circ\text{N}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\sin\alpha=-\dfrac{7}{25}$ 且 $\alpha$ 为第三象限角，试求 $\sin\!\left(\dfrac{\pi}{2}+\alpha\right)$ 的值。
+    \begin{choices}
+        \item $\dfrac{24}{25}$
+        \item $-\dfrac{24}{25}$
+        \item $\dfrac{7}{25}$
+        \item $-\dfrac{7}{25}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\triangle ABC$ 中，$\angle B$ 是钝角，$AB=8$，$BC=6$，$\triangle ABC$ 的面积为 $12\sqrt{3}$，求 $\angle B$。
+    \begin{choices}
+        \item $102^\circ$
+        \item $112^\circ$
+        \item $120^\circ$
+        \item $124^\circ$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知点 $P$ 内分以点 $A(-8,14)$ 及点 $B(4,2)$ 为端点的线段成 $\dfrac{AP}{PB}=\dfrac{1}{2}$。求点 $P$ 的坐标。
+    \begin{choices}
+        \item $(0,6)$
+        \item $(-4,10)$
+        \item $(2,2)$
+        \item $(2,8)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知直线 $L$ 的 $y$ 截距为 $-5$ 且垂直于直线 $5x-11y=35$，求直线 $L$ 的 $x$ 截距。
+    \begin{choices}
+        \item $-11$
+        \item $-7$
+        \item $-5$
+        \item $-3$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    试用公式求这 55 名高中生的身高中位数。
+    \vspace{0.4em}
+    \begin{center}
+    \begin{tabular}{lcccc}
+    \toprule
+    身高 & 150--159 & 160--169 & 170--179 & 180--189 \\
+    \midrule
+    人数 & 15 & 20 & 17 & 3 \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \vspace{0.4em}
+    \begin{choices}
+        \item $165.95$
+        \item $165.75$
+        \item $165.25$
+        \item $164.75$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求曲线 $y=3x^2-5x-1$ 上 $x=2$ 时的切线斜率。
+    \begin{choices}
+        \item $4$
+        \item $5$
+        \item $6$
+        \item $7$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求曲线 $y=x^3-6x^2+9x-12$ 的上凸区间。
+    \begin{choices}
+        \item $(-\infty,1)$
+        \item $(-\infty,2)$
+        \item $(-\infty,3)$
+        \item $(1,\infty)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    求 $\displaystyle\int\!\left(3x^2-\frac{1}{x}\right)dx$。
+    \begin{choices}
+        \item $x^3+\dfrac{1}{x^2}+C$
+        \item $x^3-\dfrac{1}{x^2}+C$
+        \item $6x+\dfrac{2}{x^2}+C$
+        \item $x^3-\ln x+C$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\begin{question}
+    已知 $\displaystyle\int_1^5 f(x)\,dx=10$ 及 $\displaystyle\int_3^5 f(x)\,dx=7$。求 $\displaystyle\int_1^3\bigl[f(x)+2\bigr]dx$ 的值。
+    \begin{choices}
+        \item $4$
+        \item $5$
+        \item $6$
+        \item $7$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    \textbf{解析：} \\
+\end{solution}
+
+\vspace{2em}
+\noindent 汇整/出题者：吴永华
+
+
+
+% ============================================================
+%  2025 年高中统考预考  高中数学 (SC04)
+%  试卷二：作答题（甲组必答题 + 乙组选答题）
+%  格式：\begin{question}...\end{question}
+%        \begin{solution}...\end{solution}
+% ============================================================
+
+% ╔══════════════════════════════════════╗
+% ║        甲组  必答题（5 题全答）       ║
+% ╚══════════════════════════════════════╝
+
+% ——— 甲组 第 1 题 ———
+\begin{question}
+    求 $\begin{pmatrix}3&5\\4&6\end{pmatrix}$ 的逆矩阵。据此，解方程组
+    $\begin{cases}3x+5y=9\\4x+6y=10\end{cases}$。\hfill(4\%)
+\end{question}
+
+\begin{solution}
+    \textbf{求逆矩阵：} \\
+    设 $A = \begin{pmatrix}3&5\\4&6\end{pmatrix}$，行列式 $\det(A) = 3\times6 - 5\times4 = 18-20 = -2$。\\
+    伴随矩阵 $\operatorname{adj}(A) = \begin{pmatrix}6&-5\\-4&3\end{pmatrix}$，故
+    \[
+        A^{-1} = \frac{1}{\det(A)}\operatorname{adj}(A)
+        = \frac{1}{-2}\begin{pmatrix}6&-5\\-4&3\end{pmatrix}
+        = \begin{pmatrix}-3 & \frac{5}{2}\\[4pt]2 & -\frac{3}{2}\end{pmatrix}.
+    \]
+
+    \textbf{解方程组：} \\
+    将方程组写成矩阵形式 $A\mathbf{x} = \mathbf{b}$，其中 $\mathbf{b} = \begin{pmatrix}9\\10\end{pmatrix}$：
+    \[
+        \begin{pmatrix}x\\y\end{pmatrix} = A^{-1}\mathbf{b}
+        = \begin{pmatrix}-3 & \frac{5}{2}\\[4pt]2 & -\frac{3}{2}\end{pmatrix}
+          \begin{pmatrix}9\\10\end{pmatrix}
+        = \begin{pmatrix}-27+25\\[4pt]18-15\end{pmatrix}
+        = \begin{pmatrix}-2\\3\end{pmatrix}.
+    \]
+    故 $x = -2$，$y = 3$。
+\end{solution}
+
+% ——— 甲组 第 2 题 ———
+\begin{question}
+    图示为一长方体，其中 $AB = 8\ \text{cm}$，$BC = 6\ \text{cm}$，$CG = 4\ \text{cm}$。求 $AG$ 与平面 $CDHG$ 所成的角。\hfill(4\%)
+\end{question}
+
+\begin{solution}
+    \textbf{建立坐标系：} \\
+    以 $A$ 为原点，$AB$ 为 $x$ 轴，$BC$ 为 $y$ 轴，$CG$ 为 $z$ 轴方向，则：
+    \[
+        A = (0,0,0),\quad B=(8,0,0),\quad C=(8,6,0),\quad G=(8,6,4).
+    \]
+
+    \textbf{$AG$ 在平面 $CDHG$ 上的射影：} \\
+    平面 $CDHG$ 是 $x=8$ 的平面（即 $BC$ 方向的右侧面），$AG$ 在该平面上的射影为 $AC'$，其中 $C' = (8,6,0) = C$（$G$ 正下方的底角）。\\
+    $AG$ 与平面 $CDHG$ 所成的角 $\theta$ 满足：
+    \[
+        \sin\theta = \frac{\text{$G$ 到平面 $CDHG$ 底边的高度分量}}{\text{对应斜边}}.
+    \]
+    更直接地，$AG$ 在平面 $CDHG$ 的射影为 $CG$ 方向之外的分量，即 $AC$（底面对角线）。\\
+
+    设 $G'$ 为 $G$ 在底面 $ABCD$ 上的射影，即 $G' = C = (8,6,0)$。\\
+    \[
+        AG' = AC = \sqrt{AB^2 + BC^2} = \sqrt{64+36} = \sqrt{100} = 10\ \text{cm}.
+    \]
+    \[
+        AG = \sqrt{AG'^2 + GG'^2} = \sqrt{100 + 16} = \sqrt{116} = 2\sqrt{29}\ \text{cm}.
+    \]
+    $AG$ 与平面 $CDHG$（即包含 $GG'$ 的竖直面）所成的角为 $AG$ 与其在平面 $CDHG$ 上射影之间的夹角。\\
+
+    $AG$ 在平面 $CDHG$ 上的射影：平面 $CDHG$ 包含点 $C、D、H、G$，法向量为 $\overrightarrow{AB}$ 方向（即 $x$ 方向）。\\
+    $\overrightarrow{AG} = (8,6,4)$，法向量 $\hat{n} = (1,0,0)$。\\
+    $\overrightarrow{AG}$ 在平面上的投影 $= \overrightarrow{AG} - (\overrightarrow{AG}\cdot\hat{n})\hat{n} = (8,6,4)-(8,0,0) = (0,6,4)$，其模为 $\sqrt{36+16}=\sqrt{52}$。\\
+    所成角：
+    \[
+        \cos\theta = \frac{\sqrt{52}}{|AG|} = \frac{\sqrt{52}}{\sqrt{116}},\quad
+        \sin\theta = \frac{8}{\sqrt{116}},\quad
+        \tan\theta = \frac{8}{\sqrt{52}} = \frac{8}{2\sqrt{13}} = \frac{4}{\sqrt{13}}.
+    \]
+    \[
+        \theta = \arctan\!\left(\frac{4}{\sqrt{13}}\right) \approx 48.0°.
+    \]
+    故 $AG$ 与平面 $CDHG$ 所成角约为 $\mathbf{48.0°}$。
+\end{solution}
+
+% ——— 甲组 第 3 题 ———
+\begin{question}
+    已知点 $A(1,0)$，$B(2,5)$ 及 $C(3,3)$。
+    \begin{parts}
+        \part 求最短的边长；\hfill(2\%)
+        \part 求 $\triangle ABC$ 的面积。\hfill(2\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 各边长：} \\
+    \[
+        AB = \sqrt{(2-1)^2+(5-0)^2} = \sqrt{1+25} = \sqrt{26}.
+    \]
+    \[
+        BC = \sqrt{(3-2)^2+(3-5)^2} = \sqrt{1+4} = \sqrt{5}.
+    \]
+    \[
+        AC = \sqrt{(3-1)^2+(3-0)^2} = \sqrt{4+9} = \sqrt{13}.
+    \]
+    比较：$\sqrt{5} < \sqrt{13} < \sqrt{26}$，故最短边为 $BC = \sqrt{5}$。\\
+
+    \textbf{(b) 面积（行列式法）：} \\
+    \[
+        S = \frac{1}{2}\left|x_A(y_B - y_C) + x_B(y_C - y_A) + x_C(y_A - y_B)\right|
+        = \frac{1}{2}\left|1(5-3)+2(3-0)+3(0-5)\right|.
+    \]
+    \[
+        = \frac{1}{2}\left|2 + 6 - 15\right| = \frac{1}{2}|-7| = \frac{7}{2} = 3.5\ \text{单位}^2.
+    \]
+\end{solution}
+
+% ——— 甲组 第 4 题 ———
+\begin{question}
+    已知 10 个数的平均数及平方和，分别为 15 及 2500。若其中一个数 $x$ 被 20 取代，则新平均数为 16。求：
+    \begin{parts}
+        \part $x$；\hfill(2\%)
+        \part 这 10 个数的新标准差。\hfill(2\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 求 $x$：} \\
+    原 10 个数之和：$\sum x_i = 15 \times 10 = 150$。\\
+    将 $x$ 换为 20 后，新总和：$150 - x + 20 = 170 - x$。\\
+    新平均数为 16：$\dfrac{170-x}{10} = 16 \implies 170 - x = 160 \implies x = 10$。\\
+
+    \textbf{(b) 新标准差：} \\
+    原平方和：$\sum x_i^2 = 2500$。\\
+    新平方和：$2500 - x^2 + 20^2 = 2500 - 100 + 400 = 2800$。\\
+    新均值 $\bar{x}' = 16$，方差：
+    \[
+        \sigma^2 = \frac{\sum x_i'^2}{n} - \bar{x}'^2 = \frac{2800}{10} - 16^2 = 280 - 256 = 24.
+    \]
+    标准差 $\sigma = \sqrt{24} = 2\sqrt{6} \approx 4.899$。
+\end{solution}
+
+% ——— 甲组 第 5 题 ———
+\begin{question}
+    已知 $f(x) = 2 + \dfrac{4}{\sqrt{x}}$，求
+    \begin{parts}
+        \part $f'(x)$；\hfill(1.5\%)
+        \part $\displaystyle\int_1^4 f(x)\,dx$。\hfill(2.5\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 求 $f'(x)$：} \\
+    改写 $f(x) = 2 + 4x^{-1/2}$，对各项求导：
+    \[
+        f'(x) = 0 + 4 \cdot \left(-\frac{1}{2}\right)x^{-3/2} = -\frac{2}{x^{3/2}} = -\frac{2}{x\sqrt{x}}.
+    \]
+
+    \textbf{(b) 求定积分：} \\
+    \[
+        \int_1^4 \!\left(2 + 4x^{-1/2}\right)dx
+        = \left[2x + 4 \cdot \frac{x^{1/2}}{1/2}\right]_1^4
+        = \left[2x + 8\sqrt{x}\right]_1^4.
+    \]
+    代入上下限：
+    \[
+        = \left(2(4) + 8\sqrt{4}\right) - \left(2(1) + 8\sqrt{1}\right)
+        = (8 + 16) - (2 + 8)
+        = 24 - 10 = 14.
+    \]
+\end{solution}
+
+% ╔══════════════════════════════════════╗
+% ║     乙组  选答题（7 题选答 4 题）     ║
+% ╚══════════════════════════════════════╝
+
+% ——— 乙组 第 6 题 ———
+\begin{question}
+    \begin{parts}
+        \part 化简 $\dfrac{\dfrac{2}{x+3}-\dfrac{2}{a+3}}{x-a}$。\hfill(3\%)
+        \part 化简 $\dfrac{(x^2+x-6)(x^2+3x+2)}{(x^2-4)(x^2-9)}$。\hfill(3\%)
+        \part 已知函数 $f(x)=\dfrac{4}{ax+b}$ 满足 $f(0)=2$ 及 $f(-1)=-4$，求
+        \begin{subparts}
+            \subpart $a$ 及 $b$ 的值；\hfill(2\%)
+            \subpart $f^{-1}(x)$。\hfill(2\%)
+        \end{subparts}
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 化简复式分数：} \\
+    将分子通分：
+    \[
+        \frac{2}{x+3}-\frac{2}{a+3} = \frac{2(a+3)-2(x+3)}{(x+3)(a+3)} = \frac{2a-2x}{(x+3)(a+3)} = \frac{-2(x-a)}{(x+3)(a+3)}.
+    \]
+    整体除以 $(x-a)$（$x \ne a$）：
+    \[
+        \frac{-2(x-a)}{(x+3)(a+3)(x-a)} = \frac{-2}{(x+3)(a+3)}.
+    \]
+
+    \textbf{(b) 因式分解化简：} \\
+    \[
+        x^2+x-6 = (x+3)(x-2),\quad x^2+3x+2 = (x+1)(x+2),
+    \]
+    \[
+        x^2-4 = (x+2)(x-2),\quad x^2-9 = (x+3)(x-3).
+    \]
+    代入：
+    \[
+        \frac{(x+3)(x-2)(x+1)(x+2)}{(x+2)(x-2)(x+3)(x-3)} = \frac{x+1}{x-3}.
+    \]
+
+    \textbf{(c)(i) 求 $a$、$b$：} \\
+    $f(0) = 2$：$\dfrac{4}{b} = 2 \implies b = 2$。\\
+    $f(-1) = -4$：$\dfrac{4}{-a+2} = -4 \implies -a+2 = -1 \implies a = 3$。\\
+    故 $a = 3$，$b = 2$。\\
+
+    \textbf{(c)(ii) 求 $f^{-1}(x)$：} \\
+    $f(x) = \dfrac{4}{3x+2}$，令 $y = \dfrac{4}{3x+2}$，解 $x$：
+    \[
+        3x+2 = \frac{4}{y} \implies x = \frac{1}{3}\!\left(\frac{4}{y}-2\right) = \frac{4-2y}{3y}.
+    \]
+    故 $f^{-1}(x) = \dfrac{4-2x}{3x}$，其中 $x \ne 0$。
+\end{solution}
+
+% ——— 乙组 第 7 题 ———
+\begin{question}
+    \begin{parts}
+        \part 解方程式 $4^{2-x} - 4^x = 6$。\hfill(3\%)
+        \part 解方程式 $\dfrac{2x+1}{4x-2} = \dfrac{x}{x-5}$。\hfill(3\%)
+        \part 已知等差数列的第 4 项为 $-23$，第 13 项为 $-11$，试求首项、公差及首 30 项的和。\hfill(4\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 解 $4^{2-x} - 4^x = 6$：} \\
+    改写：$4^2 \cdot 4^{-x} - 4^x = 6 \implies \dfrac{16}{4^x} - 4^x = 6$。\\
+    令 $t = 4^x > 0$，得：
+    \[
+        \frac{16}{t} - t = 6 \implies 16 - t^2 = 6t \implies t^2 + 6t - 16 = 0 \implies (t+8)(t-2) = 0.
+    \]
+    故 $t = 2$（舍 $t = -8 < 0$），即 $4^x = 2 = 4^{1/2}$，解得 $x = \dfrac{1}{2}$。\\
+
+    \textbf{(b) 解 $\dfrac{2x+1}{4x-2} = \dfrac{x}{x-5}$：} \\
+    交叉相乘：$(2x+1)(x-5) = x(4x-2)$。\\
+    展开：$2x^2 - 10x + x - 5 = 4x^2 - 2x$。\\
+    整理：$2x^2 - 9x - 5 = 4x^2 - 2x \implies 2x^2 + 7x + 5 = 0 \implies (2x+5)(x+1) = 0$。\\
+    故 $x = -\dfrac{5}{2}$ 或 $x = -1$。\\
+    验证分母：$4x-2 \ne 0$ 及 $x-5 \ne 0$，两解均有效。\\
+
+    \textbf{(c) 等差数列求首项、公差及前 30 项和：} \\
+    设首项为 $a_1$，公差为 $d$。由通项公式 $a_n = a_1 + (n-1)d$：
+    \[
+        a_4 = a_1 + 3d = -23 \quad\cdots(1)
+    \]
+    \[
+        a_{13} = a_1 + 12d = -11 \quad\cdots(2)
+    \]
+    $(2)-(1)$：$9d = 12 \implies d = \dfrac{12}{9} = \dfrac{4}{3}$。\\
+    代回 $(1)$：$a_1 = -23 - 3\times\dfrac{4}{3} = -23 - 4 = -27$。\\
+    前 30 项和：
+    \[
+        S_{30} = \frac{30}{2}\left[2(-27) + 29\times\frac{4}{3}\right]
+        = 15\left[-54 + \frac{116}{3}\right]
+        = 15\times\frac{-162+116}{3}
+        = 15\times\frac{-46}{3}
+        = -230.
+    \]
+\end{solution}
+
+% ——— 乙组 第 8 题 ———
+\begin{question}
+    如图所示，$C$ 为 $AD$ 的中点，$ABD$ 为一以 $A$ 为圆心、$BA$ 为半径的扇形。已知 $BA = 50$ 及 $\angle BAC = \dfrac{\pi}{6}$，求（答案准确至 $0.1$）：
+    \begin{parts}
+        \part 阴影部分的周长；\hfill(4\%)
+        \part 阴影部分的面积；\hfill(3\%)
+        \part $\angle CBA$。\hfill(3\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{已知条件整理：} \\
+    $r = BA = 50$，$\angle BAD = \angle BAC \times 2 = \dfrac{\pi}{3}$（因 $C$ 为 $AD$ 中点，$\angle BAC = \angle CAD = \dfrac{\pi}{6}$）。\\
+    $AC$ 为 $\triangle ABC$ 中 $A$ 到 $BC$ 的连线，且由于 $ABD$ 是扇形，$AB = AD = 50$。\\
+    $C$ 为 $AD$ 的中点，故 $AC = \dfrac{AD}{2} = \dfrac{50}{2} = 25$。\\
+
+    \textbf{(a) 阴影部分的周长：} \\
+    阴影区域由弧 $BD$（扇形 $ABD$ 的弧）和线段 $BC$、$CD$ 围成（扇形 $ABD$ 中去掉 $\triangle ABC$ 后的部分）。\\
+    弧 $BD$：$s = r\theta = 50 \times \dfrac{\pi}{3} = \dfrac{50\pi}{3}$。\\
+    在 $\triangle ABC$ 中，$AB = 50$，$AC = 25$，$\angle BAC = \dfrac{\pi}{6}$，用余弦定理求 $BC$：
+    \[
+        BC^2 = AB^2 + AC^2 - 2\cdot AB \cdot AC \cdot\cos\!\left(\frac{\pi}{6}\right)
+        = 2500 + 625 - 2(50)(25)\!\cdot\!\frac{\sqrt{3}}{2}
+        = 3125 - 1250\sqrt{3}.
+    \]
+    \[
+        BC = \sqrt{3125 - 1250\sqrt{3}} = \sqrt{1250(2.5 - \sqrt{3})} \approx \sqrt{1250\times0.768} \approx \sqrt{960.4} \approx 31.0.
+    \]
+    $CD = AC = 25$（$C$ 为 $AD$ 中点，$AD=50$，$CD=25$）。\\
+    周长 $= \text{弧}BD + BC + CD = \dfrac{50\pi}{3} + 31.0 + 25 \approx 52.4 + 31.0 + 25 = 108.4$。\\
+
+    \textbf{(b) 阴影部分的面积：} \\
+    扇形 $ABD$ 面积 $= \dfrac{1}{2}r^2\theta = \dfrac{1}{2}(50)^2\!\cdot\!\dfrac{\pi}{3} = \dfrac{2500\pi}{6} = \dfrac{1250\pi}{3}$。\\
+    $\triangle ABC$ 面积 $= \dfrac{1}{2}\cdot AB\cdot AC\cdot\sin\!\left(\dfrac{\pi}{6}\right) = \dfrac{1}{2}(50)(25)(0.5) = 312.5$。\\
+    阴影面积 $= \dfrac{1250\pi}{3} - 312.5 \approx 1309.0 - 312.5 = 996.5$。\\
+
+    \textbf{(c) 求 $\angle CBA$：} \\
+    在 $\triangle ABC$ 中，$AB=50$，$AC=25$，$BC\approx 31.0$，用正弦定理：
+    \[
+        \frac{AC}{\sin\angle ABC} = \frac{BC}{\sin\angle BAC}
+        \implies \sin\angle ABC = \frac{AC\cdot\sin(\pi/6)}{BC} = \frac{25\times0.5}{31.0} \approx \frac{12.5}{31.0} \approx 0.4032.
+    \]
+    \[
+        \angle CBA = \arcsin(0.4032) \approx 23.8°\ \text{（或}\ 0.415\ \text{rad）}.
+    \]
+\end{solution}
+
+% ——— 乙组 第 9 题 ———
+\begin{question}
+    如图所示，$ABCD$ 为一梯形，$AB$ 与 $CD$ 平行。直线 $AB$ 的方程式为 $x+2y-16=0$。已知 $D(k,2)$，$B(10,p)$，$C(4,1)$。求：
+    \begin{parts}
+        \part $k$ 与 $p$ 的值；\hfill(3.5\%)
+        \part 直线 $AD$ 的方程式；\hfill(2.5\%)
+        \part 点 $A$ 的坐标；\hfill(2\%)
+        \part 梯形 $ABCD$ 的面积。\hfill(2\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 求 $k$ 与 $p$：} \\
+    直线 $AB$：$x+2y-16=0$，斜率 $m_{AB} = -\dfrac{1}{2}$。\\
+    $CD \parallel AB$，故直线 $CD$ 的斜率亦为 $-\dfrac{1}{2}$。\\
+    直线 $CD$ 过 $C(4,1)$：$y-1 = -\dfrac{1}{2}(x-4) \implies x+2y-6=0$。\\
+    $D(k,2)$ 在直线 $CD$ 上：$k + 2(2) - 6 = 0 \implies k = 2$。\\
+    $B(10,p)$ 在直线 $AB$ 上：$10 + 2p - 16 = 0 \implies p = 3$。\\
+
+    \textbf{(b) 直线 $AD$ 的方程式：} \\
+    $AD \perp AB$（梯形中 $AD$ 为腰，$AB \parallel CD$，由图可见 $AD$ 非平行边，需另行确定）。\\
+    由图，$AD$ 连接 $A$（在直线 $AB$ 上）与 $D(2,2)$，且 $AD$ 垂直于 $AB$（题图显示直角梯形）。\\
+    $AB$ 斜率为 $-\dfrac{1}{2}$，$AD \perp AB$ 时斜率为 $2$。\\
+    过 $D(2,2)$，斜率为 $2$：$y-2 = 2(x-2) \implies y = 2x-2$，即 $2x-y-2=0$。\\
+
+    \textbf{(c) 点 $A$ 的坐标：} \\
+    $A$ 为直线 $AB$（$x+2y-16=0$）与直线 $AD$（$2x-y-2=0$）的交点。\\
+    由 $2x-y=2 \implies y=2x-2$，代入 $x+2(2x-2)-16=0$：
+    \[
+        x+4x-4-16=0 \implies 5x=20 \implies x=4,\quad y=2(4)-2=6.
+    \]
+    故 $A = (4,6)$。\\
+
+    \textbf{(d) 梯形 $ABCD$ 的面积：} \\
+    $AB \parallel CD$，先求 $AB$ 和 $CD$ 的长度及两平行线间距离 $h$。\\
+    两平行线：$x+2y-16=0$（过 $AB$）与 $x+2y-6=0$（过 $CD$）。\\
+    间距：$h = \dfrac{|(-16)-(-6)|}{\sqrt{1^2+2^2}} = \dfrac{10}{\sqrt{5}} = 2\sqrt{5}$。\\
+    $AB$ 长：$A=(4,6)$，$B=(10,3)$，$AB = \sqrt{36+9} = \sqrt{45} = 3\sqrt{5}$。\\
+    $CD$ 长：$C=(4,1)$，$D=(2,2)$，$CD = \sqrt{4+1} = \sqrt{5}$。\\
+    梯形面积：
+    \[
+        S = \frac{1}{2}(AB+CD)\times h = \frac{1}{2}(3\sqrt{5}+\sqrt{5})\times 2\sqrt{5}
+        = \frac{1}{2}\times 4\sqrt{5}\times 2\sqrt{5} = \frac{1}{2}\times 40 = 20.
+    \]
+\end{solution}
+
+% ——— 乙组 第 10 题 ———
+\begin{question}
+    \begin{parts}
+        \part 已知数据 $6,4,7,10,x,5,10,13,9,6$ 的平均数为 $8$，求：
+        \begin{subparts}
+            \subpart $x$ 的值；\hfill(1\%)
+            \subpart 中位数；\hfill(1\%)
+            \subpart 众数；\hfill(1\%)
+            \subpart 全距。\hfill(1\%)
+        \end{subparts}
+        \part 同时投掷两颗均匀的骰子，求
+        \begin{subparts}
+            \subpart 两颗骰子的点数相同的概率；\hfill(2\%)
+            \subpart 两颗骰子的点数和小于 $4$ 的概率；\hfill(2\%)
+            \subpart 两颗骰子的点数都是偶数的概率。\hfill(2\%)
+        \end{subparts}
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a)(i) 求 $x$：} \\
+    总和 $= 8\times10 = 80$，已知各数之和 $= 6+4+7+10+5+10+13+9+6 = 70$。\\
+    故 $x = 80 - 70 = 10$。\\
+
+    \textbf{(a)(ii) 中位数：} \\
+    将 10 个数从小到大排列（$x=10$）：$4,5,6,6,7,9,10,10,10,13$。\\
+    共 10 个数，中位数为第 5、6 位的平均：$\dfrac{7+9}{2} = 8$。\\
+
+    \textbf{(a)(iii) 众数：} \\
+    $10$ 出现 3 次，其余最多 2 次，故众数为 $\mathbf{10}$。\\
+
+    \textbf{(a)(iv) 全距：} \\
+    全距 $= 13 - 4 = 9$。\\
+
+    \textbf{(b) 两骰子总样本空间：$6\times6=36$。} \\
+
+    \textbf{(b)(i) 点数相同：} \\
+    $(1,1),(2,2),(3,3),(4,4),(5,5),(6,6)$，共 6 种。\\
+    $P = \dfrac{6}{36} = \dfrac{1}{6}$。\\
+
+    \textbf{(b)(ii) 点数和小于 4：} \\
+    和为 2：$(1,1)$；和为 3：$(1,2),(2,1)$，共 3 种。\\
+    $P = \dfrac{3}{36} = \dfrac{1}{12}$。\\
+
+    \textbf{(b)(iii) 两颗均为偶数：} \\
+    偶数点为 $\{2,4,6\}$，各自 3 种选择，共 $3\times3=9$ 种。\\
+    $P = \dfrac{9}{36} = \dfrac{1}{4}$。
+\end{solution}
+
+% ——— 乙组 第 11 题 ———
+\begin{question}
+    \begin{parts}
+        \part 表 1 所示是四种原料 A、B、C 及 D 在 2020 年及 2025 年的价格、价比及权数资料：
+        \begin{center}
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            原料 & 2020 (RM) & 2025 (RM) & 2025 价比 & 权数 \\
+            \hline
+            A & 25 & $x$ & 120 & 6 \\
+            B & $y$ & 60 & 140 & 3 \\
+            C & $w$ & $w+30$ & 125 & 7 \\
+            D & 80 & 104 & $z$ & 4 \\
+            \hline
+        \end{tabular}
+        \end{center}
+        \begin{subparts}
+            \subpart 求 $x$、$y$、$z$ 及 $w$ 的值；\hfill(4\%)
+            \subpart 以 2020 年为基期，求此四种原料在 2025 年的综合指数。\hfill(2\%)
+        \end{subparts}
+        \part 已知数据 $3x,\ 2x+y,\ x+5,\ 3y+1,\ 3y-2$ 及 $3y$ 的平均数为 7，加上新的数 $3x-2$ 后，其平均数仍然相同。求 $x$ 与 $y$ 的值。\hfill(4\%)
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a)(i) 求 $x$、$y$、$z$、$w$：} \\
+    价比公式：$I = \dfrac{P_{2025}}{P_{2020}}\times100$。\\
+    原料 A：$\dfrac{x}{25}\times100 = 120 \implies x = 30$。\\
+    原料 B：$\dfrac{60}{y}\times100 = 140 \implies y = \dfrac{6000}{140} = \dfrac{300}{7} \approx 42.86$。\\
+    原料 C：$\dfrac{w+30}{w}\times100 = 125 \implies 100w+3000=125w \implies 25w=3000 \implies w=120$。\\
+    原料 D：$\dfrac{104}{80}\times100 = 130 \implies z = 130$。\\
+
+    \textbf{(a)(ii) 综合指数：} \\
+    \[
+        \bar{I} = \frac{\sum w_i I_i}{\sum w_i}
+        = \frac{6(120)+3(140)+7(125)+4(130)}{6+3+7+4}
+        = \frac{720+420+875+520}{20}
+        = \frac{2535}{20}
+        = 126.75.
+    \]
+
+    \textbf{(b) 求 $x$ 与 $y$：} \\
+    原 6 个数的平均为 7，故总和：
+    \[
+        3x + (2x+y) + (x+5) + (3y+1) + (3y-2) + 3y = 42.
+    \]
+    \[
+        6x + 10y + 4 = 42 \implies 6x + 10y = 38 \implies 3x + 5y = 19. \quad\cdots(1)
+    \]
+    加入 $3x-2$ 后共 7 个数，平均仍为 7，新总和 $= 7\times7 = 49$：
+    \[
+        42 + (3x-2) = 49 \implies 3x = 9 \implies x = 3.
+    \]
+    代回 $(1)$：$9 + 5y = 19 \implies y = 2$。\\
+    故 $x = 3$，$y = 2$。
+\end{solution}
+
+% ——— 乙组 第 12 题 ———
+\begin{question}
+    \begin{parts}
+        \part 求函数 $f(x) = 2x^3 + 3x^2 - 12x + 4$ 的所有极值，并判断它们是极大值还是极小值。\hfill(5\%)
+        \part 如图所示，两曲线 $y=x^2+1$ 与 $y=-x^2+4x+1$ 相交于点 $A$ 及 $B$，且点 $A$ 在 $y$ 轴上。求
+        \begin{subparts}
+            \subpart $A$ 及 $B$ 的坐标；\hfill(2\%)
+            \subpart 阴影部分的面积。\hfill(3\%)
+        \end{subparts}
+    \end{parts}
+\end{question}
+
+\begin{solution}
+    \textbf{(a) 求极值：} \\
+    $f'(x) = 6x^2 + 6x - 12 = 6(x^2+x-2) = 6(x+2)(x-1)$。\\
+    令 $f'(x)=0$：$x = -2$ 或 $x = 1$。\\
+
+    $f''(x) = 12x + 6$。\\
+    当 $x=-2$：$f''(-2) = -24+6 = -18 < 0$，故为\textbf{极大值}。\\
+    \[
+        f(-2) = 2(-8)+3(4)-12(-2)+4 = -16+12+24+4 = 24.
+    \]
+    当 $x=1$：$f''(1) = 12+6 = 18 > 0$，故为\textbf{极小值}。\\
+    \[
+        f(1) = 2+3-12+4 = -3.
+    \]
+    极大值为 $f(-2) = 24$，极小值为 $f(1) = -3$。\\
+
+    \textbf{(b)(i) 求 $A$ 及 $B$ 的坐标：} \\
+    点 $A$ 在 $y$ 轴上，令 $x=0$：$y=0+1=1$，故 $A=(0,1)$。\\
+    求交点，令 $x^2+1 = -x^2+4x+1$：
+    \[
+        2x^2 - 4x = 0 \implies 2x(x-2) = 0 \implies x=0\ \text{或}\ x=2.
+    \]
+    $x=2$：$y=4+1=5$，故 $B=(2,5)$。\\
+
+    \textbf{(b)(ii) 阴影面积：} \\
+    在 $[0,2]$ 区间，$y_2 = -x^2+4x+1 \ge y_1 = x^2+1$（可取 $x=1$：$y_2=4>y_1=2$，✓）。\\
+    \[
+        S = \int_0^2 \left[(-x^2+4x+1)-(x^2+1)\right]dx
+        = \int_0^2 (-2x^2+4x)\,dx.
+    \]
+    \[
+        = \left[-\frac{2x^3}{3}+2x^2\right]_0^2
+        = \left(-\frac{16}{3}+8\right) - 0
+        = \frac{-16+24}{3}
+        = \frac{8}{3}.
+    \]
+\end{solution}
+\end{document}

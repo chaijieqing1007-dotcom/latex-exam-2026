@@ -1,0 +1,395 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usetikzlibrary{quotes,angles}
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+
+% \renewcommand{\choiceshook}{%
+%     \setlength{\leftmargin}{18pt}%
+% }
+\geometry{margin=2cm}
+
+
+
+% ----------- 调整 exam -----------
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        problem = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {参考答案},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+
+\begin{document}
+
+% ==========================
+% 三栏标题区
+% ==========================
+\noindent
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} p{0.3\textwidth} p{0.35\textwidth} p{0.3\textwidth}}
+
+\raggedright
+\textbf{初中一}\\[0.2em]
+\textbf{}{数学（试卷一）}\\[0.4em]
+姓名：\underline{\hspace{3cm}} &
+
+\centering
+\textbf{金宝培元独立中学}\\[0.2em]
+\textbf{三月考}\\[0.4em]
+班级：J1 ( H / I / F ) &
+
+\raggedright
+日期：17 – 03 – 2026\\[0.2em]
+时间：11:00 – 12:15 \\[0.4em]
+得分：\underline{\hspace{2.5cm}} \\
+
+\end{tabular*}
+
+\begin{flushleft}
+作答题：6 题全做（60\%） 
+\end{flushleft}
+
+\begin{problem}[points = 6]
+    解下列方程式：
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sqrt{14x + 23} = 2x - 3$ \hfill (4\%)
+        \item $\sqrt{x + 3} + 2 = 0$ \hfill (2\%)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sqrt{14x + 23} = 2x - 3$ \\
+        $14x + 23 = (2x - 3)^2$ \\
+        $14x + 23 = 4x^2 - 12x + 9$ \hfill (1分) \\
+        $4x^2 - 26x - 14 = 0$ \\
+        $2x^2 - 13x - 7 = 0$ \\
+        $(2x + 1)(x - 7) = 0$ \\
+        $x = -\frac{1}{2}$ 或 $x = 7$ \hfill (1分) \\
+        检验： \\
+        当 $x = -\frac{1}{2}$ 时，左 $= 4$，右 $= -4$（不合） \hfill (1分) \\
+        当 $x = 7$ 时，左 $= 11$，右 $= 11$（合） \\
+        $\therefore x = 7$ \hfill (1分)
+
+        \item $\sqrt{x + 3} + 2 = 0$ \\
+        $\sqrt{x + 3} = -2$ \\
+        $x + 3 = 4$ \\
+        $x = 1$ \hfill (1分) \\
+        检验：当 $x = 1$ 时，$\sqrt{4} + 2 = 4 \neq 0$ \\
+        $\therefore$ 无解 \hfill (1分)
+    \end{enumerate}
+\end{solution}
+
+
+\begin{problem}[points = 15]
+    化简下列各无理式：
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sqrt{10 - 2\sqrt{21}}$ \hfill (5\%)
+        \item $\displaystyle \left( \frac{8}{27} \right)^{\frac{2}{3}} \cdot \left( \frac{9}{4} \right)^{-1} + 81^{-\frac{1}{4}}$ \hfill (5\%)
+        \item $\displaystyle \frac{\sqrt{5} + \sqrt{2}}{\sqrt{5} - \sqrt{2}} - \frac{\sqrt{5} - \sqrt{2}}{\sqrt{5} + \sqrt{2}}$ \hfill (5\%)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sqrt{10 - 2\sqrt{21}}$ \\
+        需找两数 $a, b$ 使 $a+b=10$ 且 $ab=21$，即 $7$ 和 $3$ \hfill (1分) \\
+        原式 $= \sqrt{(\sqrt{7})^2 + (\sqrt{3})^2 - 2\sqrt{7 \cdot 3}}$ \hfill (1分) \\
+        $= \sqrt{(\sqrt{7} - \sqrt{3})^2}$ \hfill (2分) \\
+        $= \sqrt{7} - \sqrt{3}$ \hfill (1分)
+
+        \item 原式 $= \left[ \left( \frac{2}{3} \right)^3 \right]^{\frac{2}{3}} \cdot \left( \frac{3^2}{2^2} \right)^{-1} + (3^4)^{-\frac{1}{4}}$ \hfill (1分) \\
+        $= \left( \frac{2}{3} \right)^2 \cdot \left( \frac{2}{3} \right)^2 + 3^{-1}$ \hfill (2分) \\
+        $= \frac{4}{9} \cdot \frac{4}{9} + \frac{1}{3}$ \\
+        $= \frac{16}{81} + \frac{27}{81}$ \hfill (1分) \\
+        $= \frac{43}{81}$ \hfill (1分)
+
+        \item 原式 $= \frac{(\sqrt{5} + \sqrt{2})^2 - (\sqrt{5} - \sqrt{2})^2}{(\sqrt{5} - \sqrt{2})(\sqrt{5} + \sqrt{2})}$ \hfill (1分) \\
+        $= \frac{(5 + 2\sqrt{10} + 2) - (5 - 2\sqrt{10} + 2)}{5 - 2}$ \hfill (2分) \\
+        $= \frac{7 + 2\sqrt{10} - 7 + 2\sqrt{10}}{3}$ \hfill (1分) \\
+        $= \frac{4\sqrt{10}}{3}$ \hfill (1分)
+    \end{enumerate}
+\end{solution}
+
+\begin{question}[points = 6]
+    已知在平面直角坐标系中，五边形 $ABCDE$ 的五个顶点按逆时针顺序依次为 $A(2, 4)$、$B(-2, 3)$、$C(-3, -1)$、$D(1, -3)$ 和 $E(4, 0)$。求该五边形的面积。
+
+    \begin{tikzpicture}[scale=0.8, >=stealth]
+    % 绘制淡色网格线作为辅助
+    % \draw[very thin, color=gray!30, dashed] (-4.5, -4.5) grid (5.5, 5.5);
+
+    % 绘制 x 轴和 y 轴
+    \draw[->, thick] (-4.5, 0) -- (5.5, 0) node[right] {$x$};
+    \draw[->, thick] (0, -4.5) -- (0, 5.5) node[above] {$y$};
+    \node[below left] at (0,0) {$O$};
+
+    % 定义五边形的五个顶点坐标
+    \coordinate (A) at (2, 4);
+    \coordinate (B) at (-2, 3);
+    \coordinate (C) at (-3, -1);
+    \coordinate (D) at (1, -3);
+    \coordinate (E) at (4, 0);
+
+    % 仅绘制五边形的边框，不填充颜色
+    \draw[thick] (A) -- (B) -- (C) -- (D) -- (E) -- cycle;
+
+    % 绘制顶点并标注坐标
+    \filldraw (A) circle (2pt) node[above] {$A(2, 4)$};
+    \filldraw (B) circle (2pt) node[above left] {$B(-2, 3)$};
+    \filldraw (C) circle (2pt) node[below left] {$C(-3, -1)$};
+    \filldraw (D) circle (2pt) node[below] {$D(1, -3)$};
+    \filldraw (E) circle (2pt) node[above right] {$E(4, 0)$};
+\end{tikzpicture} \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    利用多边形面积公式（鞋带公式），将顶点坐标按逆时针顺序依次排列进行计算： \\
+    $S = \frac{1}{2} |(x_A y_B + x_B y_C + x_C y_D + x_D y_E + x_E y_A) - (y_A x_B + y_B x_C + y_C x_D + y_D x_E + y_E x_A)|$ \hfill (1分) \\
+    正向乘积之和： \\
+    $(2)(3) + (-2)(-1) + (-3)(-3) + (1)(0) + (4)(4)$ \hfill (1分) \\
+    $= 6 + 2 + 9 + 0 + 16 = 33$ \hfill (1分) \\
+    反向乘积之和： \\
+    $(4)(-2) + (3)(-3) + (-1)(1) + (-3)(4) + (0)(2)$ \hfill (1分) \\
+    $= -8 - 9 - 1 - 12 + 0 = -30$ \hfill (1分) \\
+    $\therefore S = \frac{1}{2} |33 - (-30)|$ \\
+    $= \frac{63}{2} = 31.5$ \hfill (1分)
+\end{solution}
+
+\newpage
+
+\begin{question}[points = 12]
+    下图所示为一四边形 $ABCD$。已知 $A(-4, -1)$，$B(-2, -7)$，$C(5, 0)$。$AB$ 的垂直平分线与直线 $DA$ 交于点 $E$。已知 $AD \parallel BC$，且点 $D$ 在 $y$ 轴上。求：
+
+\begin{tikzpicture}[>=latex, scale=0.6]
+    % 画坐标轴
+    \draw[->] (-11,0) -- (7,0) node[right] {$x$};
+    \draw[->] (0,-8) -- (0,5) node[above] {$y$};
+    \node[below right] at (0,0) {$O$};
+
+    % 定义点坐标
+    \coordinate (A) at (-4,-1);
+    \coordinate (B) at (-2,-7);
+    \coordinate (C) at (5,0);
+    \coordinate (D) at (0,3);
+    \coordinate (E) at (-9,-6);
+    \coordinate (M) at (-3,-4); % AB中点
+
+    % 画四边形和辅助线
+    \draw[thick, blue!70!black] (A) -- (B) -- (C) -- (D) -- cycle;
+    \draw[thick, blue!70!black] (D) -- (E) -- (B);
+    \draw[blue!70!black] (E) -- (M);
+
+    % 画垂直符号
+    \pic [draw, angle radius=3mm] {right angle = E--M--A};
+
+    % 绘制线段 AB 并在中点自动添加等长标记
+        \draw[thick, blue!70!black,
+            postaction={decorate, % 在绘制后进行装饰
+                decoration={markings,
+                    % mark=at position 0.5 表示在路径中点
+                    mark=at position 0.25 with {
+                        % 这里的 (0,-0.2) -- (0,0.2) 始终垂直于路径 A->B
+                        \draw (0,-0.15) -- (0,0.15) (-0.05,-0.15) -- (-0.05,0.15);
+                    },
+                    mark=at position 0.75 with {
+                        % 这里的 (0,-0.2) -- (0,0.2) 始终垂直于路径 A->B
+                        \draw (0,-0.15) -- (0,0.15) (-0.05,-0.15) -- (-0.05,0.15);
+                    }
+                }
+            }
+        ] (A) -- (B);
+
+    % 标注点和坐标
+    \fill[red] (A) circle (2pt) node[left] {$A(-4,-1)$};
+    \fill[red] (B) circle (2pt) node[below] {$B(-2,-7)$};
+    \fill[red] (C) circle (2pt) node[above right] {$C(5,0)$};
+    \fill[red] (D) circle (2pt) node[above left] {$D$};
+    \fill[red] (E) circle (2pt) node[left] {$E$};
+\end{tikzpicture}
+    \begin{enumerate}[label=(\alph*)]
+        \item 直线 $BC$ 的方程； \hfill (3\%)
+        \item 点 $D$ 的坐标； \hfill (3\%)
+        \item $AB$ 的垂直平分线的方程； \hfill (3\%)
+        \item 点 $E$ 的坐标； \hfill (3\%)
+
+    \end{enumerate}
+\end{question}
+
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item \textbf{求直线 $BC$ 的方程：} \\
+        已知点 $B(-2, -7)$ 和 $C(5, 0)$，直线 $BC$ 的斜率 $k_{BC}$ 为：
+        $$k_{BC} = \frac{0 - (-7)}{5 - (-2)} = \frac{7}{7} = 1$$
+        利用点斜式，代入点 $C(5, 0)$ 及斜率 $k_{BC} = 1$：
+        $$y - 0 = 1(x - 5)$$
+        $$y = x - 5 \implies x - y - 5 = 0$$
+        \textbf{答：直线 $BC$ 的方程为 $x - y - 5 = 0$。}
+
+        \item \textbf{求点 $D$ 的坐标：} \\
+        已知 $AD \parallel BC$，所以直线 $AD$ 的斜率 $k_{AD} = k_{BC} = 1$。 \\
+        直线 $AD$ 经过点 $A(-4, -1)$，利用点斜式求直线 $AD$ 的方程：
+        $$y - (-1) = 1(x - (-4))$$
+        $$y + 1 = x + 4 \implies y = x + 3$$
+        因为点 $D$ 在 $y$ 轴上，令 $x = 0$，代入上式得：
+        $$y = 0 + 3 = 3$$
+        \textbf{答：点 $D$ 的坐标为 $(0, 3)$。}
+
+        \item \textbf{求 $AB$ 的垂直平分线的方程：} \\
+        首先求线段 $AB$ 的中点 $M$：
+        $$M = \left( \frac{-4 + (-2)}{2}, \frac{-1 + (-7)}{2} \right) = (-3, -4)$$
+        线段 $AB$ 的斜率 $k_{AB}$ 为：
+        $$k_{AB} = \frac{-7 - (-1)}{-2 - (-4)} = \frac{-6}{2} = -3$$
+        设垂直平分线的斜率为 $k_{\perp}$，由于两直线垂直，则 $k_{AB} \cdot k_{\perp} = -1$：
+        $$k_{\perp} = -\frac{1}{-3} = \frac{1}{3}$$
+        垂直平分线经过中点 $M(-3, -4)$，利用点斜式得方程：
+        $$y - (-4) = \frac{1}{3}(x - (-3))$$
+        $$3(y + 4) = x + 3$$
+        $$3y + 12 = x + 3 \implies x - 3y - 9 = 0$$
+        \textbf{答：$AB$ 的垂直平分线的方程为 $x - 3y - 9 = 0$。}
+
+        \item \textbf{求点 $E$ 的坐标：} \\
+        点 $E$ 是直线 $DA$（即直线 $AD$，方程为 $y = x + 3$）与 $AB$ 垂直平分线（方程为 $x - 3y - 9 = 0$）的交点。 \\
+        联立方程组：
+        $$y = x + 3 \quad \text{①}$$
+        $$x - 3y = 9 \quad \text{②}$$
+        将 ① 代入 ②：
+        $$x - 3(x + 3) = 9$$
+        $$x - 3x - 9 = 9$$
+        $$-2x = 18 \implies x = -9$$
+        将 $x = -9$ 代回 ① 求 $y$：
+        $$y = -9 + 3 = -6$$
+        \textbf{答：点 $E$ 的坐标为 $(-9, -6)$。}
+    \end{enumerate}
+\end{solution}
+
+\begin{problem}[points = 10]
+    已知直线 $l_1: 2x + (2h + 1)y - 7 = 0$ 与 $l_2: (3h + 4)x + (3h + 5)y - 2 = 0$。
+    \begin{enumerate}[label=(\alph*)]
+        \item 当 $h$ 为何值时，直线 $l_1$ 与 $l_2$ 互相平行？ \hfill (4\%)
+        \item 针对 (a) 中求得的 $h$ 值，分别求出两平行线之间的距离。 \hfill (6\%)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 已知直线的一般式方程为 $A_1x + B_1y + C_1 = 0$ 和 $A_2x + B_2y + C_2 = 0$。\\
+        若两直线互相平行，则满足 $A_1B_2 - A_2B_1 = 0$ 且要确保两直线不重合。 \\
+        提取系数：$A_1 = 2, B_1 = 2h + 1$；$A_2 = 3h + 4, B_2 = 3h + 5$ \\
+        代入平行条件 $A_1B_2 = A_2B_1$ 中： \\
+        $2(3h + 5) = (3h + 4)(2h + 1)$ \hfill (1分) \\
+        $6h + 10 = 6h^2 + 3h + 8h + 4$ \\
+        整理得一元二次方程： \\
+        $6h^2 + 5h - 6 = 0$ \hfill (1分) \\
+        $(2h + 3)(3h - 2) = 0$ \\
+        解得 $h = -\frac{3}{2}$ 或 $h = \frac{2}{3}$ \hfill (1分) \\
+        （经检验，当 $h = -\frac{3}{2}$ 或 $h = \frac{2}{3}$ 时，两直线的常数项比例不等于系数比例，故不重合，皆符合题意） \\
+        $\therefore h = -\frac{3}{2}$ 或 $h = \frac{2}{3}$ \hfill (1分)
+
+        \item 
+        \textbf{情况一：当 $h = \frac{2}{3}$ 时} \\
+        将 $h = \frac{2}{3}$ 代入原方程，并化为同系数一般式：\\
+        $l_1: 2x + \frac{7}{3}y - 7 = 0 \Rightarrow 6x + 7y - 21 = 0$ \\
+        $l_2: 6x + 7y - 2 = 0$ \hfill (1分) \\
+        利用平行线间距离公式 $d = \frac{|C_1 - C_2|}{\sqrt{A^2 + B^2}}$：\\
+        $d_1 = \frac{|-21 - (-2)|}{\sqrt{6^2 + 7^2}} = \frac{|-19|}{\sqrt{36 + 49}}$ \hfill (1分) \\
+        $d_1 = \frac{19}{\sqrt{85}} = \frac{19\sqrt{85}}{85}$ \hfill (1分)
+
+        \textbf{情况二：当 $h = -\frac{3}{2}$ 时} \\
+        将 $h = -\frac{3}{2}$ 代入原方程，并化为同系数一般式：\\
+        $l_1: 2x - 2y - 7 = 0$ \\
+        $l_2: -\frac{1}{2}x + \frac{1}{2}y - 2 = 0 \Rightarrow 2x - 2y + 8 = 0$ \hfill (1分) \\
+        利用平行线间距离公式 $d = \frac{|C_1 - C_2|}{\sqrt{A^2 + B^2}}$：\\
+        $d_2 = \frac{|-7 - 8|}{\sqrt{2^2 + (-2)^2}} = \frac{|-15|}{\sqrt{4 + 4}}$ \hfill (1分) \\
+        $d_2 = \frac{15}{\sqrt{8}} = \frac{15}{2\sqrt{2}} = \frac{15\sqrt{2}}{4}$ \hfill (1分)
+    \end{enumerate}
+\end{solution}
+
+\begin{problem}[points = 11]
+    解下列不等式或不等式组：
+    \begin{enumerate}[label=(\alph*)]
+        \item $3(x^2 - 1) \le 5x - 1$ \hfill (5\%)
+        \item $\begin{cases} 3(x - 2) + 5 \ge 2x - 4 \\ x^2 + 2x - 8 < 0 \end{cases}$ \hfill (6\%)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item $3(x^2 - 1) \le 5x - 1$ \\
+        展开左边括号，得：$3x^2 - 3 \le 5x - 1$ \hfill (1分) \\
+        移项并整理成标准二次不等式：$3x^2 - 5x - 2 \le 0$ \hfill (1分) \\
+        利用十字相乘法进行因式分解：$(3x + 1)(x - 2) \le 0$ \hfill (1分) \\
+        得出临界点：$x = -\frac{1}{3}$ 及 $x = 2$ \hfill (1分) \\
+        结合数轴判断符号（开口向上，取中间），解得：\\
+        $-\frac{1}{3} \le x \le 2$ \hfill (1分)
+
+        \item $\begin{cases} 3(x - 2) + 5 \ge 2x - 4 \quad \cdots (1) \\ x^2 + 2x - 8 < 0 \quad \cdots (2) \end{cases}$ \\
+        解不等式 (1)：\\
+        展开并化简：$3x - 6 + 5 \ge 2x - 4$ \hfill (1分) \\
+        移项得：$3x - 2x \ge -4 + 1$ \\
+        解得：$x \ge -3$ \hfill (1分) \\
+        解不等式 (2)：\\
+        因式分解：$(x + 4)(x - 2) < 0$ \hfill (1分) \\
+        得出临界点 $x = -4, x = 2$，解得：\\
+        $-4 < x < 2$ \hfill (1分) \\
+        将 (1) 和 (2) 的解集求交集：\\
+        即求 $x \ge -3$ 与 $-4 < x < 2$ 的公共部分 \hfill (1分) \\
+        $\therefore$ 不等式组的解集为 $-3 \le x < 2$ \hfill (1分)
+    \end{enumerate}
+\end{solution}
+
+\newpage
+\vfill % 与上方内容保持距离
+
+\noindent
+\newlength{\sigwidth}
+\settowidth{\sigwidth}{（\hspace{4em}师）}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l l l}
+    出题： & 审题： & 审题： & 审核： \\[4em]
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} \\
+    （\hspace{0em} 蔡杰庆师 ） &
+    （\hspace{0em} 王萌师 ） &
+    （\hspace{0em} 张惠雯师 ） &
+    （\hspace{0em} 雷泳健师 ） \\
+\end{tabular*}
+
+
+\end{document}

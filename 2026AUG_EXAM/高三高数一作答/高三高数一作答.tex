@@ -1,0 +1,502 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+%region 导言区
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usetikzlibrary{quotes,angles}
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+
+\usepackage{setspace}
+\usepackage{eso-pic}
+\usetikzlibrary{calc}
+\newcommand{\ulinefill}[1]{\underline{\hspace{#1}}}
+% \renewcommand{\choiceshook}{%
+%     \setlength{\leftmargin}{18pt}%
+% }
+\geometry{margin=0cm,top=0.5cm,bottom=0.5cm}
+%endregion
+
+
+
+%region exam setup
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        question = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {answer},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em
+}
+\newcommand{\qscore}[1]{%
+    \unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[4em][r]{(#1\%)}}%
+}
+%endregion
+
+%region 卷面变量设置
+\input{config.tex}
+%endregion
+
+\begin{document}
+
+
+%region 封面
+\AddToShipoutPictureFG*{%
+  \put(31,104){\color{black}\rule{16pt}{66pt}}%
+  \put(37,112){\makebox(0,0)[lb]{\rotatebox{90}{\color{white}\bfseries\footnotesize \sidebartext}}}%
+  \put(24,18){\makebox(0,0)[lb]{\small 版权所有}}%
+  \put(520,18){\makebox(0,0)[lb]{\bfseries\small 【机密】}}%
+}
+
+\begin{center}
+  {\zihao{3}\bfseries \examtitle\par}
+  \vspace{1.0em}
+  {\zihao{4}\bfseries \examlevel\par}
+  \vspace{1.0em}
+  {\zihao{2}\bfseries \examsubject\par}
+  \vspace{0.2em}
+  {\small (\papercode)\par}
+\end{center}
+
+\vspace{1.3em}
+
+\begin{center}
+  \begin{tabular}{c}
+    \papername\hspace{2em}\papertype\\[-0.1em]
+    \noalign{\hrule height 0.4pt}
+    日期：\examdate\\[-0.05em]
+    时间：\examtime\\[-0.05em]
+    （\examduration）\\
+    \noalign{\hrule height 0.4pt}
+  \end{tabular}
+\end{center}
+
+\vspace{1.0em}
+
+{\zihao{4}\bfseries 考 生 须 知\par}
+\vspace{0.55em}
+
+\begin{enumerate}[label=（\arabic*）,leftmargin=2.8em,itemsep=0.38em]
+  \item 本科试卷共分两份：\\
+  \hspace*{1.3em}试卷一：选择题（\paperonepercentage），\\
+  \hspace*{1.3em}试卷二：作答题（\papertwopercentage）。
+    
+  \item
+  试卷二分为两组：\\
+  \hspace*{1.3em}\textbf{\requiredgroupnotice}\\
+%   \hspace*{1.3em}\textbf{\electivegroupnotice。}
+
+  \item \textbf{每题必须用新的一张纸作答。}
+
+  \item 只可用蓝色或黑色的原子笔书写，惟可用铅笔画图。
+
+  \item 不必抄题，惟试题号码必须书写清楚。
+
+  \item 所有演算必须清楚地写出。必要的几何图形必须画出。
+
+  \item 可使用所规定的电子计算机进行演算，除非题目限制。
+
+  \item 答卷必须依试题号码次序排列，并且将\textbf{积分表}（电脑卡）置于上\\
+  面，合订成一本。
+
+  \item 试卷二作答题共印\questionpages，最后一面空白。
+\end{enumerate}
+
+\vspace{1.0em}
+
+\begin{center}
+  \fbox{\rule{0pt}{1.15em}\hspace{1.2em}{\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.2em}}
+\end{center}
+
+\vspace{1.2em}
+
+\noindent
+（考生姓名：\ulinefill{4.4cm}\hfill 考生编号：\ulinefill{4.3cm}）
+%endregion
+
+
+\newpage
+
+
+
+%region 范围：弧度制、扇形与半圆面积、余弦定理 | 考点：弦长公式、扇形面积公式 $\frac12r^2\theta$、弓形面积、组合图形阴影面积 | 难度：中等
+
+\begin{question}[points = 10]
+    如下图所示 $OADB$ 是以 $O$ 为圆心的扇形，已知$OA = 4$，$\angle AOB = 1.75$ 弧度。$ACB$ 是以 $AB$ 为直径半圆。
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.85]
+            \coordinate (O) at (0,0);
+            \coordinate (A) at (-3.07,2.56);
+            \coordinate (B) at (3.07,2.56);
+            \coordinate (D) at (0,4);
+            \coordinate (M) at (0,2.56);
+            \coordinate (C) at (0,5.63);
+
+            \path[fill=gray!30] (A) arc(180:0:3.07) arc(39.87:140.13:4) -- cycle;
+
+            \draw[thick] (A) arc(180:0:3.07);
+            \draw[thick] (A) arc(140.13:39.87:4);
+            \draw[dashed] (A) -- (B);
+            \draw (O) -- (A);
+            \draw (O) -- (B);
+
+            \pic[draw,"$1.75$弧度",angle radius=8mm,angle eccentricity=1.5]{angle=B--O--A};
+
+            \fill (O) circle (1.5pt) node[below]{$O$};
+            \fill (A) circle (1.5pt) node[left]{$A$};
+            \fill (B) circle (1.5pt) node[right]{$B$};
+            \fill (D) circle (1.5pt) node[right]{$D$};
+            \fill (C) circle (1.5pt) node[above]{$C$};
+
+            \node at (-1.7,1.1) {$4$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{questionparts}
+        \item 求直线 $AB$ 的长度。 \qscore{2}
+        \item 求阴影部分 $ACBD$ 的面积。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 在 $\triangle OAB$ 中，由余弦定理：
+        \[ \displaystyle AB^{2} = OA^{2} + OB^{2} - 2\cdot OA\cdot OB\cdot\cos(\angle AOB) = 4^{2}+4^{2}-2(4)(4)\cos 1.75 \] \hfill (2分) \\
+        代入 $\cos 1.75 \approx -0.1782$：
+        \[ \displaystyle AB^{2} \approx 32(1+0.1782) = 37.70 \ \Longrightarrow\ AB \approx 6.14 \] \hfill (2分)
+
+        \textbf{答：$AB \approx 6.14$（长度单位与 $OB$ 相同）。}
+
+        \item 扇形 $OADB$ 的面积：
+        \[ \displaystyle S_{\text{扇形}} = \frac{1}{2}r^{2}\theta = \frac{1}{2}(4^{2})(1.75) = 14 \] \hfill (1分) \\
+        $\triangle OAB$ 的面积：
+        \[ \displaystyle S_{\triangle OAB} = \frac{1}{2}r^{2}\sin\theta = \frac{1}{2}(4^{2})\sin 1.75 \approx 8(0.9840) = 7.872 \] \hfill (1分) \\
+        弓形（弧 $ADB$ 与弦 $AB$ 之间）的面积：
+        \[ \displaystyle S_{\text{弓形}} = S_{\text{扇形}} - S_{\triangle OAB} \approx 14 - 7.872 = 6.128 \] \hfill (1分) \\
+        半圆 $ACB$ 的半径为 $\dfrac{AB}{2}\approx 3.07$，其面积：
+        \[ \displaystyle S_{\text{半圆}} = \frac{1}{2}\pi\left(\frac{AB}{2}\right)^{2} \approx \frac{1}{2}\pi(3.07)^{2} \approx 14.81 \] \hfill (2分) \\
+        由于半圆完整地"包住"了弓形（半径 $3.07$ 大于弓形高 $\approx 1.43$），阴影月牙形面积等于半圆面积减去弓形面积：
+        \[ \displaystyle S_{ACBD} = S_{\text{半圆}} - S_{\text{弓形}} \approx 14.81 - 6.128 = 8.68 \] \hfill (1分)
+
+        \textbf{答：阴影部分面积 $\approx 8.68$（面积单位）。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：高中数学 - 解三角形（余弦定理与面积公式）、弧度制与组合图形面积（半圆、扇形、弓形的面积关系） | 
+\begin{question}[points = 10]
+    \begin{questionparts}
+        \item 三角形 $ABC$ 中，$BC = 6$，$AB = 10$，$\cos B = \dfrac{3}{5}$。求三角形 $ABC$ 的面积。\qscore{4}
+
+        \item 已知平行四边形 $ABCD$ 的三个顶点坐标为 $A(6, 1)$、$B(2, 1)$、$C(3, 4)$。求平行四边形 $ABCD$ 的面积。\qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item $0 < B < \pi$，所以 $\sin B > 0$。由 $\sin^2 B + \cos^2 B = 1$： \\
+        $$\sin B = \sqrt{1 - \left(\frac{3}{5}\right)^2} = \frac{4}{5}$$ \hfill (1分) \\
+        面积公式（两边夹一角）： \\
+        $$S = \frac{1}{2} \cdot BC \cdot AB \cdot \sin B$$ \hfill (1分) \\
+        代入数值： \\
+        $$S = \frac{1}{2} \times 6 \times 10 \times \frac{4}{5}$$ \hfill (1分) \\
+        算出结果： \\
+        $$S = 24$$ \hfill (1分) \\
+        \textbf{答：三角形 $ABC$ 的面积为 $24$。}
+
+        \item \textbf{第一步：求半圆半径。} \\
+        弦长 $AB = 2r\sin\dfrac{\theta}{2}$，所以半圆半径为： \\
+        $$R = \frac{AB}{2} = r\sin\frac{\theta}{2}$$ \hfill (1分) \\
+        \textbf{第二步：求半圆面积。} 用 $\sin^2\dfrac{\theta}{2} = \dfrac{1-\cos\theta}{2}$： \\
+        $$S_{\text{半圆}} = \frac{1}{2}\pi R^2 = \frac{\pi r^2}{4}(1 - \cos\theta)$$ \hfill (1分) \\
+        \textbf{第三步：求弓形面积。} 扇形面积 $\dfrac{1}{2}r^2\theta$，减去三角形 $OAB$ 的面积 $\dfrac{1}{2}r^2\sin\theta$： \\
+        $$S_{\text{弓形}} = \frac{1}{2}r^2(\theta - \sin\theta)$$ \hfill (1分) \\
+        \textbf{第四步：写出阴影面积的公式。} 弓形完全在半圆里面，所以阴影 = 半圆 $-$ 弓形： \\
+        $$S_{\text{阴影}} = \frac{r^2}{4}\Big[\pi(1-\cos\theta) - 2\theta + 2\sin\theta\Big]$$ \hfill (1分) \\
+        \textbf{第五步：代入数值。} $r=4$，$\theta=1.75$，取 $\sin 1.75 \approx 0.984$，$\cos 1.75 \approx -0.178$： \\
+        $$S_{\text{阴影}} = 4\big[\pi(1.178) - 3.5 + 1.968\big]$$ \hfill (1分) \\
+        \textbf{第六步：算出结果。} \\
+        $$S_{\text{阴影}} \approx 4 \times 2.169 \approx 8.68$$ \hfill (1分) \\
+        \textbf{答：阴影部分的面积约为 $8.68$（平方单位）。}
+
+        \item
+            连接对角线 $AC$。由于 $ABCD$ 是平行四边形，对角线 $AC$ 把它分成两个面积相等的三角形 $ABC$ 和 $ACD$： \\
+    $$S_{ABCD} = 2 \, S_{\triangle ABC}$$ \hfill (1分) \\
+    利用坐标法（行列式/鞋带公式）求三角形 $ABC$ 的面积，$A(6,1)$，$B(2,1)$，$C(3,4)$： \\
+    $$S_{\triangle ABC} = \frac{1}{2} \left| x_A(y_B - y_C) + x_B(y_C - y_A) + x_C(y_A - y_B) \right|$$ \hfill (1分) \\
+    代入坐标： \\
+    $$S_{\triangle ABC} = \frac{1}{2} \left| 6(1-4) + 2(4-1) + 3(1-1) \right|$$ \hfill (1分) \\
+    逐项计算： \\
+    $$= \frac{1}{2} \left| -18 + 6 + 0 \right| = \frac{1}{2} \times 12 = 6$$ \hfill (1分) \\
+    所以三角形 $ABC$ 的面积为 $6$。 \hfill (1分) \\
+    代入平行四边形面积公式： \\
+    $$S_{ABCD} = 2 \times 6 = 12$$ \hfill (1分) \\
+    \textbf{答：平行四边形 $ABCD$ 的面积为 $12$。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：三角恒等变换与三角方程 | 考点：二倍角公式、同角三角函数基本关系、正切方程求解 | 难度：中等
+\begin{question}[points = 12]
+    \begin{questionparts}
+        \item 证明恒等式 $\cos 4x = 8\cos^{4}x - 8\cos^{2}x + 1$。 \qscore{5}
+
+        \item 已知 $0^{\circ} < \theta < 360^{\circ}$，$\displaystyle 2\cos^{2}\theta + 3\cos\theta\sin\theta - 3\sin^{2}\theta = 1$，求 $\theta$。 \qscore{5}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 由二倍角公式，先将 $4x$ 视为 $2\times 2x$： \\
+        \[ \displaystyle \cos 4x = \cos(2\cdot 2x) = 2\cos^{2}2x - 1 \] \hfill (2分) \\
+        再对 $\cos 2x$ 使用二倍角公式 $\cos 2x = 2\cos^{2}x - 1$，代入并展开平方： \\
+        \[ \displaystyle \cos^{2}2x = (2\cos^{2}x - 1)^{2} = 4\cos^{4}x - 4\cos^{2}x + 1 \] \hfill (2分) \\
+        将其代回第一步的表达式： \\
+        \[ \displaystyle \cos 4x = 2(4\cos^{4}x - 4\cos^{2}x + 1) - 1 = 8\cos^{4}x - 8\cos^{2}x + 1 \]
+        故等式成立，证毕。 \hfill (2分)
+
+        \item 利用恒等式 $1 = \sin^{2}\theta + \cos^{2}\theta$ 将方程右边替换，把所有项移到左边并合并同类项： \\
+        \[ \displaystyle 2\cos^{2}\theta + 3\sin\theta\cos\theta - 3\sin^{2}\theta - (\sin^{2}\theta + \cos^{2}\theta) = 0 \]
+        \[ \displaystyle \cos^{2}\theta + 3\sin\theta\cos\theta - 4\sin^{2}\theta = 0 \] \hfill (2分) \\
+        先检验 $\cos\theta = 0$ 的情形：此时原方程左边为 $-3\sin^{2}\theta = -3 \neq 1$，矛盾，故 $\cos\theta \neq 0$。将上式两边同除以 $\cos^{2}\theta$，得关于 $\tan\theta$ 的方程： \\
+        \[ \displaystyle 4\tan^{2}\theta - 3\tan\theta - 1 = 0 \] \hfill (1分) \\
+        因式分解： \\
+        \[ \displaystyle (4\tan\theta + 1)(\tan\theta - 1) = 0 \]
+        解得 $\tan\theta = 1$ 或 $\tan\theta = -\dfrac{1}{4}$。 \hfill (1分) \\
+        当 $\tan\theta = 1$ 时，结合 $0^{\circ} < \theta < 360^{\circ}$，$\theta$ 在第一、三象限，解得 $\theta = 45^{\circ}$ 或 $\theta = 225^{\circ}$。 \hfill (1分) \\
+        当 $\tan\theta = -\dfrac{1}{4}$ 时，$\theta$ 在第二、四象限，解得 $\theta = 180^{\circ} - \arctan\dfrac{1}{4}$ 或 $\theta = 360^{\circ} - \arctan\dfrac{1}{4}$（其中 $\arctan\dfrac{1}{4} \approx 14.04^{\circ}$）。 \hfill (1分)
+
+        \textbf{答：$\theta = 45^{\circ},\ 225^{\circ},\ 180^{\circ}-\arctan\dfrac{1}{4}\ (\approx 165.96^{\circ}),\ 360^{\circ}-\arctan\dfrac{1}{4}\ (\approx 345.96^{\circ})$。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：解析几何（坐标法）| 考点：三角形面积的坐标公式、线段垂直平分线的代数性质 | 难度：中等
+\begin{question}[points = 14]
+
+    \begin{questionparts}
+        \item 已知 $\triangle ABC$ 的两个顶点为 $A(-2,1)$、$B(6,1)$，点 $C$ 落在直线 $l:\ y = x + 3$ 上。若 $\triangle ABC$ 的面积为 $32$平方单位，求点 $C$ 的坐标。
+        \qscore{5}
+
+        \item 已知点 $A(1,4)$，线段 $AB$ 的垂直平分线方程为 $l:\ x + y - 2 = 0$。不使用图解法，求点 $B$ 的坐标。 \qscore{5}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 由 $A(-2,1)$、$B(6,1)$ 纵坐标相同，知 $AB$ 在直线 $y=1$ 上，
+        \[ \displaystyle |AB| = 6-(-2) = 8 \] \hfill (1分) \\
+        设 $C(x_0,y_0)$ 在直线 $l$ 上，则
+        \[ \displaystyle y_0 = x_0 + 3 \] \hfill (1分) \\
+        由于底边 $AB$ 所在直线为 $y=1$，$C$ 到该直线的距离即为三角形的高：
+        \[ \displaystyle h = |y_0 - 1| \] \hfill (1分) \\
+        代入面积公式 $\displaystyle S = \frac{1}{2}|AB|\cdot h = 32$：
+        \[ \displaystyle \frac{1}{2}\times 8 \times h = 32 \ \Longrightarrow\ h = 8 \] \hfill (2分) \\
+        即 $|y_0-1| = 8$，解得 $y_0 = 9$ 或 $y_0 = -7$。 \hfill (1分) \\
+        代入 $x_0 = y_0 - 3$，得 $x_0 = 6$ 或 $x_0 = -10$。 \hfill (1分)
+
+        \textbf{答：$C(6,9)$ 或 $C(-10,-7)$。}
+
+        \item 由垂直平分线的性质，$AB$ 的中点 $M$ 在直线 $l$ 上，且 $AB \perp l$。 \hfill (1分) \\
+        直线 $l:\ x+y-2=0$ 的斜率为 $-1$，故直线 $AB$ 的斜率为其负倒数：
+        \[ \displaystyle k_{AB} = 1 \] \hfill (1分) \\
+        设 $B(x,y)$，由斜率条件 $\dfrac{y-4}{x-1}=1$，化简得
+        \[ \displaystyle y = x + 3 \quad \cdots\text{(i)} \] \hfill (2分) \\
+        中点 $M = \left(\dfrac{x+1}{2}, \dfrac{y+4}{2}\right)$ 代入 $l$ 的方程 $x+y-2=0$：
+        \[ \displaystyle \frac{x+1}{2} + \frac{y+4}{2} - 2 = 0 \ \Longrightarrow\ x + y + 1 = 0 \quad \cdots\text{(ii)} \] \hfill (2分) \\
+        联立 (i)(ii)：将 $y=x+3$ 代入 (ii)，得 $x+(x+3)+1=0$，解得 $x=-2$，从而 $y=1$。 \hfill (1分)
+
+        \textbf{答：$B(-2,1)$。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：高中数学（微积分入门）- 微分的应用 | 考点：相关变化率（对时间求导、链式法则）、微分线性近似（$f(x_0+\Delta x)\approx f(x_0)+f'(x_0)\Delta x$） | 难度：中等偏难
+\begin{question}[points = 10]
+    \begin{questionparts}
+        \item 已知半径为 $r$ 的球体，其表面积为 $A = 4\pi r^2$，体积为 $V = \dfrac{4}{3}\pi r^3$。若球体表面积以 $6\ \text{cm}^2\text{s}^{-1}$ 的速率增加，求当半径 $r = 7\ \text{cm}$ 时，球体体积的增加率。 \qscore{4}
+
+        \item 已知 $f(x) = \dfrac{1}{\sqrt[3]{x}}$。求 $f'(64)$，并利用微分近似公式求 $\dfrac{1}{\sqrt[3]{66}}$ 的近似值（结果以分数表示）。 \qscore{5}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 将 $A$、$V$ 都看作时间 $t$ 的函数，对 $A = 4\pi r^2$ 两边关于 $t$ 求导（链式法则）： \\
+        $$\frac{dA}{dt} = 8\pi r \cdot \frac{dr}{dt}$$ \hfill (1分) \\
+        代入 $\dfrac{dA}{dt} = 6$，解出 $\dfrac{dr}{dt}$： \\
+        $$6 = 8\pi r \cdot \frac{dr}{dt} \implies \frac{dr}{dt} = \frac{6}{8\pi r} = \frac{3}{4\pi r}$$ \hfill (1分) \\
+        同理对 $V = \dfrac{4}{3}\pi r^3$ 关于 $t$ 求导： \\
+        $$\frac{dV}{dt} = 4\pi r^2 \cdot \frac{dr}{dt} = 4\pi r^2 \cdot \frac{3}{4\pi r} = 3r$$ \hfill (1分) \\
+        代入 $r = 7$： \\
+        $$\frac{dV}{dt} = 3 \times 7 = 21$$ \hfill (1分) \\
+        \textbf{答：当半径为 $7\ \text{cm}$ 时，球体体积的增加率为 $21\ \text{cm}^3\text{s}^{-1}$。}
+
+        \item 将 $f(x) = \dfrac{1}{\sqrt[3]{x}} = x^{-\frac{1}{3}}$ 求导： \\
+        $$f'(x) = -\frac{1}{3}x^{-\frac{4}{3}}$$ \hfill (1分) \\
+        代入 $x = 64$，注意 $64^{\frac{1}{3}} = 4$，故 $64^{\frac{4}{3}} = 4^4 = 256$： \\
+        $$f'(64) = -\frac{1}{3} \times \frac{1}{256} = -\frac{1}{768}$$ \hfill (1分) \\
+        再求 $f(64)$： \\
+        $$f(64) = \frac{1}{\sqrt[3]{64}} = \frac{1}{4}$$ \hfill (1分) \\
+        利用微分近似公式 $f(x_0 + \Delta x) \approx f(x_0) + f'(x_0)\Delta x$，取 $x_0 = 64$，$\Delta x = 66 - 64 = 2$： \\
+        $$f(66) \approx f(64) + f'(64) \times 2 = \frac{1}{4} + \left(-\frac{1}{768}\right) \times 2$$ \hfill (1分) \\
+        化简第二项： \\
+        $$f(66) \approx \frac{1}{4} - \frac{2}{768} = \frac{1}{4} - \frac{1}{384}$$ \hfill (1分) \\
+        通分求最终结果（$\dfrac{1}{4} = \dfrac{96}{384}$）： \\
+        $$f(66) \approx \frac{96}{384} - \frac{1}{384} = \frac{95}{384}$$ \hfill (1分) \\
+        \textbf{答：$f'(64) = -\dfrac{1}{768}$；$\dfrac{1}{\sqrt[3]{66}} \approx \dfrac{95}{384}$。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：高中数学 - 导数与函数的极值、单调区间 | 考点：含参数四次函数的极值点求参、导数因式分解确定增减区间 | 难度：中等
+\begin{question}[points = 8]
+    已知函数 $f(x) = 9x^4 + 4x^3 - 18x^2 + ax + 1$，点 $\left(-\dfrac{1}{3}, b\right)$ 是曲线 $y = f(x)$ 的一个极值点。
+
+    \begin{questionparts}
+        \item 求 $a$ 与 $b$ 的值。 \qscore{4}
+
+        \item 求函数 $f(x)$ 的单调递增区间与单调递减区间。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 对 $f(x) = 9x^4 + 4x^3 - 18x^2 + ax + 1$ 求导： \\
+        $$f'(x) = 36x^3 + 12x^2 - 36x + a$$ \hfill (1分) \\
+        由于 $x = -\dfrac{1}{3}$ 是 $f(x)$ 的极值点，故 $f'\left(-\dfrac{1}{3}\right) = 0$，代入得： \\
+        $$36\left(-\frac{1}{27}\right) + 12\left(\frac{1}{9}\right) - 36\left(-\frac{1}{3}\right) + a = 0 \implies -\frac{4}{3} + \frac{4}{3} + 12 + a = 0$$ \hfill (1分) \\
+        解得： \\
+        $$a = -12$$ \hfill (1分) \\
+        将 $a = -12$ 代回原函数，求 $b = f\left(-\dfrac{1}{3}\right)$： \\
+        $$b = \frac{1}{9} - \frac{4}{27} - 2 + 4 + 1 = \frac{3 - 4 - 54 + 108 + 27}{27} = \frac{80}{27}$$ \hfill (1分) \\
+        \textbf{答：$a = -12$，$b = \dfrac{80}{27}$。}
+
+        \item 由 (a) 知 $f'(x) = 36x^3 + 12x^2 - 36x - 12$，提取公因数并因式分解： \\
+        $$f'(x) = 12(3x^3 + x^2 - 3x - 1) = 12\left[x^2(3x+1) - (3x+1)\right] = 12(3x+1)(x^2-1)$$
+        $$\implies f'(x) = 12(3x+1)(x-1)(x+1)$$ \hfill (1分) \\
+        令 $f'(x) = 0$，解得三个驻点（均为单根）： \\
+        $$x = -1, \quad x = -\frac{1}{3}, \quad x = 1$$ \hfill (1分) \\
+        由于 $f'(x)$ 最高次项系数为正且三根互异，符号在相邻区间依次交替：
+
+        \begin{center}
+        \begin{tabular}{c|c|c|c|c|c|c|c}
+            \hline
+            区间 & $(-\infty, -1)$ & $-1$ & $\left(-1, -\dfrac{1}{3}\right)$ & $-\dfrac{1}{3}$ & $\left(-\dfrac{1}{3}, 1\right)$ & $1$ & $(1, +\infty)$ \\
+            \hline
+            $f'(x)$ 符号 & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+            \hline
+            $f(x)$ 单调性 & 递减 & 极小值 & 递增 & 极大值 & 递减 & 极小值 & 递增 \\
+            \hline
+        \end{tabular}
+        \end{center} \hfill (1分) \\
+        由上表可得函数的单调区间。 \hfill (1分) \\
+        \textbf{答：$f(x)$ 的单调递增区间为 $\left(-1, -\dfrac{1}{3}\right)$ 和 $(1, +\infty)$；单调递减区间为 $(-\infty, -1)$ 和 $\left(-\dfrac{1}{3}, 1\right)$。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：高中数学（大学预科）- 不定积分的计算 | 考点：三角函数降幂公式积分、无理函数换元法（化为反双曲/对数形式）、配方法转化为幂函数积分 | 难度：中等
+\begin{question}[points = 9]
+    求下列不定积分：
+
+    \begin{questionparts}
+        \item $\displaystyle \int \cos^2(3x) \, dx$ \qscore{3}
+
+        \item $\displaystyle \int \frac{2}{\sqrt{2x^2 - 3}} \, dx$ \qscore{3}
+
+        \item $\displaystyle \int \frac{1}{x^2 + 4x + 4} \, dx$ \qscore{3}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 利用降幂公式 $\cos^2\theta = \dfrac{1 + \cos 2\theta}{2}$，取 $\theta = 3x$： \\
+        $$\cos^2(3x) = \frac{1 + \cos 6x}{2}$$ \hfill (1分) \\
+        逐项积分： \\
+        $$\int \frac{1}{2} \, dx = \frac{x}{2}, \qquad \int \frac{\cos 6x}{2} \, dx = \frac{1}{12}\sin 6x$$ \hfill (1分) \\
+        合并结果： \\
+        $$\int \cos^2(3x) \, dx = \frac{x}{2} + \frac{1}{12}\sin 6x + C$$ \hfill (1分) \\
+        \textbf{答：$\displaystyle \int \cos^2(3x)\,dx = \frac{x}{2} + \frac{1}{12}\sin 6x + C$。}
+
+        \item 令 $u = \sqrt{2}\,x$，则 $du = \sqrt{2}\,dx$，且 $2x^2 - 3 = u^2 - 3$，代入换元： \\
+        $$\int \frac{2}{\sqrt{2x^2-3}}\,dx = \int \frac{2}{\sqrt{u^2-3}} \cdot \frac{du}{\sqrt{2}} = \sqrt{2} \int \frac{du}{\sqrt{u^2-3}}$$ \hfill (1分) \\
+        套用标准积分公式 $\displaystyle \int \frac{du}{\sqrt{u^2-a^2}} = \ln\left|u + \sqrt{u^2-a^2}\right| + C$（此处 $a^2 = 3$）： \\
+        $$\sqrt{2}\int \frac{du}{\sqrt{u^2-3}} = \sqrt{2}\,\ln\left|u + \sqrt{u^2-3}\right| + C$$ \hfill (1分) \\
+        将 $u = \sqrt{2}\,x$ 换回，注意 $u^2 - 3 = 2x^2-3$： \\
+        $$\int \frac{2}{\sqrt{2x^2-3}}\,dx = \sqrt{2}\,\ln\left|\sqrt{2}\,x + \sqrt{2x^2-3}\right| + C$$ \hfill (1分) \\
+        \textbf{答：$\displaystyle \int \frac{2}{\sqrt{2x^2-3}}\,dx = \sqrt{2}\,\ln\left|\sqrt{2}\,x + \sqrt{2x^2-3}\right| + C$。}
+
+        \item 先对分母配方： \\
+        $$x^2 + 4x + 4 = (x+2)^2$$ \hfill (1分) \\
+        令 $t = x+2$，则 $dt = dx$，代入化为幂函数积分： \\
+        $$\int \frac{1}{(x+2)^2}\,dx = \int \frac{1}{t^2}\,dt = \int t^{-2}\,dt = -t^{-1} + C = -\frac{1}{t} + C$$ \hfill (1分) \\
+        将 $t = x+2$ 换回： \\
+        $$\int \frac{1}{x^2+4x+4}\,dx = -\frac{1}{x+2} + C$$ \hfill (1分) \\
+        \textbf{答：$\displaystyle \int \frac{1}{x^2+4x+4}\,dx = -\frac{1}{x+2} + C$。}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+
+%region 签名栏
+\vfill % 与上方内容保持距离
+
+\noindent
+\newlength{\sigwidth}
+\settowidth{\sigwidth}{（\hspace{4em}师）}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l l}
+    出题： & 审题： & 审核： \\[4em]
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} \\
+    （\hspace{0em} \setterteacher ） &
+    （\hspace{0em} \reviewteacher ）  &
+    （\hspace{0em} \auditteacher ） \\
+\end{tabular*}
+%endregion
+
+\newpage
+\end{document}
+

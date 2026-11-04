@@ -1,0 +1,1 @@
+\par \noindent 16.【解析】化简 $3(2x-y)-2(x-4y)$ 并求 $x=-2$，$y=1$ 时的值。 \\ 先去括号、合并同类项，再代入 $x=-2$，$y=1$。 \begin {align*} 3(2x-y)-2(x-4y) &= 6x-3y-2x+8y \\ &= 4x+5y \\ &= 4\times (-2)+5\times 1 \\ &= -8+5 \\ &= -3 \end {align*} 故选 B。\par \vspace *{1ex}

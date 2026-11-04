@@ -1,0 +1,620 @@
+% !TEX program = xelatex
+\documentclass{exam-zh}
+\usepackage{amsmath}
+\examsetup{
+  solution={show-solution=show-move}
+}
+
+\newcommand{\qscoreoffset}{4em}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em,
+    before={\renewcommand{\qscoreoffset}{8em}},
+}
+\newcommand{\qscore}[2][\%]{%
+    \leavevmode\unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[\qscoreoffset][r]{(#2#1)}}%
+}
+
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries 多项式专题复习：余式定理 · 因式定理 · 部分分式}\\[4pt]
+  {\large 高三统考复习讲义}
+\end{center}
+
+\vspace{1em}
+
+% =====================================================================
+\noindent{\large\bfseries 专题一\quad 余式定理}
+
+\medskip
+\noindent\textbf{知识引导}
+\begin{itemize}
+  \item \textbf{带余除法：}$f(x)=g(x)\,q(x)+r(x)$，其中余式 $r(x)$ 的次数小于除式 $g(x)$ 的次数。
+  \item \textbf{余式定理：}$f(x)$ 除以 $x-a$ 的余式为 $f(a)$；除以 $ax-b$ 的余式为 $f\!\left(\dfrac{b}{a}\right)$。
+  \item \textbf{除以二次式：}余式至多一次，设为 $ax+b$，再把除式的根代入列方程组。
+  \item \textbf{除式含重根：}若除式为 $(x-a)^2$，余式可写成 $k(x-a)^2+(\text{已知余式})$ 的形式。
+\end{itemize}
+
+\setcounter{question}{0}
+
+%region 范围：高三统考复习 · 多项式 | 考点：余式定理（直接求值） | 难度：基础
+\begin{question}
+    设 $f(x)=x^3-2x^2+3x-5$，则 $f(x)$ 除以 $x-2$ 所得的余式为 \paren[A]
+    \begin{choices}
+        \item $1$
+        \item $-27$
+        \item $3$
+        \item $-5$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $f(x)=x^3-2x^2+3x-5$ 除以 $x-2$ 的余式。 \\
+    由余式定理，余式为 $f(2)$。
+    \begin{align*}
+        f(2) &= 2^3-2\cdot 2^2+3\cdot 2-5 \\
+        &= 8-8+6-5 \\
+        &= 1
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：余式定理（求参数） | 难度：基础
+\begin{question}
+    已知 $f(x)=2x^3+ax^2-x+4$ 除以 $x+1$ 的余式为 $6$，则 $a=$ \paren[C]
+    \begin{choices}
+        \item $1$
+        \item $2$
+        \item $3$
+        \item $4$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $f(x)=2x^3+ax^2-x+4$ 除以 $x+1$ 余 $6$，求 $a$。 \\
+    由余式定理 $f(-1)=6$。
+    \begin{align*}
+        f(-1) &= -2+a+1+4 \\
+        &= a+3 = 6 \\
+        a &= 3
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：余式定理（除式首项系数不为 1） | 难度：中等偏易
+\begin{question}
+    设 $f(x)=4x^3-2x^2+x-3$，则 $f(x)$ 除以 $2x-1$ 所得的余式为 \paren[B]
+    \begin{choices}
+        \item $0$
+        \item $-\dfrac{5}{2}$
+        \item $-\dfrac{9}{2}$
+        \item $-2$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $f(x)=4x^3-2x^2+x-3$ 除以 $2x-1$ 的余式。 \\
+    由余式定理，余式为 $f\!\left(\dfrac12\right)$。
+    \begin{align*}
+        f\!\left(\frac12\right) &= 4\cdot\frac18-2\cdot\frac14+\frac12-3 \\
+        &= \frac12-\frac12+\frac12-3 \\
+        &= -\frac52
+    \end{align*}
+    故选 B。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：余式定理（除以二次式） | 难度：中等
+\begin{question}[points = 6]
+    多项式 $f(x)$ 除以 $x-1$ 的余式为 $2$，除以 $x+2$ 的余式为 $-1$。求 $f(x)$ 除以 $(x-1)(x+2)$ 的余式。
+    \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    已知 $f(x)$ 除以 $x-1$ 余 $2$、除以 $x+2$ 余 $-1$，求其除以 $(x-1)(x+2)$ 的余式。 \\
+    余式次数小于 $2$，设待定系数后用两个根代入。 \\
+    设 $f(x)=(x-1)(x+2)\,q(x)+ax+b$。
+    \hfill (1分)
+    \begin{align*}
+        f(1) &= a+b = 2 \\
+        f(-2) &= -2a+b = -1
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        3a &= 3 \\
+        a &= 1,\quad b = 1
+    \end{align*}
+    \hfill (2分) \\
+    余式为 $x+1$。
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：余式定理（高次幂） | 难度：中等偏难
+\begin{question}[points = 8]
+    求 $x^{100}$ 除以 $x^2-3x+2$ 所得的余式。
+    \hfill (8\%)
+\end{question}
+
+\begin{solution}
+    求 $x^{100}$ 除以 $x^2-3x+2=(x-1)(x-2)$ 的余式。 \\
+    设余式为 $ax+b$，分别代入除式的两个根。 \\
+    设 $x^{100}=(x-1)(x-2)\,q(x)+ax+b$。
+    \hfill (2分)
+    \begin{align*}
+        x=1:\quad a+b &= 1 \\
+        x=2:\quad 2a+b &= 2^{100}
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        a &= 2^{100}-1 \\
+        b &= 1-a = 2-2^{100}
+    \end{align*}
+    \hfill (3分) \\
+    余式为 $(2^{100}-1)x+2-2^{100}$。
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：余式定理（除式含重根） | 难度：困难
+\begin{question}[points = 10]
+    多项式 $f(x)$ 除以 $(x-1)^2$ 的余式为 $3x-1$，除以 $x+2$ 的余式为 $5$。
+
+    \begin{questionparts}
+        \item 求 $f(1)$ 的值； \qscore{2}
+
+        \item 求 $f(x)$ 除以 $(x-1)^2(x+2)$ 的余式。 \qscore{8}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求 $f(1)$。 \\
+        由条件写出 $f(x)$ 关于 $(x-1)^2$ 的带余除法，再取 $x=1$。 \\
+        设 $f(x)=(x-1)^2g(x)+3x-1$。
+        \begin{align*}
+            f(1) &= 0+3\cdot 1-1 \\
+            &= 2
+        \end{align*}
+        \hfill (2分)
+
+        \item 求 $f(x)$ 除以 $(x-1)^2(x+2)$ 的余式。 \\
+        余式 $r(x)$ 次数小于 $3$，且 $r(x)$ 除以 $(x-1)^2$ 的余式仍为 $3x-1$。 \\
+        设 $f(x)=(x-1)^2(x+2)\,h(x)+r(x)$，$r(x)=k(x-1)^2+3x-1$。
+        \hfill (3分)
+        \begin{align*}
+            f(-2) = r(-2) &= 9k-7 = 5
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            k &= \frac43
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            r(x) &= \frac43(x-1)^2+3x-1 \\
+            &= \frac{4x^2+x+1}{3}
+        \end{align*}
+        \hfill (2分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+\newpage
+% =====================================================================
+\noindent{\large\bfseries 专题二\quad 因式定理}
+
+\medskip
+\noindent\textbf{知识引导}
+\begin{itemize}
+  \item \textbf{因式定理：}$x-a$ 是 $f(x)$ 的因式 $\Longleftrightarrow f(a)=0$。
+  \item \textbf{多个因式：}当 $a\neq b$ 时，$(x-a)(x-b)$ 整除 $f(x)$ $\Longleftrightarrow f(a)=f(b)=0$。
+  \item \textbf{有理根定理：}整系数多项式 $a_nx^n+\cdots+a_0$ 的有理根 $\dfrac{p}{q}$（既约）满足 $p\mid a_0$，$q\mid a_n$。用它列出候选根逐一试。
+  \item \textbf{分解步骤：}试根 $\to$ 综合除法（或长除法）降次 $\to$ 对商式继续分解。
+\end{itemize}
+
+\setcounter{question}{0}
+
+%region 范围：高三统考复习 · 多项式 | 考点：因式定理（判断因式） | 难度：基础
+\begin{question}
+    下列各式中，是多项式 $f(x)=x^3-2x^2-5x+6$ 的因式的是 \paren[D]
+    \begin{choices}
+        \item $x+1$
+        \item $x-2$
+        \item $x+3$
+        \item $x-3$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    判断哪一个是 $f(x)=x^3-2x^2-5x+6$ 的因式。 \\
+    由因式定理，$x-a$ 为因式当且仅当 $f(a)=0$。
+    \begin{align*}
+        f(3) &= 27-18-15+6 \\
+        &= 0
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：因式定理（求参数） | 难度：基础
+\begin{question}
+    若 $x+2$ 是多项式 $f(x)=x^3+kx^2+x+2$ 的因式，则 $k=$ \paren[D]
+    \begin{choices}
+        \item $-2$
+        \item $0$
+        \item $1$
+        \item $2$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $x+2$ 是 $f(x)=x^3+kx^2+x+2$ 的因式，求 $k$。 \\
+    由因式定理 $f(-2)=0$。
+    \begin{align*}
+        f(-2) &= -8+4k-2+2 \\
+        &= 4k-8 = 0 \\
+        k &= 2
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：因式定理（两个因式，方程组） | 难度：中等偏易
+\begin{question}
+    已知 $x-1$ 与 $x+2$ 都是多项式 $f(x)=x^3+ax^2+bx-2$ 的因式，则 $ab=$ \paren[A]
+    \begin{choices}
+        \item $-2$
+        \item $2$
+        \item $-3$
+        \item $3$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $x-1$、$x+2$ 均为 $f(x)=x^3+ax^2+bx-2$ 的因式，求 $ab$。 \\
+    由因式定理 $f(1)=0$，$f(-2)=0$，解方程组。
+    \begin{align*}
+        f(1) &= a+b-1 = 0 \\
+        f(-2) &= 4a-2b-10 = 0 \\
+        a &= 2,\quad b=-1 \\
+        ab &= -2
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：因式定理（三次多项式完全分解） | 难度：中等
+\begin{question}[points = 6]
+    在实数范围内分解因式：$2x^3-3x^2-11x+6$。
+    \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    将 $f(x)=2x^3-3x^2-11x+6$ 在实数范围内分解因式。 \\
+    用有理根定理找一个根，降次后分解二次因式。 \\
+    候选根为 $\pm1,\pm2,\pm3,\pm6,\pm\dfrac12,\pm\dfrac32$。
+    \begin{align*}
+        f(3) &= 54-27-33+6 = 0
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        2x^3-3x^2-11x+6 &= (x-3)(2x^2+3x-2)
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        2x^2+3x-2 &= (2x-1)(x+2) \\
+        2x^3-3x^2-11x+6 &= (x-3)(2x-1)(x+2)
+    \end{align*}
+    \hfill (2分)
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：因式定理（整除求参数并分解） | 难度：中等偏难
+\begin{question}[points = 8]
+    已知 $f(x)=x^4-3x^3+ax^2+bx+4$ 能被 $(x-1)(x-2)$ 整除。
+
+    \begin{questionparts}
+        \item 求实数 $a,\,b$ 的值； \qscore{5}
+
+        \item 在实数范围内分解 $f(x)$，并求方程 $f(x)=0$ 的实数根。 \qscore{3}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求 $a,b$。 \\
+        整除等价于 $f(1)=f(2)=0$，解关于 $a,b$ 的方程组。
+        \begin{align*}
+            f(1) &= a+b+2 = 0 \\
+            f(2) &= 4a+2b-4 = 0
+        \end{align*}
+        \hfill (3分) \\
+        \begin{align*}
+            2a+b &= 2 \\
+            a &= 4,\quad b=-6
+        \end{align*}
+        \hfill (2分)
+
+        \item 分解 $f(x)$ 并求实根。 \\
+        $f(x)=x^4-3x^3+4x^2-6x+4$，除以 $x^2-3x+2$ 得商式 $x^2+2$。
+        \begin{align*}
+            f(x) &= (x^2-3x+2)(x^2+2) \\
+            &= (x-1)(x-2)(x^2+2)
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            x^2+2 > 0 \;\Longrightarrow\; x &= 1 \ \text{或} \ x = 2
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：因式定理（含重因式，待定系数） | 难度：困难
+\begin{question}[points = 10]
+    已知多项式 $f(x)=x^3-3x+m$ 含有形如 $(x-a)^2$ 的因式。
+
+    \begin{questionparts}
+        \item 求实数 $m$ 的所有可能值； \qscore{6}
+
+        \item 对 (a) 中每一个 $m$，在实数范围内分解 $f(x)$。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求 $m$ 的所有可能值。 \\
+        首项系数为 $1$，设 $f(x)=(x-a)^2(x-b)$，比较系数。 \\
+        设 $f(x)=(x-a)^2(x-b)$。
+        \hfill (1分)
+        \begin{align*}
+            (x-a)^2(x-b) &= x^3-(2a+b)x^2+(a^2+2ab)x-a^2b
+        \end{align*}
+        \begin{align*}
+            2a+b &= 0 \\
+            a^2+2ab &= -3 \\
+            -a^2b &= m
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            b &= -2a \\
+            -3a^2 &= -3 \\
+            a &= \pm 1
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            m &= -a^2b = 2a^3 \\
+            &= \pm 2
+        \end{align*}
+        \hfill (2分)
+
+        \item 分别分解 $f(x)$。 \\
+        将 $a=\pm1$ 及对应的 $b=-2a$ 代回 $f(x)=(x-a)^2(x-b)$。
+        \begin{align*}
+            m=2\ (a=1,\ b=-2):\quad f(x) &= (x-1)^2(x+2)
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            m=-2\ (a=-1,\ b=2):\quad f(x) &= (x+1)^2(x-2)
+        \end{align*}
+        \hfill (2分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+\newpage
+% =====================================================================
+\noindent{\large\bfseries 专题三\quad 部分分式}
+
+\medskip
+\noindent\textbf{知识引导}
+\begin{itemize}
+  \item \textbf{前提：}真分式（分子次数 $<$ 分母次数）才能直接拆。假分式先做多项式除法，化为 \textbf{多项式 $+$ 真分式}。
+  \item \textbf{分母分解后的四种形式：}
+  \begin{align*}
+    \frac{\cdots}{(x-a)(x-b)} &= \frac{A}{x-a}+\frac{B}{x-b} \\
+    \frac{\cdots}{(x-a)^2(x-b)} &= \frac{A}{x-a}+\frac{B}{(x-a)^2}+\frac{C}{x-b} \\
+    \frac{\cdots}{(x-a)(x^2+px+q)} &= \frac{A}{x-a}+\frac{Bx+C}{x^2+px+q}\quad(\text{二次式不可约})
+  \end{align*}
+  \item \textbf{求系数：}去分母后，(1) 代入分母的根（遮盖法）；(2) 比较同次项系数；两者结合最快。
+  \item \textbf{应用：}裂项求和、求积分（拆成 $\dfrac{1}{x-a}$、$\dfrac{1}{(x-a)^2}$、$\dfrac{x}{x^2+1}$ 等基本型）。
+\end{itemize}
+
+\setcounter{question}{0}
+
+%region 范围：高三统考复习 · 多项式 | 考点：部分分式（两个一次因式，求系数） | 难度：基础
+\begin{question}
+    若 $\dfrac{3x+5}{(x+1)(x+2)}=\dfrac{A}{x+1}+\dfrac{B}{x+2}$ 对所有使分母不为零的 $x$ 成立，则 $A+B=$ \paren[C]
+    \begin{choices}
+        \item $1$
+        \item $2$
+        \item $3$
+        \item $5$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求恒等式 $\dfrac{3x+5}{(x+1)(x+2)}=\dfrac{A}{x+1}+\dfrac{B}{x+2}$ 中 $A+B$ 的值。 \\
+    去分母后代入分母的根。
+    \begin{align*}
+        3x+5 &= A(x+2)+B(x+1) \\
+        x=-1:\quad 2 &= A \\
+        x=-2:\quad -1 &= -B \;\Rightarrow\; B=1 \\
+        A+B &= 3
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：部分分式（裂项求和） | 难度：基础
+\begin{question}
+    $\displaystyle\sum_{n=1}^{99}\frac{1}{n(n+1)}=$ \paren[A]
+    \begin{choices}
+        \item $\dfrac{99}{100}$
+        \item $\dfrac{100}{101}$
+        \item $\dfrac{98}{99}$
+        \item $\dfrac{1}{100}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $\displaystyle\sum_{n=1}^{99}\frac{1}{n(n+1)}$ 的值。 \\
+    先把通项拆成部分分式，再相消求和。
+    \begin{align*}
+        \frac{1}{n(n+1)} &= \frac1n-\frac1{n+1} \\
+        \sum_{n=1}^{99}\frac{1}{n(n+1)} &= \left(1-\frac12\right)+\left(\frac12-\frac13\right)+\cdots+\left(\frac1{99}-\frac1{100}\right) \\
+        &= 1-\frac1{100} = \frac{99}{100}
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：部分分式（含重因式） | 难度：中等偏易
+\begin{question}
+    若 $\dfrac{1}{x(x+1)^2}=\dfrac{A}{x}+\dfrac{B}{x+1}+\dfrac{C}{(x+1)^2}$，则 $A+B+C=$ \paren[A]
+    \begin{choices}
+        \item $-1$
+        \item $0$
+        \item $1$
+        \item $-3$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求恒等式 $\dfrac{1}{x(x+1)^2}=\dfrac{A}{x}+\dfrac{B}{x+1}+\dfrac{C}{(x+1)^2}$ 中 $A+B+C$ 的值。 \\
+    去分母后代根，再比较 $x^2$ 项系数。
+    \begin{align*}
+        1 &= A(x+1)^2+Bx(x+1)+Cx \\
+        x=0:\quad A &= 1 \\
+        x=-1:\quad C &= -1 \\
+        x^2\text{ 项}:\quad 0 &= A+B \;\Rightarrow\; B=-1 \\
+        A+B+C &= -1
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：部分分式（含不可约二次因式） | 难度：中等
+\begin{question}[points = 6]
+    将 $\dfrac{3x^2+x+4}{(x-1)(x^2+1)}$ 表示成部分分式。
+    \hfill (6\%)
+\end{question}
+
+\begin{solution}
+    将 $\dfrac{3x^2+x+4}{(x-1)(x^2+1)}$ 拆成部分分式。 \\
+    分母含不可约二次因式 $x^2+1$，对应分子设为 $Bx+C$。 \\
+    设 $\dfrac{3x^2+x+4}{(x-1)(x^2+1)}=\dfrac{A}{x-1}+\dfrac{Bx+C}{x^2+1}$。
+    \hfill (1分)
+    \begin{align*}
+        3x^2+x+4 &= A(x^2+1)+(Bx+C)(x-1)
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        x=1:\quad 8 &= 2A \;\Rightarrow\; A=4
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        x^2\text{ 项}:\quad 3 &= A+B \;\Rightarrow\; B=-1 \\
+        \text{常数项}:\quad 4 &= A-C \;\Rightarrow\; C=0
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        \frac{3x^2+x+4}{(x-1)(x^2+1)} &= \frac{4}{x-1}-\frac{x}{x^2+1}
+    \end{align*}
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：部分分式（假分式，先做多项式除法） | 难度：中等偏难
+\begin{question}[points = 8]
+    将 $\dfrac{x^3-x^2+x+1}{x^2-x-2}$ 表示成多项式与部分分式之和。
+    \hfill (8\%)
+\end{question}
+
+\begin{solution}
+    将假分式 $\dfrac{x^3-x^2+x+1}{x^2-x-2}$ 化为多项式加部分分式。 \\
+    分子次数高于分母，先做多项式除法，再拆余下的真分式。
+    \begin{align*}
+        x^3-x^2+x+1 &= x(x^2-x-2)+3x+1 \\
+        \frac{x^3-x^2+x+1}{x^2-x-2} &= x+\frac{3x+1}{(x-2)(x+1)}
+    \end{align*}
+    \hfill (2分) \\
+    设 $\dfrac{3x+1}{(x-2)(x+1)}=\dfrac{A}{x-2}+\dfrac{B}{x+1}$。
+    \hfill (1分)
+    \begin{align*}
+        3x+1 &= A(x+1)+B(x-2)
+    \end{align*}
+    \hfill (1分) \\
+    \begin{align*}
+        x=2:\quad 7 &= 3A \;\Rightarrow\; A=\frac73 \\
+        x=-1:\quad -2 &= -3B \;\Rightarrow\; B=\frac23
+    \end{align*}
+    \hfill (2分) \\
+    \begin{align*}
+        \frac{x^3-x^2+x+1}{x^2-x-2} &= x+\frac{7}{3(x-2)}+\frac{2}{3(x+1)}
+    \end{align*}
+    \hfill (2分)
+\end{solution}
+%endregion
+
+%region 范围：高三统考复习 · 多项式 | 考点：部分分式（重因式加二次因式）与定积分 | 难度：困难
+\begin{question}[points = 10]
+    设 $f(x)=\dfrac{2x^3-x^2+2x+1}{(x-1)^2(x^2+1)}$。
+
+    \begin{questionparts}
+        \item 将 $f(x)$ 表示成部分分式； \qscore{6}
+
+        \item 利用 (a) 的结果，求 $\displaystyle\int_2^3 f(x)\,\mathrm{d}x$。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 将 $f(x)$ 拆成部分分式。 \\
+        分母含重因式 $(x-1)^2$ 与不可约二次式 $x^2+1$，按对应形式设分子。 \\
+        设 $f(x)=\dfrac{A}{x-1}+\dfrac{B}{(x-1)^2}+\dfrac{Cx+D}{x^2+1}$。
+        \begin{align*}
+            2x^3-x^2+2x+1 &= A(x-1)(x^2+1)+B(x^2+1)+(Cx+D)(x-1)^2
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            x=1:\quad 4 &= 2B \;\Rightarrow\; B=2 \\
+            x^3\text{ 项}:\quad 2 &= A+C \\
+            x\text{ 项}:\quad 2 &= A+C-2D \;\Rightarrow\; D=0 \\
+            \text{常数项}:\quad 1 &= -A+B+D
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            A &= 1,\quad C=1
+        \end{align*}
+        \hfill (1分) \\
+        \begin{align*}
+            f(x) &= \frac{1}{x-1}+\frac{2}{(x-1)^2}+\frac{x}{x^2+1}
+        \end{align*}
+        \hfill (1分)
+
+        \item 求 $\displaystyle\int_2^3 f(x)\,\mathrm{d}x$。 \\
+        逐项积分，代入上下限。
+        \begin{align*}
+            \int f(x)\,\mathrm{d}x &= \ln|x-1|-\frac{2}{x-1}+\frac12\ln(x^2+1)+C
+        \end{align*}
+        \hfill (2分) \\
+        \begin{align*}
+            \int_2^3 f(x)\,\mathrm{d}x &= \left(\ln2-1+\frac12\ln10\right)-\left(0-2+\frac12\ln5\right) \\
+            &= 1+\ln2+\frac12(\ln10-\ln5) \\
+            &= 1+\frac32\ln2
+        \end{align*}
+        \hfill (2分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+\end{document}

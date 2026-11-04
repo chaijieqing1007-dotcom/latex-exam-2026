@@ -1,0 +1,362 @@
+%region 范围：多项式函数 | 考点：根与因式分解、待定系数 | 难度：基础
+\begin{question}
+    已知 $f(x)$ 是三次多项式，且 $f(1)=f(2)=f(3)=0$，则 $f(0)=$ \paren[D]
+    \begin{choices}
+        \item $-6$
+        \item $0$
+        \item $6$
+        \item 资料不足
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知三次多项式 $f(x)$ 有三个零点 $1,2,3$，求 $f(0)$。\\
+    三个零点已用完三次多项式的全部根，设 $f(x)=a(x-1)(x-2)(x-3)$，其中首项系数 $a\neq0$ 未知。\\
+    \begin{align*}
+        f(0)=a(0-1)(0-2)(0-3)=-6a
+    \end{align*}
+    $a$ 可取任意非零实数，故 $f(0)$ 无法唯一确定。故选 D。
+\end{solution}
+%endregion
+
+%region 范围：函数的奇偶性 | 考点：复合函数的奇偶性 | 难度：基础
+\begin{question}
+    已知 $f$ 是奇函数，$g$ 是偶函数，则下列关于复合函数的叙述中正确的是 \paren[B]
+    \begin{choices}
+        \item $f\circ g$ 是奇函数
+        \item $f\circ g$ 是偶函数
+        \item $f\circ g$ 既是奇函数又是偶函数
+        \item $f\circ g$ 既不是奇函数也不是偶函数
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    判断 $f\circ g$ 的奇偶性。\\
+    计算 $(f\circ g)(-x)$，利用 $g$ 为偶函数先化简内层。\\
+    \begin{align*}
+        (f\circ g)(-x)=f\bigl(g(-x)\bigr)=f\bigl(g(x)\bigr)=(f\circ g)(x)
+    \end{align*}
+    故选 B。
+\end{solution}
+%endregion
+
+%region 范围：复数与数列求和 | 考点：$i^k$ 的周期性 | 难度：中等
+\begin{question}
+    若 $\displaystyle\sum_{k=1}^{n} i^{k}=-1$，则下列各数中，$n$ 可能取的值是 \paren[B]
+    \begin{choices}
+        \item $2026$
+        \item $2027$
+        \item $2028$
+        \item $2029$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求使 $\displaystyle\sum_{k=1}^{n} i^{k}=-1$ 成立的 $n$。\\
+    $i^k$ 以 $4$ 为周期，连续四项之和为 $0$，故和只取决于 $n$ 除以 $4$ 的余数 $r$。\\
+    设 $n=4m+r$，$r\in\{0,1,2,3\}$。\\
+    \begin{align*}
+        r=0:&\ 0 \\
+        r=1:&\ i \\
+        r=2:&\ i+i^2=i-1 \\
+        r=3:&\ i+i^2+i^3=i-1-i=-1
+    \end{align*}
+    需 $n\equiv3\pmod 4$，而 $2027=4\times506+3$。故选 B。
+\end{solution}
+%endregion
+
+%region 范围：复数 | 考点：共轭复数、复数的辐角 | 难度：基础
+\begin{question}
+    若 $2z-\overline{z}=3i$，则 $z$ 的辐角主值是 \paren[D]
+    \begin{choices}
+        \item $-\dfrac{\pi}{2}$
+        \item $-\dfrac{\pi}{4}$
+        \item $\dfrac{\pi}{4}$
+        \item $\dfrac{\pi}{2}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    由 $2z-\overline{z}=3i$ 求 $z$ 的辐角主值。\\
+    设 $z=a+bi$（$a,b\in\mathbb{R}$），比较实部与虚部。\\
+    \begin{align*}
+        2(a+bi)-(a-bi) &=3i \\
+        a+3bi &=3i \\
+        a=0,\ b &=1 \\
+        z &=i
+    \end{align*}
+    $z=i$ 位于虚轴正半轴，辐角主值为 $\dfrac{\pi}{2}$。故选 D。
+\end{solution}
+%endregion
+
+%region 范围：三角恒等变换 | 考点：二倍角公式的连续使用 | 难度：中等
+\begin{question}
+    已知 $\dfrac{\sin 8x}{\sin x}=4$，则 $\cos x\cos 2x\cos 4x=$ \paren[C]
+    \begin{choices}
+        \item $0$
+        \item $\dfrac{1}{4}$
+        \item $\dfrac{1}{2}$
+        \item $\dfrac{5}{8}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $\dfrac{\sin 8x}{\sin x}=4$，求 $\cos x\cos 2x\cos 4x$。\\
+    连续使用二倍角公式 $\sin 2\theta=2\sin\theta\cos\theta$，把 $\sin 8x$ 拆成 $\sin x$ 与余弦之积。\\
+    \begin{align*}
+        \sin 8x &=2\sin 4x\cos 4x \\
+        &=4\sin 2x\cos 2x\cos 4x \\
+        &=8\sin x\cos x\cos 2x\cos 4x \\
+        \frac{\sin 8x}{\sin x} &=8\cos x\cos 2x\cos 4x=4 \\
+        \cos x\cos 2x\cos 4x &=\frac{1}{2}
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：三角函数 | 考点：降幂公式、最小正周期 | 难度：基础
+\begin{question}
+    函数 $f(x)=4\cos^2 2x-3$ 的最小正周期是 \paren[B]
+    \begin{choices}
+        \item $\dfrac{\pi}{4}$
+        \item $\dfrac{\pi}{2}$
+        \item $\pi$
+        \item $2\pi$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $f(x)=4\cos^2 2x-3$ 的最小正周期。\\
+    用降幂公式 $\cos^2\theta=\dfrac{1+\cos2\theta}{2}$ 化为 $A\cos\omega x+B$ 的形式，再用 $T=\dfrac{2\pi}{\omega}$。\\
+    \begin{align*}
+        f(x) &=4\cdot\frac{1+\cos 4x}{2}-3 \\
+        &=2\cos 4x-1 \\
+        T &=\frac{2\pi}{4}=\frac{\pi}{2}
+    \end{align*}
+    故选 B。
+\end{solution}
+%endregion
+
+%region 范围：解析几何·直线 | 考点：平行线间的距离 | 难度：基础
+\begin{question}
+    若 $ab\neq0$，则直线 $ax+by=c$ 与 $ax+by=-c$ 之间的距离为 \paren[C]
+    \begin{choices}
+        \item $|c|$
+        \item $2|c|$
+        \item $\dfrac{2|c|}{\sqrt{a^2+b^2}}$
+        \item $\left|\dfrac{2c}{ab}\right|$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求两条平行直线 $ax+by-c=0$ 与 $ax+by+c=0$ 之间的距离。\\
+    两直线的 $x,y$ 系数相同，直接用平行线距离公式 $d=\dfrac{|C_1-C_2|}{\sqrt{A^2+B^2}}$。\\
+    \begin{align*}
+        d=\frac{|(-c)-c|}{\sqrt{a^2+b^2}}=\frac{2|c|}{\sqrt{a^2+b^2}}
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：极坐标与参数方程 | 考点：极坐标方程与直角坐标方程互化 | 难度：中等
+\begin{question}
+    下列极坐标方程中，图像是圆的是 \paren[B]
+    \begin{choices}
+        \item $\theta=4$
+        \item $r=\sin\dfrac{\pi}{4}$
+        \item $r^2=\sin\theta$
+        \item $r\sin\theta=4$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    判断哪个极坐标方程表示圆。\\
+    利用 $x=r\cos\theta,\ y=r\sin\theta,\ r^2=x^2+y^2$ 化为直角坐标方程。\\
+    \begin{align*}
+        \theta=4 &:\ y=x\tan 4\ (\text{过原点的射线}) \\
+        r=\sin\frac{\pi}{4}=\frac{\sqrt2}{2} &:\ x^2+y^2=\frac12 \\
+        r^2=\sin\theta &:\ (x^2+y^2)^{\frac32}=y \\
+        r\sin\theta=4 &:\ y=4
+    \end{align*}
+    只有 $x^2+y^2=\dfrac12$ 是圆。故选 B。
+\end{solution}
+%endregion
+
+%region 范围：坐标变换 | 考点：坐标轴平移 | 难度：中等
+\begin{question}
+    平移坐标轴后，方程 $2x^2+y^2=2$ 在新坐标系中的方程为 $2(x')^2-4x'+(y')^2+4y'+4=0$。则新坐标系的原点在原坐标系中的坐标为 \paren[C]
+    \begin{choices}
+        \item $(1,2)$
+        \item $(1,-2)$
+        \item $(-1,2)$
+        \item $(-1,-2)$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求平移后新原点在原坐标系中的坐标。\\
+    设新原点为 $(h,k)$，则 $x=x'+h,\ y=y'+k$，代入原方程后与已知方程比较系数。\\
+    \begin{align*}
+        2(x'+h)^2+(y'+k)^2-2 &=0 \\
+        2(x')^2+4hx'+(y')^2+2ky'+2h^2+k^2-2 &=0
+    \end{align*}
+    比较 $x'$ 与 $y'$ 的系数：
+    \begin{align*}
+        4h=-4 &\Rightarrow h=-1 \\
+        2k=4 &\Rightarrow k=2
+    \end{align*}
+    检验常数项：$2h^2+k^2-2=2+4-2=4$，与已知一致。新原点为 $(-1,2)$。故选 C。
+\end{solution}
+%endregion
+
+%region 范围：排列组合 | 考点：组合数、三角形个数 | 难度：基础
+\begin{question}
+    圆上有 $n$ 个点，以这些点为顶点恰能组成 $84$ 个不同的三角形，则 $n=$ \paren[B]
+    \begin{choices}
+        \item $8$
+        \item $9$
+        \item $10$
+        \item $21$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    圆上 $n$ 点中任取三点恰组成 $84$ 个三角形，求 $n$。\\
+    圆上任意三点不共线，三角形个数为 $\dbinom{n}{3}$。\\
+    \begin{align*}
+        \binom{n}{3}=\frac{n(n-1)(n-2)}{6} &=84 \\
+        n(n-1)(n-2) &=504=9\times8\times7 \\
+        n &=9
+    \end{align*}
+    故选 B。
+\end{solution}
+%endregion
+
+%region 范围：概率与统计 | 考点：离散型随机变量的数学期望 | 难度：基础
+\begin{question}
+    一袋中装有 $5$ 个黄球和 $3$ 个白球。从中随机取出两个球，令 $X$ 为这两个球中白球的个数，则 $E(X)=$ \paren[A]
+    \begin{choices}
+        \item $\dfrac{3}{4}$
+        \item $\dfrac{9}{14}$
+        \item $\dfrac{3}{7}$
+        \item $\dfrac{3}{14}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    从 $5$ 黄 $3$ 白共 $8$ 球中任取 $2$ 球，求白球个数 $X$ 的期望。\\
+    $X\in\{0,1,2\}$，先求分布列再求 $E(X)=\sum xP(X=x)$。\\
+    \begin{align*}
+        P(X=0) &=\frac{\binom52}{\binom82}=\frac{10}{28},\quad
+        P(X=1)=\frac{\binom51\binom31}{\binom82}=\frac{15}{28},\quad
+        P(X=2)=\frac{\binom32}{\binom82}=\frac{3}{28} \\
+        E(X) &=0\cdot\frac{10}{28}+1\cdot\frac{15}{28}+2\cdot\frac{3}{28}=\frac{21}{28}=\frac34
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：微分方程 | 考点：可分离变量方程的通解 | 难度：中等
+\begin{question}
+    下列哪一项\textbf{不是}微分方程 $\dfrac{\mathrm{d}y}{\mathrm{d}x}-3x^2y=0$ 的解？ \paren[C]
+    \begin{choices}
+        \item $y=0$
+        \item $y=2e^{x^3}$
+        \item $y=e^{-x^3}$
+        \item $y=e^{x^3+5}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    找出不满足 $\dfrac{\mathrm{d}y}{\mathrm{d}x}=3x^2y$ 的函数。\\
+    分离变量求通解 $y=Ce^{x^3}$（$C\in\mathbb{R}$，$C=0$ 对应 $y=0$），再逐项判断。\\
+    \begin{align*}
+        \frac{\mathrm{d}y}{y} &=3x^2\,\mathrm{d}x \\
+        \ln|y| &=x^3+C_1 \\
+        y &=Ce^{x^3}
+    \end{align*}
+    对 $y=e^{-x^3}$ 直接代入：
+    \begin{align*}
+        \frac{\mathrm{d}y}{\mathrm{d}x}-3x^2y=-3x^2e^{-x^3}-3x^2e^{-x^3}=-6x^2e^{-x^3}\neq0
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：不定积分 | 考点：积化和差公式 | 难度：中等
+\begin{question}
+    求 $\displaystyle\int\cos 4x\cos 7x\,\mathrm{d}x$。 \paren[B]
+    \begin{choices}
+        \item $\dfrac12(\sin3x+\sin11x)+C$
+        \item $\dfrac{\sin3x}{6}+\dfrac{\sin11x}{22}+C$
+        \item $\dfrac12(\cos3x+\cos11x)+C$
+        \item $\dfrac{\cos3x}{6}+\dfrac{\cos11x}{22}+C$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $\displaystyle\int\cos 4x\cos 7x\,\mathrm{d}x$。\\
+    用积化和差 $\cos A\cos B=\dfrac12\bigl[\cos(A-B)+\cos(A+B)\bigr]$ 化为可直接积分的形式。\\
+    \begin{align*}
+        \int\cos 4x\cos 7x\,\mathrm{d}x
+        &=\frac12\int(\cos3x+\cos11x)\,\mathrm{d}x \\
+        &=\frac12\left(\frac{\sin3x}{3}+\frac{\sin11x}{11}\right)+C \\
+        &=\frac{\sin3x}{6}+\frac{\sin11x}{22}+C
+    \end{align*}
+    故选 B。
+\end{solution}
+%endregion
+
+%region 范围：数值方法 | 考点：牛顿迭代法 | 难度：基础
+\begin{question}
+    用牛顿法求 $f(x)=e^{\sin x}-2$ 的根时，若取 $x_0=0$，则经过一次迭代后 $x_1=$ \paren[C]
+    \begin{choices}
+        \item $-1.3333$
+        \item $-1$
+        \item $1$
+        \item $1.3333$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    以 $x_0=0$ 对 $f(x)=e^{\sin x}-2$ 做一次牛顿迭代，求 $x_1$。\\
+    用迭代公式 $x_1=x_0-\dfrac{f(x_0)}{f'(x_0)}$，其中 $f'(x)=\cos x\,e^{\sin x}$。\\
+    \begin{align*}
+        f(0) &=e^0-2=-1 \\
+        f'(0) &=\cos 0\cdot e^0=1 \\
+        x_1 &=0-\frac{-1}{1}=1
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：微积分·函数的极限与连续 | 考点：重要极限 $\lim\limits_{x\to0}\frac{\sin x}{x}=1$、连续的定义 | 难度：基础
+\begin{question}
+    已知函数 $f(x)=\dfrac{\sin 2x}{x}$ 在 $x=0$ 处无定义，在其余各点处连续。定义分段函数
+    \[
+        g(x)=\begin{cases}
+            f(x), & x\neq 0, \\
+            k, & x=0.
+        \end{cases}
+    \]
+    若 $g(x)$ 在 $x=0$ 处连续，则 $k=$ \paren[D]
+    \begin{choices}
+        \item $-1$
+        \item $1$
+        \item $\dfrac{1}{2}$
+        \item $2$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求使 $g(x)$ 在 $x=0$ 处连续的常数 $k$。\\
+    连续要求 $k=\displaystyle\lim_{x\to0}f(x)$，利用重要极限 $\displaystyle\lim_{u\to0}\frac{\sin u}{u}=1$ 求值。\\
+    \begin{align*}
+        k=\lim_{x\to0}\frac{\sin 2x}{x}
+        &=2\lim_{x\to0}\frac{\sin 2x}{2x} \\
+        &=2\times 1 \\
+        &=2
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion

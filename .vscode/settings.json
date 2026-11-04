@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "**/*.solution": true,
+    "**/*.log": true,
+    "**/*.out": true
+  },
+  "search.exclude": {
+    "**/*.solution": true,
+    "**/*.log": true,
+    "**/*.out": true
+  }
+}

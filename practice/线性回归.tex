@@ -1,0 +1,288 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc}
+
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+\geometry{margin=2cm}
+
+\AtBeginDocument{\zihao{4}}
+% ----------- 调整 exam -----------
+
+
+%region exam setup
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        question = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {answer},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em
+}
+\newcommand{\qscore}[1]{%
+    \unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[4em][r]{(#1\%)}}%
+}
+\newcommand{\solutionlayout}{%
+    \setlength{\abovedisplayskip}{0.6em}%
+    \setlength{\belowdisplayskip}{0.6em}%
+    \setlength{\abovedisplayshortskip}{0.35em}%
+    \setlength{\belowdisplayshortskip}{0.35em}%
+    \setlength{\jot}{0.35em}%
+}
+%endregion
+
+
+
+
+\begin{document}
+
+%region 范围：选择性必修第三册·成对数据的统计分析 | 考点：样本相关系数的计算 | 难度：基础
+\begin{question}
+    已知关于 $X$ 与 $Y$ 的 $50$ 组观测数据 $(x_i,y_i)\ (i=1,2,\cdots,50)$，其中
+    $        \displaystyle
+        \sum\limits_{i=1}^{50}x_i=123,\quad \sum\limits_{i=1}^{50}x_i^2=12321,\quad
+        \sum\limits_{i=1}^{50}y_i=243,\quad \sum\limits_{i=1}^{50}y_i^2=67854,\quad
+        \sum\limits_{i=1}^{50}x_iy_i=23436,$
+
+    求 $X$ 与 $Y$ 的样本相关系数 $r$（结果保留两位小数）。
+\end{question}
+
+\begin{solution}
+    求 $X$ 与 $Y$ 的样本相关系数 $r$。\\
+    利用相关系数公式，先求均值，再求三个离差平方和。\\
+    \begin{align*}
+        r &= \frac{\displaystyle\sum\limits_{i=1}^{n}x_iy_i-n\bar{x}\,\bar{y}}
+        {\sqrt{\left(\displaystyle\sum\limits_{i=1}^{n}x_i^2-n\bar{x}^2\right)\left(\displaystyle\sum\limits_{i=1}^{n}y_i^2-n\bar{y}^2\right)}}
+    \end{align*}
+    $n=50$，则
+    \begin{align*}
+        \bar{x} &= \frac{123}{50}=2.46, \qquad \bar{y}=\frac{243}{50}=4.86 \\
+        \sum\limits_{i=1}^{50}x_i^2-n\bar{x}^2 &= 12321-50\times 2.46^2=12018.42 \\
+        \sum\limits_{i=1}^{50}y_i^2-n\bar{y}^2 &= 67854-50\times 4.86^2=66673.02 \\
+        \sum\limits_{i=1}^{50}x_iy_i-n\bar{x}\,\bar{y} &= 23436-50\times 2.46\times 4.86=22838.22 \\
+        r &= \frac{22838.22}{\sqrt{12018.42\times 66673.02}} \\
+        &\approx \frac{22838.22}{28307.3} \\
+        &\approx 0.81
+    \end{align*}
+\end{solution}
+%endregion
+
+%region 范围：选择性必修第三册·成对数据的统计分析 | 考点：散点图、样本相关系数的计算与相关程度判断 | 难度：基础
+\begin{question}
+    为研究人体心脏的收缩压 $Y$（单位：mmHg）与年龄 $X$（单位：岁）之间的关系，某医学院随机收集了 $13$ 名男子的数据，如下表所示：
+    \begin{center}
+        \small
+        \begin{tabular}{c|*{13}{c}}
+            \hline
+            年龄 $x_i$（岁）  & 51  & 22  & 23  & 31  & 33  & 49  & 58  & 53  & 44  & 55  & 42  & 45  & 25  \\
+            \hline
+            收缩压 $y_i$（mmHg） & 130 & 141 & 124 & 126 & 117 & 135 & 143 & 138 & 132 & 143 & 133 & 155 & 147 \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \begin{questionparts}
+        \item 作收缩压与年龄的散点图；
+
+        \item 求收缩压与年龄的样本相关系数 $r$（结果保留两位小数），并判断两者的相关程度。
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 作 $13$ 名男子的年龄与收缩压的散点图。\\
+        以年龄为横坐标、收缩压为纵坐标，描出各点 $(x_i,y_i)$。
+        \begin{center}
+            \begin{tikzpicture}[x=0.2cm, y=0.1cm, >=stealth]
+                % 坐标轴
+                \draw[->] (20,110) -- (63,110) node[right] {年龄/岁};
+                \draw[->] (20,110) -- (20,164) node[above] {收缩压/mmHg};
+                % 刻度
+                \foreach \x in {20,30,40,50,60}{
+                    \draw (\x,110) -- (\x,112);
+                    \node[below] at (\x,110) {\small \x};
+                }
+                \foreach \y in {110,120,130,140,150,160}{
+                    \draw (20,\y) -- (21,\y);
+                    \node[left] at (20,\y) {\small \y};
+                }
+                % 数据点
+                \foreach \x/\y in {51/130,22/141,23/124,31/126,33/117,49/135,58/143,53/138,44/132,55/143,42/133,45/155,25/147}{
+                    \fill (\x,\y) circle (1.8pt);
+                }
+            \end{tikzpicture}
+        \end{center}
+
+        \item 求收缩压与年龄的样本相关系数 $r$，并判断相关程度。\\
+        利用 $\displaystyle r=\frac{n\sum\limits_{i=1}^{n}x_iy_i-\sum\limits_{i=1}^{n}x_i\sum\limits_{i=1}^{n}y_i}{\sqrt{\left[n\sum\limits_{i=1}^{n}x_i^2-\left(\sum\limits_{i=1}^{n}x_i\right)^2\right]\left[n\sum\limits_{i=1}^{n}y_i^2-\left(\sum\limits_{i=1}^{n}y_i\right)^2\right]}}$ 计算，再依 $|r|$ 的大小判断。\\
+        $n=13$，则
+        \begin{align*}
+            \sum\limits_{i=1}^{13}x_i &= 531, \quad \sum\limits_{i=1}^{13}y_i=1764 \\
+            \sum\limits_{i=1}^{13}x_i^2 &= 23613, \quad \sum\limits_{i=1}^{13}y_i^2=240636, \quad \sum\limits_{i=1}^{13}x_iy_i=72483 \\
+            r &= \frac{13\times 72483-531\times 1764}{\sqrt{\left(13\times 23613-531^2\right)\left(13\times 240636-1764^2\right)}} \\
+            &= \frac{5595}{\sqrt{25008\times 16572}} \\
+            &\approx \frac{5595}{20357.6} \\
+            &\approx 0.27
+        \end{align*}
+        $0<r<0.3$，故收缩压与年龄呈正相关，但线性相关程度很弱。
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：选择性必修第三册·成对数据的统计分析 | 考点：样本相关系数、回归直线方程及预测 | 难度：基础
+\begin{question}
+    某班 $16$ 名学生参加一次音乐与体育的评估，音乐分数 $X$ 的满分为 $60$ 分，体育分数 $Y$ 的满分为 $40$ 分。成绩简报如下：
+    
+      $  \sum\limits_{i=1}^{16}x_i=682,\quad \sum\limits_{i=1}^{16}x_i^2=29982,\quad
+        \sum\limits_{i=1}^{16}y_i=407,\quad \sum\limits_{i=1}^{16}y_i^2=10815,\quad
+        \sum\limits_{i=1}^{16}x_iy_i=17060.$
+    
+
+    \begin{questionparts}
+        \item 求音乐与体育分数的样本相关系数 $r$（结果保留两位小数），并判断其相关程度；
+
+        \item 求 $Y$ 对 $X$ 的回归直线方程（系数保留四位小数，常数项保留两位小数）；
+
+        \item 若小芬的音乐得分为 $55$ 分，预测她的体育得分（保留一位小数）。
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求音乐与体育分数的样本相关系数 $r$，并判断相关程度。\\
+        用 $r=\dfrac{n\sum x_iy_i-\sum x_i\sum y_i}{\sqrt{\left[n\sum x_i^2-\left(\sum x_i\right)^2\right]\left[n\sum y_i^2-\left(\sum y_i\right)^2\right]}}$ 计算，再依 $|r|$ 判断。
+        \begin{align*}
+            n\sum\limits_{i=1}^{16}x_iy_i-\sum\limits_{i=1}^{16}x_i\sum\limits_{i=1}^{16}y_i &= 16\times 17060-682\times 407=-4614 \\
+            n\sum\limits_{i=1}^{16}x_i^2-\left(\sum\limits_{i=1}^{16}x_i\right)^2 &= 16\times 29982-682^2=14588 \\
+            n\sum\limits_{i=1}^{16}y_i^2-\left(\sum\limits_{i=1}^{16}y_i\right)^2 &= 16\times 10815-407^2=7391 \\
+            r &= \frac{-4614}{\sqrt{14588\times 7391}} \\
+            &\approx \frac{-4614}{10383.6} \\
+            &\approx -0.44
+        \end{align*}
+        $0.3\le|r|<0.75$，故音乐与体育分数呈中度负相关。
+
+        \item 求 $Y$ 对 $X$ 的回归直线方程 $\hat{y}=bx+a$。\\
+        用 $b=\dfrac{n\sum x_iy_i-\sum x_i\sum y_i}{n\sum x_i^2-\left(\sum x_i\right)^2}$，$a=\bar{y}-b\bar{x}$。
+        \begin{align*}
+            \bar{x} &= \frac{682}{16}=42.625, \qquad \bar{y}=\frac{407}{16}=25.4375 \\
+            b &= \frac{-4614}{14588}\approx -0.3163 \\
+            a &= 25.4375-(-0.3163)\times 42.625\approx 38.92 \\
+            \hat{y} &= -0.3163x+38.92
+        \end{align*}
+
+        \item 当 $x=55$ 时，预测体育得分 $\hat{y}$。\\
+        将 $x=55$ 代入回归直线方程。
+        \begin{align*}
+            \hat{y} &= -0.3163\times 55+38.92 \\
+            &\approx 21.5
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：选择性必修第三册·成对数据的统计分析 | 考点：样本相关系数、回归直线方程及预测 | 难度：基础
+\begin{question}
+    下表为 $10$ 个同类企业的固定资产价值 $X$ 与总产值 $Y$ 的数据（单位：万令吉）：
+    \begin{center}
+        \small
+        \begin{tabular}{c|*{10}{c}}
+            \hline
+            企业编号 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+            \hline
+            固定资产价值 $x_i$ & 200 & 314 & 318 & 409 & 415 & 502 & 910 & 1022 & 1210 & 1225 \\
+            \hline
+            总产值 $y_i$ & 638 & 605 & 524 & 815 & 913 & 928 & 1019 & 1219 & 1516 & 1624 \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \begin{questionparts}
+        \item 求固定资产价值与总产值的样本相关系数 $r$（结果保留两位小数），并判断其相关程度；
+
+        \item 求 $Y$ 对 $X$ 的回归直线方程（系数保留四位小数，常数项保留两位小数）；
+
+        \item 若一家同类企业的固定资产价值为 $800$ 万令吉，预测其总产值（保留一位小数）。
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 求固定资产价值与总产值的样本相关系数 $r$，并判断相关程度。\\
+        先求各项和，再代入 $r=\dfrac{n\sum x_iy_i-\sum x_i\sum y_i}{\sqrt{\left[n\sum x_i^2-\left(\sum x_i\right)^2\right]\left[n\sum y_i^2-\left(\sum y_i\right)^2\right]}}$。\\
+        $n=10$，则
+        \begin{align*}
+            \sum\limits_{i=1}^{10}x_i &= 6525, \quad \sum\limits_{i=1}^{10}y_i=9801 \\
+            \sum\limits_{i=1}^{10}x_i^2 &= 5668539, \quad \sum\limits_{i=1}^{10}y_i^2=10866577, \quad \sum\limits_{i=1}^{10}x_iy_i=7659156 \\
+            n\sum\limits_{i=1}^{10}x_iy_i-\sum\limits_{i=1}^{10}x_i\sum\limits_{i=1}^{10}y_i &= 10\times 7659156-6525\times 9801=12640035 \\
+            n\sum\limits_{i=1}^{10}x_i^2-\left(\sum\limits_{i=1}^{10}x_i\right)^2 &= 10\times 5668539-6525^2=14109765 \\
+            n\sum\limits_{i=1}^{10}y_i^2-\left(\sum\limits_{i=1}^{10}y_i\right)^2 &= 10\times 10866577-9801^2=12606169 \\
+            r &= \frac{12640035}{\sqrt{14109765\times 12606169}} \\
+            &\approx \frac{12640035}{13336796} \\
+            &\approx 0.95
+        \end{align*}
+        $|r|\ge 0.75$，故固定资产价值与总产值呈高度正相关。
+
+        \item 求 $Y$ 对 $X$ 的回归直线方程 $\hat{y}=bx+a$。\\
+        用 $b=\dfrac{n\sum x_iy_i-\sum x_i\sum y_i}{n\sum x_i^2-\left(\sum x_i\right)^2}$，$a=\bar{y}-b\bar{x}$。
+        \begin{align*}
+            \bar{x} &= \frac{6525}{10}=652.5, \qquad \bar{y}=\frac{9801}{10}=980.1 \\
+            b &= \frac{12640035}{14109765}\approx 0.8958 \\
+            a &= 980.1-0.8958\times 652.5\approx 395.57 \\
+            \hat{y} &= 0.8958x+395.57
+        \end{align*}
+
+        \item 当 $x=800$ 时，预测总产值 $\hat{y}$。\\
+        将 $x=800$ 代入回归直线方程。
+        \begin{align*}
+            \hat{y} &= 0.8958\times 800+395.57 \\
+            &\approx 1112.2
+        \end{align*}
+        即预测总产值约为 $1112.2$ 万令吉。
+    \end{enumerate}
+\end{solution}
+%endregion
+
+\end{document}

@@ -1,0 +1,1 @@
+\par \noindent 11.【解析】求付 $50$ 元后应找回的钱数。 \\ 找回的钱数等于付款数减去所花的总钱数。 \begin {align*} \text {所花总钱数} &= 3a+2b \\ \text {找回} &= 50-(3a+2b) \\ &= 50-3a-2b \end {align*} 故选 D。\par \vspace *{1ex}

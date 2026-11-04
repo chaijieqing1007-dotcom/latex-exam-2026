@@ -1,0 +1,767 @@
+% !TeX program = xelatex
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{amsmath,array,graphicx,booktabs,multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{setspace}
+\setCJKmainfont{Noto Serif CJK SC}
+\geometry{margin=2.2cm,top=2.0cm,bottom=2.2cm}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{-\thepage{}-}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.2em}
+\setlength{\headheight}{14pt}
+\linespread{1.12}
+\usepackage{setspace}
+\usepackage{eso-pic}
+\usetikzlibrary{calc}
+
+%region exam setup
+
+\examsetup{
+    page = {
+    size = a4paper,           % 设定纸张大小 [4]
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 [3]
+  },
+    choices = {
+    label-pos = top-left,
+    column-sep = 1em,
+    label-pos = auto,
+    label-sep = 0.5em,
+    max-columns = 4
+    },
+  question = {
+    top-sep    = 1em, % 调整题目上方的垂直距离（默认值为 .5em plus .5em minus .2em）
+    bottom-sep = 1em  % 调整题目下方的垂直距离（默认值为 .5em plus .5em minus .2em）
+  },
+    paren = {
+    show-paren = false  % 设置为 false 则不显示括号 [3, 4]
+  },
+    choices = {
+    label = \textbf{\Alph*}
+  }, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {参考答案},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  }
+}
+
+%endregion
+
+
+%region 卷面变量设置
+    % ==========================
+    % 兼容从当前文件夹或工作区根目录进行编译
+    \input{config.tex}
+
+
+    \newcommand{\optrow}[4]{%
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llll}
+    A~#1 & B~#2 & C~#3 & D~#4
+    \end{tabular*}%
+    }
+    \newcommand{\qitem}[5]{\item #1\par\optrow{#2}{#3}{#4}{#5}}
+%endregion
+    \begin{document}
+
+
+%region 封面
+    \AddToShipoutPictureFG*{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[
+            anchor=north west,
+            fill=black,
+            minimum width=22pt,
+            minimum height=90pt,
+            inner sep=0pt
+        ] (sidebar) at ([xshift=3em,yshift=-3em]current page.north west) {};
+        \node[
+            rotate=270,
+            text=white,
+            font=\bfseries\footnotesize
+        ] at (sidebar.center) {\sidebartext};
+    \end{tikzpicture}%
+    \put(24,18){\makebox(0,0)[lb]{\small 版权所有}}%
+    \put(520,18){\makebox(0,0)[lb]{\bfseries\small 【机密】}}%
+    }
+
+    \thispagestyle{fancy}
+
+    \begin{minipage}[t]{0.22\linewidth}
+    \vspace{0pt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.8\linewidth}
+        \centering
+        {\zihao{2}\bfseries \examtitle\par}
+        \vspace{1.3em}
+        {\zihao{3}\bfseries \examlevel\par}
+        \vspace{1.3em}
+        {\zihao{2}\bfseries \examsubject\par}
+        \vspace{0.2em}
+        {\large (\papercode)\par}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.18\linewidth}
+    \vspace{0pt}
+    \end{minipage}
+
+    \vspace{3.0em}
+
+    \begin{center}
+    \begin{tabular}{l}
+        \multicolumn{1}{c}{\papername\hspace{2em}\papertype}\\[-0.1em]
+        \midrule
+        日期：\examdate\\[-0.1em]
+        时间：\examtime\\[-0.1em]
+        \multicolumn{1}{c}{(\examduration)}\\
+        \midrule
+    \end{tabular}
+    \end{center}
+
+    \vspace{2.0em}
+
+    {\zihao{4}\bfseries \underline{考生须知}\par}
+    \vspace{0.8em}
+
+    \begin{enumerate}[label=（\chinese*）,leftmargin=3em,itemsep=0.65em]
+    \item 本科试卷共分两份：\\
+    \hspace*{2em}试卷一：选择题（\paperonepercentage）；\\
+    \hspace*{2em}试卷二：作答题（\papertwopercentage）。
+
+    \item 考生须于第一阶段规定的60分钟内完成试卷一。第二阶段规定的2小时内作答试卷二。
+
+    \item 试卷一选择题15题全答。选出正确的答案，然后用\textbf{5B铅笔将“O”答案纸}（电脑卡）上相应的字母所在的小方格涂黑。
+
+    \item 可使用电子计算机进行演算。
+
+    \item 试卷一选择题共印\questionpages。
+    \end{enumerate}
+
+    \vspace{2.0em}
+
+    \begin{center}
+    {% 外框粗细及外、内框之间的距离
+    \setlength{\fboxrule}{3pt}%
+    \setlength{\fboxsep}{1.5pt}%
+    \fbox{%
+        {% 内框粗细及文字与内框之间的距离
+        \setlength{\fboxrule}{0.5pt}%
+        \setlength{\fboxsep}{6pt}%
+        \fbox{\rule{0pt}{1.1em}\hspace{1.2em}{\zihao{4}\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.2em}}%
+        }%
+    }%
+    }
+    \end{center}
+
+    \vfill
+
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
+    考生姓名：\underline{\hspace{4.2cm}} & 考生编号：\underline{\hspace{4.0cm}}
+    \end{tabular*}
+
+%endregion
+
+\newpage
+
+
+
+
+
+\IfFileExists{questions_1-15-1.tex}{%
+    \input{questions_1-15-1.tex}%
+}{%
+    \input{2026统考/questions_1-15-1.tex}%
+}%
+\iffalse
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：多项式整除与待定系数法 | 难度：基础
+\begin{question}
+    已知多项式 $x^{2}-x$ 整除 $x^{4}-3x^{3}+3x^{2}-mx$，求 $m$ 的值。\paren[A]
+    \begin{choices}
+        \item $1$
+        \item $2$
+        \item $3$
+        \item $4$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $x^{2}-x$ 整除 $x^{4}-3x^{3}+3x^{2}-mx$，求 $m$。 \\
+    设商式为 $x^{2}+ax+b$，用待定系数法比较系数。
+    \begin{align*}
+        x^{4}-3x^{3}+3x^{2}-mx &= (x^{2}-x)(x^{2}+ax+b) \\
+        &= x^{4}+(a-1)x^{3}+(b-a)x^{2}-bx
+    \end{align*}
+    比较系数：
+    \begin{align*}
+        a-1 &= -3 \ \Rightarrow \ a=-2 \\
+        b-a &= 3 \ \Rightarrow \ b=1 \\
+        m &= b = 1
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+% %region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：一元二次方程根与系数关系（韦达定理） | 难度：基础
+% \begin{question}
+%     设 $\alpha$ 及 $\beta$ 为方程 $2x^{2}+kx+1=0$ 的两个根，试用 $\alpha,\beta$ 表示 $k$。\paren[A]
+%     \begin{choices}
+%         \item $-2(\alpha+\beta)$
+%         \item $-\alpha-\beta$
+%         \item $2(\alpha+\beta)$
+%         \item $\alpha+\beta$
+%     \end{choices}
+% \end{question}
+
+% \begin{solution}
+%     已知 $\alpha,\beta$ 为 $2x^{2}+kx+1=0$ 的两根，求 $k$。 \\
+%     由韦达定理，两根之和等于 $-\dfrac{k}{2}$。
+%     \begin{align*}
+%         \alpha+\beta &= -\frac{k}{2} \\
+%         k &= -2(\alpha+\beta)
+%     \end{align*}
+%     故选 A。
+% \end{solution}
+% %endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：等差数列通项公式与求和公式 | 难度：中等
+\begin{question}
+    一等差数列的首四项之和为 $\dfrac{17}{3}$，第十项为 $\dfrac{31}{6}$，求该数列的公差。\paren[D]
+    \begin{choices}
+        \item $\dfrac{7}{6}$
+        \item $\dfrac{5}{3}$
+        \item $\dfrac{2}{3}$
+        \item $\dfrac{1}{2}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知首四项和为 $\dfrac{17}{3}$，第十项为 $\dfrac{31}{6}$，求公差 $d$。 \\
+    设首项为 $a_{1}$，公差为 $d$，分别列出两个条件的方程联立求解。
+    \begin{align*}
+        4a_{1}+6d &= \frac{17}{3} \\
+        a_{1}+9d &= \frac{31}{6}
+    \end{align*}
+    由第一式：
+    \[
+        a_{1} = \frac{17}{12}-\frac{3d}{2}
+    \]
+    代入第二式：
+    \begin{align*}
+        \frac{17}{12}-\frac{3d}{2}+9d &= \frac{31}{6} \\
+        \frac{15d}{2} &= \frac{31}{6}-\frac{17}{12} = \frac{15}{4} \\
+        d &= \frac{1}{2}
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：数列求和公式（平方和） | 难度：中等
+\begin{question}
+    求 $\displaystyle\sum_{k=1}^{50}(3k+1)^{2}$ 的值。\paren[D]
+    \begin{choices}
+        \item $74000$
+        \item $202775$
+        \item $206550$
+        \item $394025$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $\displaystyle\sum_{k=1}^{50}(3k+1)^{2}$。 \\
+    展开后逐项利用 $\sum k^{2}$、$\sum k$ 及 $\sum 1$ 的公式求和。
+    \begin{align*}
+        \sum_{k=1}^{50}(3k+1)^{2} &= \sum_{k=1}^{50}\left(9k^{2}+6k+1\right) \\
+        &= 9\sum_{k=1}^{50}k^{2}+6\sum_{k=1}^{50}k+\sum_{k=1}^{50}1
+    \end{align*}
+    代入 $\displaystyle\sum_{k=1}^{50}k^{2}=\frac{50\times51\times101}{6}=42925$，$\displaystyle\sum_{k=1}^{50}k=\frac{50\times51}{2}=1275$：
+    \begin{align*}
+        \sum_{k=1}^{50}(3k+1)^{2} &= 9(42925)+6(1275)+50 \\
+        &= 386325+7650+50 \\
+        &= 394025
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：反函数与不动点方程 | 难度：中等
+\begin{question}
+    已知函数 $g(x)=\dfrac{1}{x}+3$，$x\neq0$，求方程 $g^{-1}(x)=x$ 的解。\paren[D]
+    \begin{choices}
+        \item $1$
+        \item $0$ 或 $1$
+        \item $\dfrac{3\pm\sqrt{5}}{2}$
+        \item $\dfrac{3\pm\sqrt{13}}{2}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求满足 $g^{-1}(x)=x$ 的 $x$。 \\
+    互为反函数的图象关于直线 $y=x$ 对称，故 $g^{-1}(x)=x$ 的解等价于 $g(x)=x$ 的解。
+    \begin{align*}
+        \frac{1}{x}+3 &= x \\
+        1+3x &= x^{2} \\
+        x^{2}-3x-1 &= 0
+    \end{align*}
+    由求根公式：
+    \[
+        x = \frac{3\pm\sqrt{13}}{2}
+    \]
+    故选 D。
+\end{solution}
+%endregion
+
+% %region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：逆矩阵、伴随矩阵与余子式 | 难度：困难
+% \begin{question}
+%     已知矩阵 $A=\begin{pmatrix} 1 & 2 & a \\ 2 & b & 3 \\ c & 0 & 8 \end{pmatrix}$ 的逆矩阵为 $A^{-1}=\begin{pmatrix} -40 & u & x \\ 13 & v & y \\ 5 & w & z \end{pmatrix}$，求 $b$ 的值。\paren[D]
+%     \begin{choices}
+%         \item $-5$
+%         \item $-1$
+%         \item $1$
+%         \item $5$
+%     \end{choices}
+% \end{question}
+
+% \begin{solution}
+%     已知 $A^{-1}$ 的第一列，求 $b$。 \\
+%     利用 $A^{-1}=\dfrac{1}{\det A}\operatorname{adj}A$，第一列元素对应第一行的三个余子式除以行列式。
+%     \begin{align*}
+%         C_{11} &= \begin{vmatrix} b & 3 \\ 0 & 8 \end{vmatrix} = 8b \\
+%         C_{12} &= -\begin{vmatrix} 2 & 3 \\ c & 8 \end{vmatrix} = 3c-16 \\
+%         C_{13} &= \begin{vmatrix} 2 & b \\ c & 0 \end{vmatrix} = -bc
+%     \end{align*}
+%     由 $A^{-1}$ 第一列条件：
+%     \begin{align*}
+%         \frac{C_{11}}{\det A} &= -40 \ \Rightarrow \ b=-5\det A \\
+%         \frac{C_{12}}{\det A} &= 13 \ \Rightarrow \ c=\frac{13\det A+16}{3} \\
+%         \frac{C_{13}}{\det A} &= 5 \ \Rightarrow \ bc=-5\det A
+%     \end{align*}
+%     代入 $b=-5\det A$ 至 $bc=-5\det A$，得 $c=1$；代回第二式求得：
+%     \begin{align*}
+%         13\det A+16 &= 3 \\
+%         \det A &= -1
+%     \end{align*}
+%     故 $b=-5\det A=-5\times(-1)=5$。
+%     故选 D。
+% \end{solution}
+% %endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：对数换底公式 | 难度：中等
+\begin{question}
+    若 $\log_{7}a=\dfrac{1}{\log_{121}49}$，则 $a$ 满足以下哪个不等式？\paren[B]
+    \begin{choices}
+        \item $0<a<10$
+        \item $10<a<20$
+        \item $20<a<100$
+        \item $100<a<1000$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $\log_{7}a=\dfrac{1}{\log_{121}49}$，求 $a$ 所在的范围。 \\
+    先化简右式，再用换底公式求出 $a$ 的值。
+    \begin{align*}
+        \log_{121}49 &= \frac{\ln 7^{2}}{\ln 11^{2}} = \frac{\ln 7}{\ln 11} = \log_{11}7
+    \end{align*}
+    因此：
+    \begin{align*}
+        \log_{7}a &= \frac{1}{\log_{11}7} = \log_{7}11 \\
+        a &= 11
+    \end{align*}
+    由于 $10<11<20$，故选 B。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：一元二次方程判别式 | 难度：基础
+\begin{question}
+    已知方程式 $x^{2}-(2k+2)x+k^{2}+1=0$ 有两个相异的实根，求 $k$ 的取值范围。\paren[A]
+    \begin{choices}
+        \item $k>0$
+        \item $k\geq0$
+        \item $k<0$
+        \item $k>-\dfrac{1}{2}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求使方程有两个相异实根的 $k$ 的取值范围。 \\
+    两根相异等价于判别式大于零。
+    \begin{align*}
+        \Delta &= (2k+2)^{2}-4(k^{2}+1) \\
+        &= 4k^{2}+8k+4-4k^{2}-4 \\
+        &= 8k
+    \end{align*}
+    由 $\Delta>0$：
+    \[
+        8k>0 \ \Rightarrow \ k>0
+    \]
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：诱导公式与同角三角函数关系 | 难度：中等
+\begin{question}
+    若 $a>0$，$b>0$ 且 $\sin20^{\circ}=\dfrac{a}{b}$，则 $\tan160^{\circ}=?$\paren[D]
+    \begin{choices}
+        \item $\dfrac{a}{\sqrt{a^{2}+b^{2}}}$
+        \item $-\dfrac{b}{\sqrt{a^{2}+b^{2}}}$
+        \item $-\dfrac{b}{\sqrt{a^{2}-b^{2}}}$
+        \item $-\dfrac{a}{\sqrt{b^{2}-a^{2}}}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $\sin20^{\circ}=\dfrac{a}{b}$，求 $\tan160^{\circ}$。 \\
+    利用诱导公式 $\tan160^{\circ}=-\tan20^{\circ}$，再由同角关系求出 $\cos20^{\circ}$。
+    \begin{align*}
+        \cos20^{\circ} &= \sqrt{1-\sin^{2}20^{\circ}} = \sqrt{1-\frac{a^{2}}{b^{2}}} = \frac{\sqrt{b^{2}-a^{2}}}{b}
+    \end{align*}
+    因此：
+    \begin{align*}
+        \tan20^{\circ} &= \frac{\sin20^{\circ}}{\cos20^{\circ}} = \frac{a}{\sqrt{b^{2}-a^{2}}} \\
+        \tan160^{\circ} &= -\tan20^{\circ} = -\frac{a}{\sqrt{b^{2}-a^{2}}}
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：余弦定理与三角形面积公式 | 难度：中等
+\begin{question}
+    在 $\triangle ABC$ 中，$\angle B$ 是钝角，$AB=6$，$BC=8$，$\triangle ABC$ 的面积为 $12\sqrt{3}$，求 $AC$ 的长。\paren[C]
+    \begin{choices}
+        \item $4.11$
+        \item $7.21$
+        \item $12.17$
+        \item $13.53$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知 $AB=6$，$BC=8$，$\triangle ABC$ 面积为 $12\sqrt{3}$，$\angle B$ 为钝角，求 $AC$。 \\
+    先由面积公式求 $\sin B$，再由钝角条件确定 $\cos B$，最后用余弦定理求 $AC$。
+    \begin{align*}
+        \frac{1}{2}\times AB\times BC\times\sin B &= 12\sqrt{3} \\
+        24\sin B &= 12\sqrt{3} \\
+        \sin B &= \frac{\sqrt{3}}{2}
+    \end{align*}
+    由 $\angle B$ 为钝角，取 $B=120^{\circ}$，故 $\cos B=-\dfrac{1}{2}$。
+    \begin{align*}
+        AC^{2} &= AB^{2}+BC^{2}-2\times AB\times BC\times\cos B \\
+        &= 36+64-2(6)(8)\left(-\frac{1}{2}\right) \\
+        &= 148 \\
+        AC &= \sqrt{148} \approx 12.17
+    \end{align*}
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：三角方程与定义域限制 | 难度：中等
+\begin{question}
+    求方程式 $\tan x=2\sin x$ 在区间 $(0,2\pi)$ 内的解的个数。\paren[B]
+    \begin{choices}
+        \item $4$
+        \item $3$
+        \item $2$
+        \item $1$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $\tan x=2\sin x$ 在 $(0,2\pi)$ 内解的个数。 \\
+    化为关于 $\sin x$ 的因式方程，注意 $\cos x\neq0$ 的定义域限制。
+    \begin{align*}
+        \frac{\sin x}{\cos x} &= 2\sin x \\
+        \sin x\left(\frac{1}{\cos x}-2\right) &= 0
+    \end{align*}
+    情况一：$\sin x=0$，在 $(0,2\pi)$ 内得 $x=\pi$（且 $\cos\pi\neq0$，合法）。
+
+    情况二：$\cos x=\dfrac{1}{2}$，在 $(0,2\pi)$ 内得 $x=\dfrac{\pi}{3}$ 或 $x=\dfrac{5\pi}{3}$。
+
+    综合两种情况，共有 $3$ 个解。
+    故选 B。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：圆的标准式与直线相切条件 | 难度：中等
+\begin{question}
+    若直线 $3x+4y+k=0$ 与圆 $x^{2}+y^{2}+4x-6y-12=0$ 相切，求 $k$ 的值。\paren[C]
+    \begin{choices}
+        \item $-31$ 或 $-19$
+        \item $31$ 或 $-19$
+        \item $-31$ 或 $19$
+        \item $31$ 或 $19$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知直线 $3x+4y+k=0$ 与已知圆相切，求 $k$。 \\
+    先将圆化为标准式求出圆心与半径，再令圆心到直线的距离等于半径。
+    \begin{align*}
+        x^{2}+4x+y^{2}-6y &= 12 \\
+        (x+2)^{2}+(y-3)^{2} &= 25
+    \end{align*}
+    圆心为 $(-2,3)$，半径为 $5$。由相切条件：
+    \begin{align*}
+        \frac{|3(-2)+4(3)+k|}{5} &= 5 \\
+        |k+6| &= 25
+    \end{align*}
+    解得：
+    \[
+        k=19 \ \text{或} \ k=-31
+    \]
+    故选 C。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：三角形面积公式（坐标法） | 难度：中等
+\begin{question}
+    已知 $A(k+1,6)$，$B(3,2)$ 及 $C(-k,0)$ 是 $\triangle ABC$ 的顶点。若 $\triangle ABC$ 的面积是 $10$ 平方单位，求 $k$ 的值。\paren[D]
+    \begin{choices}[columns=2,linesep=0pt]
+        \item $k=2$
+        \item $k=6$
+        \item $k=6$ 或 $k=-\dfrac{2}{3}$
+        \item $k=2$ 或 $k=-18$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    已知三顶点坐标，面积为 $10$，求 $k$。 \\
+    代入三角形面积的坐标公式，化简后取绝对值等于 $10$。
+    \begin{align*}
+        10 &= \frac{1}{2}\left|(k+1)(2-0)+3(0-6)+(-k)(6-2)\right| \\
+        20 &= \left|2k+2-18-4k\right| \\
+        20 &= \left|-2k-16\right| \\
+        10 &= |k+8|
+    \end{align*}
+    解得：
+    \[
+        k=2 \ \text{或} \ k=-18
+    \]
+    故选 D。
+\end{solution}
+%endregion
+
+% %region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：中位数与平均数 | 难度：基础
+% \begin{question}
+%     下列为一组顺序排列的数据：$3,3,4,7,x,12,14,18$。若数据的中位数与平均数相等，求 $x$ 的值。\paren[A]
+%     \begin{choices}
+%         \item $11$
+%         \item $10$
+%         \item $9$
+%         \item $8$
+%     \end{choices}
+% \end{question}
+
+% \begin{solution}
+%     已知 $8$ 个按序排列的数据，中位数等于平均数，求 $x$。 \\
+%     中位数为中间两数之平均，平均数为总和除以 $8$，两者相等列方程求解。
+%     \begin{align*}
+%         \text{中位数} &= \frac{7+x}{2}, \qquad \text{平均数} = \frac{61+x}{8}
+%     \end{align*}
+%     \begin{align*}
+%         \frac{7+x}{2} &= \frac{61+x}{8} \\
+%         4(7+x) &= 61+x \\
+%         28+4x &= 61+x \\
+%         3x &= 33 \\
+%         x &= 11
+%     \end{align*}
+%     故选 A。
+% \end{solution}
+% %endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：超几何分布（组合概率） | 难度：中等
+\begin{question}
+    一袋中盛有 $3$ 粒白球、$4$ 粒红球与 $5$ 粒黑球。若从袋中任意抽出三球，求三球中恰有二球是白球的概率。\paren[D]
+    \begin{choices}
+        \item $\dfrac{3}{64}$
+        \item $\dfrac{9}{64}$
+        \item $\dfrac{9}{220}$
+        \item $\dfrac{27}{220}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    从 $12$ 粒球中抽 $3$ 粒，求恰有 $2$ 粒白球的概率。 \\
+    利用超几何分布，分子为从白球中选 $2$ 粒、其余球中选 $1$ 粒的组合数。
+    \begin{align*}
+        P &= \frac{\dbinom{3}{2}\dbinom{9}{1}}{\dbinom{12}{3}} \\
+        &= \frac{3\times9}{220} \\
+        &= \frac{27}{220}
+    \end{align*}
+    故选 D。
+\end{solution}
+%endregion
+
+% %region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：含重复元素的排列（相邻元素不相邻问题） | 难度：困难
+% \begin{question}
+%     将 "coefficient" 一字的字母全取来排列，若两个 "f" 不能相邻，有多少种排法？\paren[D]
+%     \begin{choices}
+%         \item $36288000$
+%         \item $4536000$
+%         \item $4082400$
+%         \item $2041200$
+%     \end{choices}
+% \end{question}
+
+% \begin{solution}
+%     求 "coefficient" 全部字母排列中两个 "f" 不相邻的排法数。 \\
+%     先求全部排列数，再减去两个 "f" 相邻的排列数。
+%     \begin{align*}
+%         \text{总排列数} &= \frac{11!}{2!\,2!\,2!\,2!} = 2494800
+%     \end{align*}
+%     （字母 c, e, f, i 各重复 $2$ 次，共 $11$ 个字母。）
+%     将两个 "f" 捆绑为一个整体，与其余 $9$ 个字母共 $10$ 个单位排列：
+%     \begin{align*}
+%         \text{相邻排列数} &= \frac{10!}{2!\,2!\,2!} = 453600
+%     \end{align*}
+%     （此时 c, e, i 各重复 $2$ 次。）
+%     \begin{align*}
+%         \text{不相邻排列数} &= 2494800-453600 = 2041200
+%     \end{align*}
+%     故选 D。
+% \end{solution}
+% %endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：高阶导数的规律推导 | 难度：中等
+\begin{question}
+    已知 $f(x)=\dfrac{1}{x}$，求 $f^{(10)}(x)$。\paren[A]
+    \begin{choices}
+        \item $\dfrac{10!}{x^{11}}$
+        \item $-\dfrac{10!}{x^{10}}$
+        \item $\dfrac{10!}{x^{10}}$
+        \item $\dfrac{11!}{x^{11}}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $f(x)=x^{-1}$ 的第十阶导数。 \\
+    逐阶求导找出规律 $f^{(n)}(x)=(-1)^{n}n!\,x^{-(n+1)}$。
+    \begin{align*}
+        f'(x) &= -x^{-2} \\
+        f''(x) &= 2x^{-3} \\
+        f'''(x) &= -6x^{-4} \\
+        f^{(n)}(x) &= (-1)^{n}n!\,x^{-(n+1)}
+    \end{align*}
+    代入 $n=10$：
+    \[
+        f^{(10)}(x) = (-1)^{10}\cdot10!\cdot x^{-11} = \frac{10!}{x^{11}}
+    \]
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：隐函数微分与切线斜率 | 难度：中等
+\begin{question}
+    求曲线 $x^{3}-xy+y^{2}=3$ 在点 $(1,2)$ 处的切线斜率。\paren[A]
+    \begin{choices}
+        \item $-\dfrac{1}{3}$
+        \item $-\dfrac{5}{3}$
+        \item $-\dfrac{13}{5}$
+        \item $-1$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求曲线在 $(1,2)$ 处的切线斜率。 \\
+    对方程两边关于 $x$ 隐函数求导，再代入该点求 $\dfrac{dy}{dx}$。
+    \begin{align*}
+        3x^{2}-\left(y+x\frac{dy}{dx}\right)+2y\frac{dy}{dx} &= 0 \\
+        (2y-x)\frac{dy}{dx} &= y-3x^{2}
+    \end{align*}
+    代入 $x=1,\ y=2$：
+    \begin{align*}
+        (4-1)\frac{dy}{dx} &= 2-3 \\
+        \frac{dy}{dx} &= -\frac{1}{3}
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+%region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：三角函数定积分（降幂公式） | 难度：中等
+\begin{question}
+    求 $\displaystyle\int_{0}^{\frac{\pi}{4}}\sin^{2}x\,dx$。\paren[A]
+    \begin{choices}
+        \item $\dfrac{\pi}{8}-\dfrac{1}{4}$
+        \item $\dfrac{\pi}{8}$
+        \item $\dfrac{\pi}{4}-\dfrac{1}{2}$
+        \item $\dfrac{\pi}{4}$
+    \end{choices}
+\end{question}
+
+\begin{solution}
+    求 $\displaystyle\int_{0}^{\frac{\pi}{4}}\sin^{2}x\,dx$。 \\
+    用降幂公式 $\sin^{2}x=\dfrac{1-\cos2x}{2}$ 化简后积分。
+    \begin{align*}
+        \int_{0}^{\frac{\pi}{4}}\sin^{2}x\,dx &= \int_{0}^{\frac{\pi}{4}}\frac{1-\cos2x}{2}\,dx \\
+        &= \left[\frac{x}{2}-\frac{\sin2x}{4}\right]_{0}^{\frac{\pi}{4}}
+    \end{align*}
+    代入上下限：
+    \begin{align*}
+        &= \left(\frac{\pi}{8}-\frac{1}{4}\right)-(0-0) \\
+        &= \frac{\pi}{8}-\frac{1}{4}
+    \end{align*}
+    故选 A。
+\end{solution}
+%endregion
+
+% %region 范围：2026年度金宝培元独中毕业考·高中组·高级数学试卷一 | 考点：自反函数（involution）的积分 | 难度：困难
+% \begin{question}
+%     已知 $f(x)=\dfrac{x}{\sqrt{2x^{2}-1}}$，$x\geq\dfrac{1}{\sqrt2}$。求 $\displaystyle\int_{1}^{5}2f^{-1}(x)\,dx$。\paren[B]
+%     \begin{choices}
+%         \item $3$
+%         \item $6$
+%         \item $7$
+%         \item $\dfrac{8}{7}$
+%     \end{choices}
+% \end{question}
+
+% \begin{solution}
+%     求 $\displaystyle\int_{1}^{5}2f^{-1}(x)\,dx$，其中 $f(x)=\dfrac{x}{\sqrt{2x^{2}-1}}$。 \\
+%     先证 $f$ 为自反函数（$f^{-1}=f$），再直接积分。
+%     设 $y=\dfrac{x}{\sqrt{2x^{2}-1}}$，解出 $x$：
+%     \begin{align*}
+%         y^{2}(2x^{2}-1) &= x^{2} \\
+%         x^{2}(2y^{2}-1) &= y^{2} \\
+%         x &= \frac{y}{\sqrt{2y^{2}-1}}
+%     \end{align*}
+%     可见反函数与原函数同式，即 $f^{-1}(x)=f(x)=\dfrac{x}{\sqrt{2x^{2}-1}}$。于是：
+%     \begin{align*}
+%         \int_{1}^{5}2f^{-1}(x)\,dx &= \int_{1}^{5}\frac{2x}{\sqrt{2x^{2}-1}}\,dx \\
+%         &= \Big[\sqrt{2x^{2}-1}\Big]_{1}^{5} \\
+%         &= \sqrt{49}-\sqrt{1} \\
+%         &= 7-1=6
+%     \end{align*}
+%     故选 B。
+% \end{solution}
+% %endregion
+
+\fi
+\newpage
+\vfill % 与上方内容保持距离
+
+\noindent
+\newlength{\sigwidth}
+\settowidth{\sigwidth}{（\hspace{4em}师）}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l l}
+    出题： & 审题： & 审核： \\[4em]
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} &
+    \rule{\sigwidth}{0.5pt} \\
+    （\hspace{0em} \setterteacher ） &
+    （\hspace{0em} \reviewteacher ）  &
+    （\hspace{0em} \auditteacher ） \\
+\end{tabular*}
+
+\clearpage
+\thispagestyle{empty} % 取消这一页的页眉页脚（页码）
+~
+\clearpage
+\end{document}

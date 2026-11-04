@@ -1,0 +1,361 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc}
+
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+\geometry{margin=2cm}
+
+\AtBeginDocument{\zihao{4}}
+% ----------- 调整 exam -----------
+
+
+%region exam setup
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        question = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {answer},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em
+}
+\newcommand{\qscore}[1]{%
+    \unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[4em][r]{(#1\%)}}%
+}
+\newcommand{\solutionlayout}{%
+    \setlength{\abovedisplayskip}{0.6em}%
+    \setlength{\belowdisplayskip}{0.6em}%
+    \setlength{\abovedisplayshortskip}{0.35em}%
+    \setlength{\belowdisplayshortskip}{0.35em}%
+    \setlength{\jot}{0.35em}%
+}
+%endregion
+
+
+\begin{document}
+
+% 三角学总复习 · 作答题 6 题
+% 考点覆盖：正弦定理、余弦定理、三角形面积公式、方位角测量
+% 所需 TikZ 库：\usetikzlibrary{angles,quotes,calc,decorations.markings}
+
+%region 范围：统考初中数学 · 三角学总复习 | 考点：正弦定理、三角形面积公式 | 难度：基础
+\begin{question}[points = 6]
+    如图，在 $\triangle ABC$ 中，$\angle A = 45^\circ$，$\angle B = 60^\circ$，边 $BC = 10$ cm。
+
+    \begin{center}
+        \begin{tikzpicture}
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (6.21,0);
+            \coordinate (C) at (3.94,3.94);
+            \draw (A)--(B)--(C)--cycle;
+            \pic[draw,"$45^\circ$",angle radius=7mm,angle eccentricity=1.4]{angle=B--A--C};
+            \pic[draw,"$60^\circ$",angle radius=7mm,angle eccentricity=1.4]{angle=C--B--A};
+            \draw ($(B)!0.5!(C)$) node[right,xshift=2pt]{$10\ \mathrm{cm}$};
+            \fill (A) circle (1.5pt) node[below left]{$A$};
+            \fill (B) circle (1.5pt) node[below right]{$B$};
+            \fill (C) circle (1.5pt) node[above]{$C$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{questionparts}
+        \item 求边长 $AC$，答案以最简根式表示。 \qscore{3}
+
+        \item 求 $\triangle ABC$ 的面积，答案准确至小数点后两位。 \qscore{3}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 已知 $\angle A = 45^\circ$、$\angle B = 60^\circ$、$a = 10$ cm，求 $b = AC$。 \\
+        已知两角与其中一角的对边，用正弦定理。 \\
+        \[
+            \frac{b}{\sin 60^\circ} = \frac{10}{\sin 45^\circ}
+        \]
+        \hfill (1分) \\
+        \begin{align*}
+            b &= \frac{10\sin 60^\circ}{\sin 45^\circ} \\
+              &= \frac{10\sqrt{3}}{\sqrt{2}} \\
+              &= 5\sqrt{6} \approx 12.25 \ \mathrm{cm}
+        \end{align*}
+        \hfill (2分)
+
+        \item 求 $\triangle ABC$ 的面积。 \\
+        先求夹角 $\angle C$，再用面积公式 $\dfrac{1}{2}ab\sin C$。 \\
+        \[
+            \angle C = 180^\circ - 45^\circ - 60^\circ = 75^\circ
+        \]
+        \hfill (1分) \\
+        \[
+            L = \frac{1}{2}\times 10 \times 5\sqrt{6}\times \sin 75^\circ
+        \]
+        \hfill (1分) \\
+        \begin{align*}
+            L &= \frac{25\sqrt{6}\,(\sqrt{6}+\sqrt{2})}{4} \\
+              &= \frac{150+50\sqrt{3}}{4} \\
+              &\approx 59.15 \ \mathrm{cm}^2
+        \end{align*}
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：统考初中数学 · 三角学总复习 | 考点：余弦定理（求边、求角） | 难度：中等
+\begin{question}[points = 7]
+    如图，在 $\triangle ABC$ 中，$AB = 5$ cm，$AC = 7$ cm，$\angle A = 60^\circ$。
+
+    \begin{center}
+        \begin{tikzpicture}
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (3,0);
+            \coordinate (C) at (2.1,3.64);
+            \draw (A)--(B)--(C)--cycle;
+            \pic[draw,"$60^\circ$",angle radius=7mm,angle eccentricity=1.4]{angle=B--A--C};
+            \draw ($(A)!0.5!(B)$) node[below,yshift=-2pt]{$5\ \mathrm{cm}$};
+            \draw ($(A)!0.5!(C)$) node[above left,xshift=-2pt]{$7\ \mathrm{cm}$};
+            \fill (A) circle (1.5pt) node[below left]{$A$};
+            \fill (B) circle (1.5pt) node[below right]{$B$};
+            \fill (C) circle (1.5pt) node[above right]{$C$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{questionparts}
+        \item 求边长 $BC$，答案以最简根式表示。 \qscore{3}
+
+        \item 求 $\angle B$，答案准确至 $0.1^\circ$。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 已知 $b = 7$、$c = 5$、$\angle A = 60^\circ$，求 $a = BC$。 \\
+        已知两边及其夹角，用余弦定理。 \\
+        \begin{align*}
+            a^2 &= b^2 + c^2 - 2bc\cos A \\
+                &= 7^2 + 5^2 - 2(7)(5)\cos 60^\circ
+        \end{align*}
+        \hfill (1分) \\
+        \[
+            a^2 = 74 - 35 = 39
+        \]
+        \hfill (1分) \\
+        \[
+            a = \sqrt{39} \approx 6.245 \ \mathrm{cm}
+        \]
+        \hfill (1分)
+
+        \item 求 $\angle B$。 \\
+        三边已知，用余弦定理求角，可避免正弦定理的二解问题。 \\
+        \[
+            \cos B = \frac{a^2 + c^2 - b^2}{2ac}
+        \]
+        \hfill (1分) \\
+        \[
+            \cos B = \frac{39 + 25 - 49}{2\sqrt{39}\times 5} = \frac{15}{10\sqrt{39}}
+        \]
+        \hfill (1分) \\
+        \[
+            \cos B = \frac{\sqrt{39}}{26} \approx 0.2402
+        \]
+        \hfill (1分) \\
+        \[
+            \angle B \approx 76.1^\circ
+        \]
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+%region 范围：统考初中数学 · 三角学总复习 | 考点：三角形面积公式、余弦定理、分类讨论 | 难度：中等
+\begin{question}[points = 8]
+    在 $\triangle ABC$ 中，$a = 9$ cm，$b = 12$ cm，其面积为 $27\sqrt{3}$ cm$^2$。
+
+    \begin{questionparts}
+        \item 求 $\angle C$ 的所有可能值。 \qscore{3}
+
+        \item 对 $\angle C$ 的每一个可能值，求相应的边长 $c$，答案准确至小数点后两位。 \qscore{5}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 已知 $a = 9$、$b = 12$ 及面积 $27\sqrt{3}$，求 $\angle C$。 \\
+        由面积公式 $L = \dfrac{1}{2}ab\sin C$ 反解 $\sin C$。 \\
+        \[
+            \frac{1}{2}(9)(12)\sin C = 27\sqrt{3}
+        \]
+        \hfill (1分) \\
+        \[
+            \sin C = \frac{27\sqrt{3}}{54} = \frac{\sqrt{3}}{2}
+        \]
+        \hfill (1分) \\
+        \[
+            \angle C = 60^\circ \quad \text{或} \quad \angle C = 120^\circ
+        \]
+        \hfill (1分)
+
+        \item 分别求两种情况下的 $c$。 \\
+        已知两边及其夹角，用余弦定理。 \\
+        \[
+            c^2 = a^2 + b^2 - 2ab\cos C
+        \]
+        \hfill (1分) \\
+        \textbf{情况一：} $\angle C = 60^\circ$
+        \begin{align*}
+            c^2 &= 81 + 144 - 2(9)(12)\cos 60^\circ \\
+                &= 225 - 108 = 117
+        \end{align*}
+        \hfill (1分) \\
+        \[
+            c = 3\sqrt{13} \approx 10.82 \ \mathrm{cm}
+        \]
+        \hfill (1分) \\
+        \textbf{情况二：} $\angle C = 120^\circ$
+        \begin{align*}
+            c^2 &= 81 + 144 - 2(9)(12)\cos 120^\circ \\
+                &= 225 + 108 = 333
+        \end{align*}
+        \hfill (1分) \\
+        \[
+            c = 3\sqrt{37} \approx 18.25 \ \mathrm{cm}
+        \]
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+
+
+
+%region 范围：统考初中数学 · 三角学总复习 | 考点：余弦定理、三角形面积公式、平面图形分割 | 难度：困难
+\begin{question}[points = 11]
+    如图，四边形 $ABCD$ 中，$AB = 8$ cm，$BC = 6$ cm，$\angle ABC = 120^\circ$，$AD = 11$ cm，$CD = 9$ cm。
+
+    \begin{center}
+        \begin{tikzpicture}
+            \coordinate (B) at (0,0);
+            \coordinate (C) at (2.1,0);
+            \coordinate (A) at (-1.4,2.42);
+            \coordinate (D) at (0.16,4.68);
+            \draw (A)--(B)--(C)--(D)--cycle;
+            \draw[dashed] (A)--(C);
+            \pic[draw,"$120^\circ$",angle radius=7mm,angle eccentricity=1.55]{angle=C--B--A};
+            \draw ($(A)!0.5!(B)$) node[left,xshift=-2pt]{$8\ \mathrm{cm}$};
+            \draw ($(B)!0.5!(C)$) node[below,yshift=-2pt]{$6\ \mathrm{cm}$};
+            \draw ($(A)!0.5!(D)$) node[above left,xshift=-1pt]{$11\ \mathrm{cm}$};
+            \draw ($(C)!0.5!(D)$) node[right,xshift=2pt]{$9\ \mathrm{cm}$};
+            \fill (A) circle (1.5pt) node[left,xshift=-2pt]{$A$};
+            \fill (B) circle (1.5pt) node[below left]{$B$};
+            \fill (C) circle (1.5pt) node[below right]{$C$};
+            \fill (D) circle (1.5pt) node[above]{$D$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{questionparts}
+        \item 求对角线 $AC$，答案以最简根式表示。 \qscore{3}
+
+        \item 求 $\angle ADC$，答案准确至 $0.1^\circ$。 \qscore{4}
+
+        \item 求四边形 $ABCD$ 的面积，答案准确至小数点后两位。 \qscore{4}
+    \end{questionparts}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 在 $\triangle ABC$ 中求 $AC$。 \\
+        已知两边及其夹角，用余弦定理。 \\
+        \[
+            AC^2 = 8^2 + 6^2 - 2(8)(6)\cos 120^\circ
+        \]
+        \hfill (1分) \\
+        \[
+            AC^2 = 100 + 48 = 148
+        \]
+        \hfill (1分) \\
+        \[
+            AC = 2\sqrt{37} \approx 12.17 \ \mathrm{cm}
+        \]
+        \hfill (1分)
+
+        \item 在 $\triangle ACD$ 中求 $\angle ADC$。 \\
+        三边 $AD$、$CD$、$AC$ 已知，用余弦定理求夹角。 \\
+        \[
+            \cos \angle ADC = \frac{AD^2 + CD^2 - AC^2}{2\,(AD)(CD)}
+        \]
+        \hfill (1分) \\
+        \[
+            \cos \angle ADC = \frac{121 + 81 - 148}{2(11)(9)} = \frac{54}{198}
+        \]
+        \hfill (1分) \\
+        \[
+            \cos \angle ADC = \frac{3}{11}
+        \]
+        \hfill (1分) \\
+        \[
+            \angle ADC \approx 74.2^\circ
+        \]
+        \hfill (1分)
+
+        \item 求四边形 $ABCD$ 的面积。 \\
+        以对角线 $AC$ 把四边形分割为 $\triangle ABC$ 与 $\triangle ACD$，分别用面积公式后相加。 \\
+        \[
+            L_{\triangle ABC} = \frac{1}{2}(8)(6)\sin 120^\circ = 12\sqrt{3}
+        \]
+        \hfill (1分) \\
+        \[
+            \sin \angle ADC = \sqrt{1 - \left(\frac{3}{11}\right)^2} = \frac{4\sqrt{7}}{11}
+        \]
+        \hfill (1分) \\
+        \[
+            L_{\triangle ACD} = \frac{1}{2}(11)(9)\times \frac{4\sqrt{7}}{11} = 18\sqrt{7}
+        \]
+        \hfill (1分) \\
+        \[
+            L_{ABCD} = 12\sqrt{3} + 18\sqrt{7} \approx 68.41 \ \mathrm{cm}^2
+        \]
+        \hfill (1分)
+    \end{enumerate}
+\end{solution}
+%endregion
+\end{document}

@@ -1,0 +1,1 @@
+\par \noindent 20.【解析】已知方程组 $\begin {cases} 4x+3y=11 \\ 3x-y=5 \end {cases}$，求 $x+y$。 \\ 由第二式用 $x$ 表示 $y$，代入第一式消去 $y$，先求 $x$，再求 $y$，最后相加。 \begin {align*} y &= 3x-5 \\ 4x+3(3x-5) &= 11 \\ 13x &= 26 \\ x &= 2 \\ y &= 3\times 2-5 = 1 \\ x+y &= 3 \end {align*} 故选 C。\par \vspace *{1ex}

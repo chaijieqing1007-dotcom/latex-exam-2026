@@ -1,0 +1,183 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc}
+
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+\geometry{margin=2cm}
+
+\AtBeginDocument{\zihao{4}}
+% ----------- 调整 exam -----------
+
+
+% --- 全局样式定义 ---
+% 定义选择题环境：题号 1. 2.，选项 A. B. C. D. 粗体，且保留 1.5em 间距
+\examsetup{
+    page = {
+    size = a4paper,           % 设定纸张大小 [4]
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 [3]
+  },
+    choices = {
+    label-pos = top-left,
+    column-sep = 1em,
+    label-pos = auto,
+    label-sep = 0.5em,
+    max-columns = 4
+    },
+  question = {
+    top-sep    = 1em, % 调整题目上方的垂直距离（默认值为 .5em plus .5em minus .2em）
+    bottom-sep = 1em  % 调整题目下方的垂直距离（默认值为 .5em plus .5em minus .2em）
+  },
+    paren = {
+    show-paren = false  % 设置为 false 则不显示括号 [3, 4]
+  },
+    choices = {
+    label = \textbf{\Alph*}
+  }, 
+    solution = {
+    show-solution = hide,      % 不生成空答案页
+    label-content = {参考答案},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  }
+}
+
+\newcommand{\functionblock}[6]{%
+  \node[anchor=north west, inner sep=0pt] at
+    ($(current page.north west)+(#1\paperwidth/2,-#2\paperheight/6)$) {%
+      \begin{minipage}[c][\paperheight/6][c]{\paperwidth/2}
+        \centering
+        {\large $#3$}\par\vspace{0.1em}
+        \begin{tikzpicture}
+          \begin{axis}[
+            width=0.34\paperwidth,
+            height=0.085\paperheight,
+            scale only axis,
+            axis lines=middle,
+            axis line style={->},
+            xmin=#4, xmax=#5,
+            ymin=#4, ymax=#5,
+            enlargelimits=false,
+            xtick=\empty,
+            ytick=\empty,
+            tick style={draw=none},
+            samples=160,
+            unbounded coords=jump,
+            clip=true
+          ]
+          \end{axis}
+        \end{tikzpicture}
+      \end{minipage}%
+    };%
+}
+
+
+\newcommand{\fourfunctionblock}[6]{%
+  \node[anchor=north west, inner sep=0pt] at
+    ($(current page.north west)+(#1\paperwidth/2,-#2\paperheight/2)$) {%
+      \begin{minipage}[c][\paperheight/2][c]{\paperwidth/2}
+        \centering
+        {\Large $#3$}\par\vspace{0.8em}
+        \begin{tikzpicture}
+          \begin{axis}[
+            width=0.34\paperwidth,
+            height=0.24\paperheight,
+            scale only axis,
+            axis lines=middle,
+            axis line style={->},
+            xmin=#4, xmax=#5,
+            ymin=#4, ymax=#5,
+            enlargelimits=false,
+            xtick=\empty,
+            ytick=\empty,
+            tick style={draw=none},
+            samples=160,
+            unbounded coords=jump,
+            clip=true
+          ]
+          \end{axis}
+        \end{tikzpicture}
+      \end{minipage}%
+    };%
+}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \foreach \i in {1,...,5} {
+    \draw ($(current page.north west)!\i/6!(current page.south west)$) --
+          ($(current page.north east)!\i/6!(current page.south east)$);
+  }
+  \draw ($(current page.north west)!1/2!(current page.north east)$) --
+        ($(current page.south west)!1/2!(current page.south east)$);
+
+  \functionblock{0}{0}{y=x}{-3}{3}{\addplot[thick, blue, domain=-3:3] {x};}
+  \functionblock{1}{0}{y=x^2}{-3}{3}{\addplot[thick, blue, domain=-3:3] {x^2};}
+  \functionblock{0}{1}{y=x^3}{-3}{3}{\addplot[thick, blue, domain=-3:3] {x^3};}
+  \functionblock{1}{1}{y=\dfrac{1}{x}}{-3}{3}{\addplot[thick, blue, domain=-3:-0.15] {1/x}; \addplot[thick, blue, domain=0.15:3] {1/x};}
+  \functionblock{0}{2}{y=\dfrac{1}{x^2}}{-3}{3}{\addplot[thick, blue, domain=-3:-0.15] {1/(x^2)}; \addplot[thick, blue, domain=0.15:3] {1/(x^2)};}
+  \functionblock{1}{2}{y=\sqrt{x}}{-0.5}{4}{\addplot[thick, blue, domain=0:4] {sqrt(x)};}
+  \functionblock{0}{3}{y=-x}{-3}{3}{\addplot[thick, red, domain=-3:3] {-x};}
+  \functionblock{1}{3}{y=-x^2}{-3}{3}{\addplot[thick, red, domain=-3:3] {-x^2};}
+  \functionblock{0}{4}{y=-x^3}{-3}{3}{\addplot[thick, red, domain=-3:3] {-x^3};}
+  \functionblock{1}{4}{y=-\dfrac{1}{x}}{-3}{3}{\addplot[thick, red, domain=-3:-0.15] {-1/x}; \addplot[thick, red, domain=0.15:3] {-1/x};}
+  \functionblock{0}{5}{y=-\dfrac{1}{x^2}}{-3}{3}{\addplot[thick, red, domain=-3:-0.15] {-1/(x^2)}; \addplot[thick, red, domain=0.15:3] {-1/(x^2)};}
+  \node[anchor=north west, inner sep=0pt] at
+    ($(current page.north west)+(1\paperwidth/2,-5\paperheight/6)$) {%
+      \begin{minipage}[c][\paperheight/6][c]{\paperwidth/2}
+        \centering
+        {\large $y=-\sqrt{x}$}\par\vspace{0.1em}
+        \begin{tikzpicture}
+          \begin{axis}[
+            width=0.34\paperwidth,
+            height=0.085\paperheight,
+            scale only axis,
+            axis lines=middle,
+            axis line style={->},
+            xmin=-0.5, xmax=4,
+            ymin=-3, ymax=1,
+            enlargelimits=false,
+            xtick=\empty,
+            ytick=\empty,
+            tick style={draw=none},
+            samples=160,
+            unbounded coords=jump,
+            clip=true
+          ]
+          \end{axis}
+        \end{tikzpicture}
+      \end{minipage}%
+    };
+\end{tikzpicture}
+
+
+\newpage
+
+\begin{tikzpicture}[remember picture, overlay]
+  \draw ($(current page.north west)!1/2!(current page.south west)$) --
+        ($(current page.north east)!1/2!(current page.south east)$);
+  \draw ($(current page.north west)!1/2!(current page.north east)$) --
+        ($(current page.south west)!1/2!(current page.south east)$);
+
+  \fourfunctionblock{0}{0}{y=\dfrac{1}{(x+2)^2}}{-6}{6}{}
+  \fourfunctionblock{1}{0}{y=-\dfrac{1}{2(x-1)^2}}{-6}{6}{}
+  \fourfunctionblock{0}{1}{y=3\sqrt{x+2}-4}{-6}{6}{}
+  \fourfunctionblock{1}{1}{y=\dfrac{4}{2x+3}}{-6}{6}{}
+\end{tikzpicture}
+
+\end{document}

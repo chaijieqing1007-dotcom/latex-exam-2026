@@ -1,0 +1,1 @@
+\par \noindent 6.【解析】由 $a:b:c=6:8:10$ 及 $a:b=2:m$，$b:c=4:n$，求 $m+n$。 \\ 连比中相邻两项的比与已知比相等，分别用比例的基本性质求 $m$ 与 $n$。 \begin {align*} a:b &= 6:8 = 2:m & b:c &= 8:10 = 4:n \\ 6m &= 8\times 2 & 8n &= 10\times 4 \\ m &= \dfrac {8}{3} & n &= 5 \\ m+n &= \dfrac {8}{3}+5 = \dfrac {23}{3} \end {align*} 故选 B。\par \vspace *{1ex}

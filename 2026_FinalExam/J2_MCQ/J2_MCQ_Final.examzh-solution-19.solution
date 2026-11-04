@@ -1,0 +1,1 @@
+\par \noindent 19.【解析】解方程组 $\begin {cases} 2x+3y=8 & \text {①} \\ 3x-2y=-1 & \text {②} \end {cases}$。 \\ 用加减消元法消去 $y$：①$\times 2$ 与 ②$\times 3$ 后相加。 \begin {align*} \text {①}\times 2:\quad 4x+6y &= 16 \\ \text {②}\times 3:\quad 9x-6y &= -3 \\ \text {相加：}\quad 13x &= 13 \\ x &= 1 \end {align*} 将 $x=1$ 代入 ①： \begin {align*} 2+3y &= 8 \\ y &= 2 \end {align*} 故选 C。\par \vspace *{1ex}

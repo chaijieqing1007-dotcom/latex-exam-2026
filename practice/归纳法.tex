@@ -1,0 +1,275 @@
+%!TEX program = xelatex
+\let\stop\empty
+
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc}
+
+\usepackage{scalerel}
+\def\mcirc{\mathbin{\scalerel*{\circ}{j}}}
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+\geometry{margin=2cm}
+
+\AtBeginDocument{\zihao{4}}
+% ----------- 调整 exam -----------
+
+
+%region exam setup
+\examsetup{
+    % problem/label = \arabic*., 
+    % 设置大题题号格式 
+        question = {
+        top-sep = 1em,      % 题头上方的间距（默认 0.25em）
+        bottom-sep = 1em,   % 题号下方的间距（默认 0pt）
+    },
+    % 隐藏大题后的分值显示 
+    problem/show-points = false,
+    % 调整小题列表的缩进和间距
+    list/step-name = {}, 
+    solution = {
+    show-solution = show-move, % 答案自动移动到卷末
+    label-content = {answer},  % 答案区的标题文字
+    show-qed = true            % 在解答末尾显示结束符号 ◻ 
+  },
+    page = {
+    size = a4paper,           % 设定纸张大小 
+    foot-content = { - ; - }  % 页脚显示为 -1-, -2- 格式 
+  }
+}
+\setlist[enumerate,1]{
+    label=(\alpha*), 
+    itemsep=0.5em, 
+    leftmargin=2em, 
+    after=\hfill % 配合您之前要求的百分比靠右样式
+}
+\newlist{questionparts}{enumerate}{1}
+\setlist[questionparts]{
+    label=(\alph*),
+    itemsep=0.5em,
+    leftmargin=2em,
+    rightmargin=4em
+}
+\newcommand{\qscore}[1]{%
+    \unskip\nobreak\hfill
+    \makebox[0pt][l]{\makebox[4em][r]{(#1\%)}}%
+}
+\newcommand{\solutionlayout}{%
+    \setlength{\abovedisplayskip}{0.6em}%
+    \setlength{\belowdisplayskip}{0.6em}%
+    \setlength{\abovedisplayshortskip}{0.35em}%
+    \setlength{\belowdisplayshortskip}{0.35em}%
+    \setlength{\jot}{0.35em}%
+}
+%endregion
+
+
+
+
+\begin{document}
+
+%region 范围：普通高中数学 | 考点：数学归纳法证明恒等式（求和公式） | 难度：基础
+\begin{question}[points = 8]
+    用数学归纳法证明：对任意正整数 $n$，
+    \[
+    1+2+3+\cdots+n=\dfrac{n(n+1)}{2}.
+    \]
+    \hfill (8\%)
+\end{question}
+
+\begin{solution}
+    证明对任意正整数 $n$，$1+2+\cdots+n=\dfrac{n(n+1)}{2}$ 成立。\\
+    按数学归纳法，先验证 $n=1$ 时等式成立，再证明由 $n=k$ 成立可推出 $n=k+1$ 成立。\\
+    当 $n=1$ 时，
+    \[
+    \text{左边}=1,\qquad \text{右边}=\dfrac{1\cdot 2}{2}=1.
+    \]
+    \hfill (2分) \\
+    等式成立。假设 $n=k$（$k\geqslant 1$）时命题成立，即
+    \[
+    1+2+\cdots+k=\dfrac{k(k+1)}{2}.
+    \]
+    \hfill (2分) \\
+    则当 $n=k+1$ 时，
+    \begin{align*}
+        1+2+\cdots+k+(k+1) &= \dfrac{k(k+1)}{2}+(k+1) \\
+        &= \dfrac{k(k+1)+2(k+1)}{2} \\
+        &= \dfrac{(k+1)(k+2)}{2}.
+    \end{align*}
+    \hfill (3分) \\
+    这恰为 $n=k+1$ 时等式右边 $\dfrac{(k+1)\left[(k+1)+1\right]}{2}$ 的形式，故 $n=k+1$ 时命题也成立。由数学归纳法原理，对任意正整数 $n$，原等式成立。
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：普通高中数学 | 考点：数学归纳法证明整除性 | 难度：基础
+\begin{question}[points = 8]
+    用数学归纳法证明：对任意正整数 $n$，$5^n-1$ 能被 $4$ 整除。
+    \hfill (8\%)
+\end{question}
+
+\begin{solution}
+    证明对任意正整数 $n$，$4\mid(5^n-1)$ 成立。\\
+    按数学归纳法，先验证 $n=1$ 时命题成立，再证明由 $n=k$ 成立可推出 $n=k+1$ 成立。\\
+    当 $n=1$ 时，
+    \[
+    5^1-1=4,
+    \]
+    显然能被 $4$ 整除。
+    \hfill (2分) \\
+    假设 $n=k$（$k\geqslant 1$）时命题成立，即存在正整数 $m$，使得
+    \[
+    5^k-1=4m.
+    \]
+    \hfill (2分) \\
+    则当 $n=k+1$ 时，
+    \begin{align*}
+        5^{k+1}-1 &= 5\cdot 5^k-1 \\
+        &= 5(4m+1)-1 \\
+        &= 20m+4 \\
+        &= 4(5m+1).
+    \end{align*}
+    \hfill (3分) \\
+    因 $5m+1$ 为正整数，故 $5^{k+1}-1$ 能被 $4$ 整除，即 $n=k+1$ 时命题也成立。由数学归纳法原理，对任意正整数 $n$，$5^n-1$ 能被 $4$ 整除。
+    \hfill (1分)
+\end{solution}
+%endregion
+
+%region 范围：普通高中数学 | 考点：数学归纳法证明恒等式 | 难度：中等
+\begin{question}[points = 10]
+    用数学归纳法证明：对任意正整数 $n$，
+    \[
+    1^2+2^2+3^2+\cdots+n^2=\dfrac{n(n+1)(2n+1)}{6}.
+    \]
+    \hfill (10\%)
+\end{question}
+
+\begin{solution}
+    证明对任意正整数 $n$，$1^2+2^2+\cdots+n^2=\dfrac{n(n+1)(2n+1)}{6}$ 成立。\\
+    按数学归纳法，先验证 $n=1$ 时等式成立，再证明由 $n=k$ 成立可推出 $n=k+1$ 成立。\\
+    当 $n=1$ 时，
+    \[
+    \text{左边}=1^2=1,\qquad \text{右边}=\dfrac{1\cdot 2\cdot 3}{6}=1.
+    \]
+    \hfill (2分) \\
+    等式成立。假设 $n=k$（$k\geqslant 1$）时命题成立，即
+    \[
+    1^2+2^2+\cdots+k^2=\dfrac{k(k+1)(2k+1)}{6}.
+    \]
+    \hfill (2分) \\
+    则当 $n=k+1$ 时，
+    \begin{align*}
+        1^2+2^2+\cdots+k^2+(k+1)^2 &= \dfrac{k(k+1)(2k+1)}{6}+(k+1)^2 \\
+        &= \dfrac{k(k+1)(2k+1)+6(k+1)^2}{6} \\
+        &= \dfrac{(k+1)\left[k(2k+1)+6(k+1)\right]}{6} \\
+        &= \dfrac{(k+1)(2k^2+7k+6)}{6} \\
+        &= \dfrac{(k+1)(k+2)(2k+3)}{6}.
+    \end{align*}
+    \hfill (4分) \\
+    这恰为 $n=k+1$ 时等式右边 $\dfrac{(k+1)\left[(k+1)+1\right]\left[2(k+1)+1\right]}{6}$ 的形式，故 $n=k+1$ 时命题也成立。由数学归纳法原理，对任意正整数 $n$，原等式成立。
+    \hfill (2分)
+\end{solution}
+%endregion
+
+%region 范围：普通高中数学 | 考点：数学归纳法证明不等式 | 难度：中等
+\begin{question}[points = 10]
+    用数学归纳法证明：当 $n\geqslant 5$ 时，
+    \[
+    2^n>n^2.
+    \]
+    \hfill (10\%)
+\end{question}
+
+\begin{solution}
+    证明当 $n\geqslant 5$ 时 $2^n>n^2$ 恒成立。\\
+    按数学归纳法，先验证 $n=5$ 时不等式成立，再证明由 $n=k$ 成立可推出 $n=k+1$ 成立。\\
+    当 $n=5$ 时，
+    \[
+    2^5=32,\qquad 5^2=25,
+    \]
+    因 $32>25$，不等式成立。
+    \hfill (2分) \\
+    假设 $n=k$（$k\geqslant 5$）时命题成立，即
+    \[
+    2^k>k^2.
+    \]
+    \hfill (2分) \\
+    则当 $n=k+1$ 时，
+    \begin{align*}
+        2^{k+1} &= 2\cdot 2^k \\
+        &> 2k^2.
+    \end{align*}
+    \hfill (2分) \\
+    又因 $k\geqslant 5$，有
+    \begin{align*}
+        2k^2-(k+1)^2 &= k^2-2k-1 \\
+        &= (k-1)^2-2 \\
+        &>0,
+    \end{align*}
+    故 $2k^2>(k+1)^2$，从而 $2^{k+1}>(k+1)^2$，即 $n=k+1$ 时命题也成立。由数学归纳法原理，当 $n\geqslant 5$ 时，$2^n>n^2$ 恒成立。
+    \hfill (4分)
+\end{solution}
+%endregion
+
+%region 范围：普通高中数学 | 考点：数学归纳法证明不等式（根式型） | 难度：困难
+\begin{question}[points = 12]
+    用数学归纳法证明：当 $n\geqslant 2$ 时，
+    \[
+    1+\dfrac{1}{\sqrt{2}}+\dfrac{1}{\sqrt{3}}+\cdots+\dfrac{1}{\sqrt{n}}>\sqrt{n}.
+    \]
+    \hfill (12\%)
+\end{question}
+
+\begin{solution}
+    证明当 $n\geqslant 2$ 时 $\displaystyle 1+\frac{1}{\sqrt2}+\cdots+\frac{1}{\sqrt n}>\sqrt n$ 恒成立。\\
+    按数学归纳法，先验证 $n=2$ 时不等式成立，再利用 $\sqrt{k+1}-\sqrt{k}=\dfrac{1}{\sqrt{k+1}+\sqrt{k}}$ 完成归纳步。\\
+    当 $n=2$ 时，
+    \begin{align*}
+        1+\dfrac{1}{\sqrt2}-\sqrt2 &= \dfrac{\sqrt2+1-2}{\sqrt2} \\
+        &= \dfrac{\sqrt2-1}{\sqrt2} \\
+        &>0,
+    \end{align*}
+    故 $1+\dfrac{1}{\sqrt2}>\sqrt2$，不等式成立。
+    \hfill (3分) \\
+    假设 $n=k$（$k\geqslant 2$）时命题成立，即
+    \[
+    1+\dfrac{1}{\sqrt2}+\cdots+\dfrac{1}{\sqrt k}>\sqrt k.
+    \]
+    \hfill (2分) \\
+    则当 $n=k+1$ 时，
+    \[
+    1+\dfrac{1}{\sqrt2}+\cdots+\dfrac{1}{\sqrt k}+\dfrac{1}{\sqrt{k+1}}>\sqrt k+\dfrac{1}{\sqrt{k+1}}.
+    \]
+    \hfill (2分) \\
+    只需证明 $\sqrt k+\dfrac{1}{\sqrt{k+1}}\geqslant \sqrt{k+1}$，即证
+    \begin{align*}
+        \dfrac{1}{\sqrt{k+1}} &\geqslant \sqrt{k+1}-\sqrt k \\
+        &= \dfrac{1}{\sqrt{k+1}+\sqrt k}.
+    \end{align*}
+    \hfill (3分) \\
+    因 $k\geqslant 2$，有 $\sqrt{k+1}+\sqrt k>\sqrt{k+1}$，故 $\dfrac{1}{\sqrt{k+1}+\sqrt k}<\dfrac{1}{\sqrt{k+1}}$，上式成立。从而
+    \[
+    1+\dfrac{1}{\sqrt2}+\cdots+\dfrac{1}{\sqrt{k+1}}>\sqrt{k+1},
+    \]
+    即 $n=k+1$ 时命题也成立。由数学归纳法原理，当 $n\geqslant 2$ 时，原不等式恒成立。
+    \hfill (2分)
+\end{solution}
+%endregion
+
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+
+\end{document}

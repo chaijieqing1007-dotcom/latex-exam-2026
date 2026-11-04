@@ -1,0 +1,1 @@
+\par \noindent 7.【解析】求甲、乙、丙共有 $620$ 元时丙的钱数。 \\ 先由两个比求出甲、乙、丙的连比，再按总份数分配。 \begin {align*} \text {甲}:\text {乙} &= 3:4 = 9:12 \\ \text {乙}:\text {丙} &= 6:5 = 12:10 \\ \text {甲}:\text {乙}:\text {丙} &= 9:12:10 \\ \text {丙} &= 620\times \dfrac {10}{9+12+10} \\ &= 620\times \dfrac {10}{31} \\ &= 200\ (\text {元}) \end {align*} 故选 B。\par \vspace *{1ex}

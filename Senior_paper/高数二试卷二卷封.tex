@@ -1,0 +1,112 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{exam-zh}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{xcolor}
+\geometry{margin=1.6cm,top=0.9cm,bottom=0.9cm}
+\usetikzlibrary{calc}
+
+\examsetup{
+  page = {
+    size = a4paper,
+    foot-content = {}
+  }
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.0}
+
+\newcommand{\ulinefill}[1]{\underline{\hspace{#1}}}
+
+\begin{document}
+
+\begin{samepage}
+
+\AddToShipoutPictureFG*{%
+  \put(31,104){\color{black}\rule{16pt}{66pt}}%
+  \put(37,112){\makebox(0,0)[lb]{\rotatebox{90}{\color{white}\bfseries\footnotesize 高级数学(II)/二}}}%
+  \put(24,18){\makebox(0,0)[lb]{\small 版权所有}}%
+  \put(520,18){\makebox(0,0)[lb]{\bfseries\small 【机密】}}%
+}
+
+\begin{center}
+  {\zihao{3}\bfseries 2026年金宝培元独立中学半年考\par}
+  \vspace{1.0em}
+  {\zihao{4}\bfseries 高中组\par}
+  \vspace{1.0em}
+  {\zihao{2}\bfseries 高级数学(II)\par}
+  \vspace{0.2em}
+  {\small (SC07)\par}
+\end{center}
+
+\vspace{1.3em}
+
+\begin{center}
+  \begin{tabular}{c}
+    试卷二\hspace{2em}作答题\\[-0.1em]
+    \noalign{\hrule height 0.4pt}
+    日期：2026年5月20日\\[-0.05em]
+    时间：9.00 a.m.－11.00 a.m.\\[-0.05em]
+    （2 小时）\\
+    \noalign{\hrule height 0.4pt}
+  \end{tabular}
+\end{center}
+
+\vspace{1.0em}
+
+{\zihao{4}\bfseries 考 生 须 知\par}
+\vspace{0.55em}
+
+\begin{enumerate}[label=（\arabic*）,leftmargin=2.8em,itemsep=0.38em]
+  \item 本科试卷共分两份：\\
+  \hspace*{1.3em}试卷一：选择题（40\%），\\
+  \hspace*{1.3em}试卷二：作答题（60\%）。
+
+  \item 试卷二：\\
+  \hspace*{1.3em}（选答题）：7 题\textbf{选答 6 题}（40\%）。
+
+  \item \textbf{每题必须用新的一张纸作答。}
+
+  \item 只可用蓝色或黑色的原子笔书写，惟可用铅笔画图。
+
+  \item 不必抄题，惟试题号码必须书写清楚。
+
+  \item 所有演算必须清楚地写出。必要的几何图形必须画出。
+
+  \item 可使用所规定的电子计算机进行演算，除非题目限制。
+
+  \item 作答前，须在\textbf{积分表}（电脑卡）上正确填写考生编号及用 \textbf{5B} 铅笔\\
+  将对应的小方格涂黑。作答后，须根据所答题数在试题号码栏上\\
+  将有关小方格涂黑，并指出作答总数。
+
+  \item 答卷必须依试题号码次序排列，并且将\textbf{积分表}（电脑卡）置于上\\
+  面，合订成一本。
+
+  \item 试卷二作答题共印七面，最后一面空白。
+\end{enumerate}
+
+\vspace{1.0em}
+
+\begin{center}
+  \fbox{\rule{0pt}{1.15em}\hspace{1.2em}{\bfseries 未经正式宣布\quad 不得翻看内页}\hspace{1.2em}}
+\end{center}
+
+\vspace{1.2em}
+
+\noindent
+（考生姓名：\ulinefill{4.4cm}\hfill 考生编号：\ulinefill{4.3cm}）
+
+\vfill
+
+
+\end{samepage}
+
+\end{document}
